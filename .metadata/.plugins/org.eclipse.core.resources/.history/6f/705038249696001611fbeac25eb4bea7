@@ -1,0 +1,38 @@
+package T15_2;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import T15_1.SQLlianjie;
+
+public class TelImp implements TelSQL{
+
+	public void add(Telbean telbean) {
+		Connection con = SQLlianjie.open();
+		String SQL = "insert into Telnumber values(?,?)";
+		try {
+			int i=1;
+			PreparedStatement ps = con.prepareStatement(SQL);
+			ps.setString(i++, telbean.getName());
+			ps.setString(i++, telbean.getTelnumber());
+			ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public void Up(Telbean tb) {
+		Connection con = SQLlianjie.open();
+		String SQL = "select * from ";
+		try {
+			CallableStatement cs = con.prepareCall("{call GetPhoneNumber(?,?)}");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+}

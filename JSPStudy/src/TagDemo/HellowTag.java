@@ -1,0 +1,43 @@
+package TagDemo;
+
+import java.io.IOException;
+
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.Tag;
+
+public class HellowTag implements Tag{
+
+	private PageContext pageContext;
+	private Tag tag;
+	public int doEndTag() throws JspException {
+		return EVAL_PAGE;
+	}
+	public int doStartTag() throws JspException {
+		JspWriter out = pageContext.getOut();
+		try {
+			out.println("<h1 align='center'>你好！欢迎使用Tag----作者：陈飞龙</h1>");
+		} catch (IOException e) {
+			System.out.println("输出Tag出错！");
+		}
+		return SKIP_BODY;
+	}
+
+	public Tag getParent() {
+		return null;
+	}
+
+	public void release() {
+		
+	}
+
+	public void setPageContext(PageContext pageContext) {
+		this.pageContext=pageContext;
+	}
+
+	public void setParent(Tag tag) {
+		
+	}
+
+}

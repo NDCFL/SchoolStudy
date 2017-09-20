@@ -1,0 +1,17 @@
+package T6;
+
+import java.awt.*;
+
+public class Frama extends Frame{
+		
+	public Frama() {
+		super("窗口演示");
+		this.setSize(500, 500);
+		this.setBackground(Color.BLUE);
+		this.setVisible(true);
+		
+	}
+	public static void main(String[] args) {
+		new Frama();
+	}
+}

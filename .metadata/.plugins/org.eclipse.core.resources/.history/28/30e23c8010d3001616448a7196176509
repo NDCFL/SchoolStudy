@@ -1,0 +1,54 @@
+package TagDemo;
+
+import java.io.IOException;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletRequestAttributeEvent;
+import javax.servlet.ServletRequestAttributeListener;
+import javax.servlet.ServletRequestEvent;
+import javax.servlet.ServletRequestListener;
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.tagext.BodyTagSupport;
+
+public class CheckLogin extends BodyTagSupport implements ServletRequestListener,ServletRequestAttributeListener{
+	ServletRequest request ;
+	String name,password;
+	@Override
+	public int doStartTag() throws JspException {
+		JspWriter out = pageContext.getOut();
+		try {
+			out.println(request.getParameter("username"));
+			out.write(request.getParameter("userpassword"));
+		} catch (IOException e) {
+			System.out.println("显示登录信息出错！");
+		}
+		return super.doStartTag();
+	}
+	@Override
+	public int doEndTag() throws JspException {
+		// TODO Auto-generated method stub
+		return super.doEndTag();
+	}
+	public void requestDestroyed(ServletRequestEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void requestInitialized(ServletRequestEvent arg0) {
+		request = arg0.getServletRequest();
+		
+	}
+	public void attributeAdded(ServletRequestAttributeEvent arg0) {
+		name = request.getParameter("username");
+		
+	}
+	public void attributeRemoved(ServletRequestAttributeEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void attributeReplaced(ServletRequestAttributeEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}

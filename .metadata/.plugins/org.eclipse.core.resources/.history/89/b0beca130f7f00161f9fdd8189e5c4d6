@@ -1,0 +1,12 @@
+package T8;
+
+public class Lianxi_2 {
+
+	public static void main(String[] args) {
+		//String s = new String("Java");
+//		String s2 = new String("there");
+//		String s3 = new String();
+		//s3=s1+s2;
+		System.out.println(1e2);
+	}
+}

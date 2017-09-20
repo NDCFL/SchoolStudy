@@ -1,0 +1,22 @@
+#
+#Sat Aug 19 21:26:52 CST 2017
+genBasicCompId=false
+sessionFactoryName=com.ht.pojo.HibernateSessionFactory
+profile=
+daoSFId=
+version=3.1
+jndiPath=
+detectM2M=false
+reStrategyClass=
+springDaoFile=
+useJavaTypes=true
+keyGenerator=
+libInstallFolder=WebRoot/WEB-INF/lib
+addLibs2Project=false
+genVersionTag=false
+sessionFactoryId=
+basePersistenceClass=
+reSettingsFile=/EasyUiStudy/hibernate.reveng.xml
+configFile=/EasyUiStudy/src/hibernate.cfg.xml
+createConfigFile=true
+addLibs2Classpath=false

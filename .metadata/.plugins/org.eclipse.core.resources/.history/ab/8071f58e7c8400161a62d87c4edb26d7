@@ -1,0 +1,28 @@
+package T11;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Stack;
+
+public class Stack_1 {
+
+	public static void main(String[] args) {
+		
+		Stack<String> sk = new Stack<String>();
+		sk.push("dfxh");
+		sk.push("ertgr");
+		sk.push("ertge");
+		sk.push("erte");
+		sk.push("esrt");
+		sk.push("esrtf");
+		while (!sk.isEmpty()) {
+			System.out.println(sk.pop());
+		}
+		System.out.println("------------------");
+		Collections.reverse(sk);
+		while (!sk.isEmpty()) {
+			System.out.println(sk.pop());
+		}
+	}
+	
+}

@@ -1,0 +1,71 @@
+create table IDtable(
+	QQid int primary key not null,--QQ号码
+	QQname varchar(30) not null,--QQ昵称
+	QQpassword varchar(20) not null,--QQ密码
+	QQhead varchar(30) not null,
+	age int check(age>0 and age<=100) not null,--年龄
+	sex char(4) default '女神' check (sex='男神' or sex='女神') not null,--性别
+	start varchar(12) not null,--星座
+	blood varchar(2) not null,--血型
+	nation varchar(10) not null,--民族
+	hobit varchar(20) not null,--爱好
+	ipdizhi varchar(20) not null,--IP地址
+	port int unique not null, --端口
+	zhuangtai varchar(10) not null,--QQ状态
+	remark text not null--签名
+)
+drop table friendtable;
+create table friendtable(
+	friendid int identity (1,1) not null,
+	fQQid int not null,
+	mQQid int  not null,
+	groupname varchar(20) not null
+
+)
+drop table news;
+create table news(
+	newsid int identity (1,1) not null,
+	mQQid int not null,
+	fQQid int not null,
+	minlin int not null,--命令制
+	newsxinxi text not null
+)
+select * from IDtable;
+select * from friendtable;
+select * from news;
+
+
+
+
+else if (e.getSource() == jtclose) {
+			System.exit(0);
+		} else if (e.getSource() == head) {
+			int i =new Random().nextInt(43);
+			String headface = "images/"+i+".jpg";
+			head.setIcon(new ImageIcon(headface));
+			System.out.println(i);
+		}else if (xieyi.getText().equals("")) {
+			JOptionPane.showMessageDialog(this,"是否接受此协议" );
+		}else if (e.getSource()==xieyi) {
+			String string="\t\t\t\t\t\t用户协议\t\t\t\t\t\t\n";
+			string+="1．引言\n1.1编写目的为明确软件需求、安排项目规划与进度、组织软件开发与测试，撰写本文档。\n本文档供项目经理、设计人员、开发人员参考。参考项目文档：数据库设计，页面图示\n";
+			string+="\t多个用户能够在局域网内互相通信，并对自己的好友进行管理。";
+			string+="2.2\n运行环境操作系统：Microsoft Windows 2000 Advanced Server\n支持环境：java环境\n数 据 库：Microsoft SQL Server 2000\n";
+			string+="4.1功能划分\n•注册登录+\n•个人信息管理+\n•组管理\n+\n•好友管理+\n•即时聊天";
+			string+="4.2功能描述\n•注册登录\n首先要申请QQ号，用户按要求填入正确的个人信息资料后由系统生成QQ号.\n要保证每个用户的QQ号都是唯一的。然后用申请成功的QQ号和用户自己设定的密码登录本系统.\n";
+			string+="QQ号或密码填入有误显示登录失败并有所提示，登录成功后弹出主面板并关闭登录的面板.\n";
+			string+="\t进入主面板后可以显示本用户的头像，QQ名，QQ号，状态等个人信息，可以显示好友及好友所在的组别，\n并能通过头像区分在线的好友和隐身或离线的好友。";
+			string+="5.4技术难点\n";
+			string+="1.服务器如何存储上线用户。\n";
+			string+="\t在服务器上有一个HashTable或者其他的集合也可以，用来存储所有上线的用户，一般应存贮用户的id以标识每个用户，还应该存储用户连上的Socket以便向对应的客户发送消息\n";
+			string+="\t用户在登录的时候，我们一般会将用户的id查出来后保存在一个变量里，连上服务器后，我们马上会向服务器发送一个消息，在这个消息的字符串中我们会包含本用户的ID号在里面，\n;" ;
+			string+="\t当服务器接受到这个消息后会根据消息的类型将该用户的状态改变为“在线”状态。\n";
+			string+="\t送的消息应该包含两个要素，一个是“消息类型”，一个是“用户ID”，特殊的情况下还应该有对方的“用户ID\n";
+			string+="\t如：用户上线，我们就向服务器发送消息“上线=用户ID\n";
+			string+="\t用户隐身，我们就向服务器发送消息“隐身=用户ID\n";
+			string+="\t用户离线，我们就向服务器发送消息“离线=用户ID\n";
+			string+="注意：本QQ不得盗版！使用时需要遵守法律法规！\n";
+			String nickname = txtQQname.getText().trim();
+			JOptionPane.showMessageDialog(this,string);
+			
+		}

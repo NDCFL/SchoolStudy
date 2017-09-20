@@ -1,0 +1,274 @@
+package T9;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+
+
+public class Tuixiangzi extends JFrame implements ActionListener,MouseListener{
+
+	JButton lbchonglai,lbFirst,lbnext,lblast,lbxuanguan,lbhuiyibu,lbshangyiguan,lbxiayiguan;
+	JMenu jmxuanzhe,jmmusic,jmhelpMenu;
+	JLabel title,yingyue;
+	JPanel panel;
+	JComboBox cmusic;
+	JMenu xuanzhe,yinyue,help;
+	JMenuBar caidan;
+	JPopupMenu popup;
+	Mypanel mypanel;
+	JMenuItem jxiayguan,jshangyiguan,jlast,jfirst,jhuiyibu,jexit,qin,po,guang,nor,eye,guanyu;
+	public Tuixiangzi() {
+		super("推箱子游戏");
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		Image image = toolkit.getImage("pic/5.gif");
+		setIconImage(image);
+		panel = new JPanel(null);
+		menu();
+		lable();
+		mypanel = new Mypanel();
+		mypanel.setBounds(10, 80, 550, 550);
+		panel.add(mypanel);
+		setSize(720, 680);
+		setVisible(true);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	public void lable() {
+		
+		
+		title = new JLabel("推箱子游戏",JLabel.CENTER);
+		title.setBounds(230, 30, 200, 30);
+		title.setFont(new Font("黑体",Font.BOLD,30));
+		title.setForeground(Color.red);
+		
+		lbchonglai = new JButton("重来");
+		lbchonglai.setBounds(600, 100, 80, 30);
+		lbchonglai.setFont(new Font("黑体",Font.BOLD,14));
+		lbchonglai.setForeground(Color.blue);
+		
+		lbFirst= new JButton("第一关");
+		lbFirst.setBounds(600, 150, 80, 30);
+		lbFirst.setFont(new Font("黑体",Font.BOLD,14));
+		lbFirst.setForeground(Color.blue);
+		
+		lbshangyiguan= new JButton("上一关");
+		lbshangyiguan.setBounds(600, 200, 80, 30);
+		lbshangyiguan.setFont(new Font("黑体",Font.BOLD,14));
+		lbshangyiguan.setForeground(Color.blue);
+		
+		
+		lbnext= new JButton("下一关");
+		lbnext.setBounds(600, 250, 80, 30);
+		lbnext.setFont(new Font("黑体",Font.BOLD,14));
+		lbnext.setForeground(Color.blue);
+		
+		lblast= new JButton("最后关");
+		lblast.setBounds(600, 300, 80, 30);
+		lblast.setFont(new Font("黑体",Font.BOLD,14));
+		lblast.setForeground(Color.blue);
+		
+		lbxuanguan= new JButton("选关");
+		lbxuanguan.setBounds(600, 350, 80, 30);
+		lbxuanguan.setFont(new Font("黑体",Font.BOLD,14));
+		lbxuanguan.setForeground(Color.blue);
+		
+		lbhuiyibu= new JButton("悔一步");
+		lbhuiyibu.setBounds(600, 400, 80, 30);
+		lbhuiyibu.setFont(new Font("黑体",Font.BOLD,14));
+		lbhuiyibu.setForeground(Color.blue);
+		
+		
+		yingyue = new JLabel("选择音乐",JLabel.CENTER);
+		yingyue.setBounds(600, 450, 80, 30);
+		yingyue.setFont(new Font("黑体",Font.BOLD,14));
+		yingyue.setForeground(Color.blue);
+		
+		String [] yl={"默认","琴萧合奏","泡泡堂","灌篮高手","eyes on me"};
+		cmusic= new JComboBox(yl);
+		cmusic.setBounds(600, 500, 80, 30);
+		
+		
+		panel.add(title);
+		panel.add(lbchonglai);
+		panel.add(lbFirst);
+		panel.add(lbnext);
+		panel.add(lblast);
+		panel.add(lbxuanguan);
+		panel.add(lbhuiyibu);
+		panel.add(lbshangyiguan);
+		panel.add(yingyue);
+		panel.add(cmusic);
+		
+		//监听事件
+		lbchonglai.addActionListener(this);
+		lbFirst.addActionListener(this);
+		lbnext.addActionListener(this);
+		lblast.addActionListener(this);
+		lbxuanguan.addActionListener(this);
+		lbhuiyibu.addActionListener(this);
+		lbshangyiguan.addActionListener(this);
+
+		
+		jxiayguan.addActionListener(this);
+		jshangyiguan.addActionListener(this);
+		jlast.addActionListener(this);
+		jfirst.addActionListener(this);
+		jhuiyibu.addActionListener(this);
+		jexit.addActionListener(this);
+		qin.addActionListener(this);
+		po.addActionListener(this);
+		guang.addActionListener(this);
+		nor.addActionListener(this);
+		eye.addActionListener(this);
+		guanyu.addActionListener(this);
+		
+		add(panel);
+		
+	}
+	public void menu(){
+		Icon icon = new ImageIcon("images/41.gif");
+		caidan = new JMenuBar();//菜单条
+		//子菜单
+		xuanzhe = new JMenu("选择");
+		yinyue = new JMenu("音乐");
+		help = new JMenu("帮助");
+		//把子菜单加到菜单条里
+		caidan.add(xuanzhe);
+		caidan.add(yinyue);
+		caidan.add(help);
+		//菜单项
+		jfirst= new JMenuItem("第一关",icon);
+		jlast= new JMenuItem("最后一关",icon);
+		jshangyiguan= new JMenuItem("上一关",icon);
+		jxiayguan = new JMenuItem("下一关",icon);
+		jhuiyibu= new JMenuItem("悔一步",icon);
+		jexit= new JMenuItem("退出",icon);
+		xuanzhe.add(jfirst);
+		xuanzhe.add(jlast);
+		xuanzhe.add(jshangyiguan);
+		xuanzhe.add(jxiayguan);
+		xuanzhe.add(jhuiyibu);
+		xuanzhe.addSeparator();
+		xuanzhe.add(jexit);
+		
+		qin = new JMenuItem("琴萧合奏",icon);
+
+		po = new JMenuItem("泡泡堂",icon);
+
+		guang = new JMenuItem("灌篮高手",icon);
+
+		nor = new JMenuItem("默认",icon);
+
+		eye = new JMenuItem("eyes on me",icon);
+
+		yinyue.add(nor);
+		yinyue.add(qin);
+		yinyue.add(po);
+		yinyue.add(guang);
+		yinyue.add(eye);
+		
+		guanyu = new JMenuItem("关于推箱子",icon); 
+		help.add(guanyu);
+		
+		JMenuItem jfirst1= new JMenuItem("第一关",icon);
+		JMenuItem jlast1= new JMenuItem("最后一关",icon);
+		JMenuItem jshangyiguan1= new JMenuItem("上一关",icon);
+		JMenuItem jxiayguan1 = new JMenuItem("下一关",icon);
+		JMenuItem jhuiyibu1= new JMenuItem("悔一步",icon);
+		JMenuItem jexit1= new JMenuItem("退出",icon);
+		
+		//弹出菜单
+		popup = new JPopupMenu();
+		popup.add(jfirst1);
+		popup.add(jlast1);
+		popup.add(jshangyiguan1);
+		popup.add(jxiayguan1);
+		popup.add(jhuiyibu1);
+		//popup.add(guanyu);
+		
+		setJMenuBar(caidan);
+	}
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		new Tuixiangzi();
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource()==guanyu) {
+			String str = "游戏名称：推箱子\n作者：陈飞龙\n玩法帮助：操控键盘上的上下左右键就可以玩游戏了\n作者寄语：希望你玩的开心";
+			JOptionPane.showMessageDialog(this,str,"游戏帮助\n",JOptionPane.INFORMATION_MESSAGE);
+		}else if (e.getSource()==jexit) {
+			System.exit(0);
+		}
+		
+	}
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	class Mypanel extends JPanel{
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		Image image[]={
+				toolkit.getImage("pic/0.gif"),
+				toolkit.getImage("pic/1.gif"),
+				toolkit.getImage("pic/2.gif"),
+				toolkit.getImage("pic/3.gif"),
+				toolkit.getImage("pic/4.gif"),
+				toolkit.getImage("pic/5.gif"),
+				toolkit.getImage("pic/6.gif"),
+				toolkit.getImage("pic/7.gif"),
+				toolkit.getImage("pic/8.gif"),
+				toolkit.getImage("pic/9.gif")
+		};
+		public Mypanel() {
+			setSize(550,550);
+			requestFocus();
+
+		}
+		@Override
+		public void paint(Graphics g) {
+			for(int i=0;i<20;i++){
+				for (int j = 0; j < 20; j++) {
+					g.drawImage(image[i*j%10], i*30, j*30, 30, 30, this);
+				}
+			}
+		}
+	}
+
+}

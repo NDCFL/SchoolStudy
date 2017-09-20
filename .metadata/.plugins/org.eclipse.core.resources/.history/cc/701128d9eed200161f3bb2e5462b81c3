@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="gb2312" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee Web-jsptaglibrary_2_0.xsd"
+		version="2.0">
+	<description>Custom Tag Demo</description>
+	<tlib-version>1.0</tlib-version>
+	<short-name>samples</short-name>
+	<uri>/demotag</uri>
+	<tag>
+		<description>OutPut Hello ,World,直接实现Tag接口</description>
+		<name>helloworld</name>
+		<tag-class>demo.tag.HelloTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+	
+	
+	
+	
+	<tag>
+		<description>OutPut Hello ,World,直接继承TagSupport</description>
+		<name>hello</name>
+		<tag-class>demo.tag.HelloTagSupport</tag-class>
+		<body-content>JSP</body-content>
+	</tag>
+	
+	
+	
+	<tag>
+		<description>Attributed  OutPut Hello ,World,直接继承TagSupport</description>
+		<name>helloattr</name>
+		<tag-class>demo.tag.HelloAttTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>bgColor</name>
+			<required>true</required>
+		</attribute>
+		<attribute>
+			<name>color</name>
+			<required>false</required>
+		</attribute>
+	</tag>
+	
+	
+	
+	<tag>
+		<description>Attributed  OutPut Hello ,World,直接继承BodyTagSupport</description>
+		<name>helloloop</name>
+		<tag-class>demo.tag.HelloBodyTagSupport</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>count</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+
+
+	<tag>	
+      <name>mytag</name>
+	  <tag-class>demo.tag.MyTag</tag-class>
+	  <body-content>JSP</body-content>
+      <attribute>
+  	  	<name>b</name>
+  		<required>true</required>
+  		<rtexprvalue>true</rtexprvalue>
+  	  </attribute>
+     </tag>
+     <tag>	
+      <name>mytag2</name>
+	  <tag-class>demo.tag.MyTag2</tag-class>
+	  <body-content>JSP</body-content>
+      <attribute>
+		<name>value</name>
+  		<required>true</required>
+  		<rtexprvalue>true</rtexprvalue>
+  	  </attribute>
+     </tag>
+             
+</taglib>

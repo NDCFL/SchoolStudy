@@ -1,0 +1,18 @@
+package T10;
+
+import javax.swing.JFrame;
+
+public class Table extends JFrame{
+
+	public Table() {
+		super("表格制作");
+		setSize(500, 500);
+		setVisible(true);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+	}
+	public static void main(String[] args) {
+		new Table();
+	}
+}

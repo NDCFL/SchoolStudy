@@ -1,0 +1,61 @@
+package TagDemo;
+
+import java.io.IOException;
+
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.tagext.TagSupport;
+
+public class FontTagDemo extends TagSupport{
+
+	int size;
+	String face;
+	String color;
+	@Override
+	public int doStartTag() throws JspException {
+		if(size==0){
+			size=5;
+		}else if (face==null || face.equals("")) {
+			face="华文行楷";
+		}else if (color==null || color.equals("")) {
+			color="blue";
+		}
+		JspWriter out = pageContext.getOut();
+		try {
+			out.write("<font size='"+size+"' face='"+face+"' color='"+color+"'");
+		} catch (IOException e) {
+			System.out.println("处理字体自定义标签是出错！");
+		}
+		//还有方法体要处理，所以使用EVAL_BODY_INCLUDE
+		return EVAL_BODY_INCLUDE;
+	}
+	@Override
+	public int doEndTag() throws JspException {
+		JspWriter out = pageContext.getOut();
+		try {
+			out.write("</font>");
+		} catch (IOException e) {
+			System.out.println("处理字体自定义标签是出错！");
+		}
+		return super.doEndTag();
+	}
+	public int getSize() {
+		return size;
+	}
+	public void setSize(int size) {
+		this.size = size;
+	}
+	public String getFace() {
+		return face;
+	}
+	public void setFace(String face) {
+		this.face = face;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	
+}

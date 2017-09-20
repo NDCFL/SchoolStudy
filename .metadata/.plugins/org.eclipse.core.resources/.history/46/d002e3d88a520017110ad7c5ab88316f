@@ -1,0 +1,811 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<title>物流管理</title>
+		<meta name="description"
+			content="大驼队是基于移动互联网和大数据技术的企业SaaS化物流软件，致力于为公路货运领域提供高效的货运协同管理工具" />
+		<meta name="keywords"
+			content="大驼队 物流 公路货运 协同运输 可视运输 物流SaaS平台 物流金融 司机生态 货运APP" />
+		<meta name="author" content="order by lcdt" />
+		<meta name="baidu-site-verification" content="MbMgMpa8bF" />
+		<link
+			href="https://cdn.bootcss.com/bootstrap/3.2.0/css/bootstrap.min.css"
+			rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/cs/style.css" rel="stylesheet">
+		<link href="${pageContext.request.contextPath}/cs/shake.css" rel="stylesheet">
+		<link href="/skin/css/dtd.css" rel="stylesheet">
+		<link rel="shortcut icon" href="favicon.ico" />
+
+		<!--[if lt IE 9]>
+<script src="/skin/js/html5shiv.min.js"></script>
+<script src="/skin/js/respond.min.js"></script>
+<link href="/skin/css/ie8.css" rel="stylesheet">
+<![endif]-->
+		<!--[if lte IE 6]>
+<meta http-equiv="refresh" content="0;url=/no-ie6.html" />
+<![endif]-->
+		<!--[if lte IE 7]>
+<meta http-equiv="refresh" content="0;url=/no-ie6.html" />
+<![endif]-->
+		<script type='text/javascript'>
+      var _vds = _vds || [];
+      window._vds = _vds;
+      (function(){
+        _vds.push(['setAccountId', 'b7a624b6b3ec7998']);
+        (function() {
+          var vds = document.createElement('script');
+          vds.type='text/javascript';
+          vds.async = true;
+          vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(vds, s);
+        })();
+      })();
+  </script>
+
+		<style media="screen">
+p {
+	font-family: "微软雅黑", "Hiragino Sans GB", "Microsoft YaHei", tahoma,
+		arial, simsun, "";
+}
+
+.shiyong:focus,.shiyong:hover {
+	color: #fff;
+	text-decoration: blink;
+}
+
+.top-inner {
+	margin-top: 100px;
+	padding-top: 80px;
+	color: #fff;
+}
+
+.top-inner.text-right {
+	text-align: right;
+}
+
+.top-inner.text-left {
+	text-align: left;
+}
+
+p.sub-title {
+	font-size: 26px;
+	text-shadow: 0px 0px 9px rgba(0, 0, 0, 0.39);
+	margin-bottom: 26px;
+}
+
+.block-a {
+	display: block;
+}
+
+p.title {
+	font-size: 38px;
+	line-height: 50px;
+	text-shadow: 0px 0px 9px rgba(0, 0, 0, 0.39);
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+p.btn-row a.blue {
+	background: #587dff;
+}
+
+p.btn-row a {
+	display: inline-block;
+	width: 121px;
+	background-color: #f29a00;
+	color: #fff;
+	text-align: center;
+	font-size: 18px;
+	line-height: 38px;
+	border-radius: 5px;
+	height: 38px;
+}
+
+.border-block a {
+	display: block;
+	position: relative;
+}
+
+.border-block .maskb {
+	display: none;
+	background: #36b8c9;
+	opacity: 0.8;
+	width: 100%;
+	position: absolute;
+	height: 100%;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;;
+}
+
+.cases-hover {
+	cursor: pointer;
+	display: block;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(54, 184, 201, 0.8);
+	background-image: url(/images/home_cover.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	opacity: 0;
+	filter: Alpha(Opacity = 0);
+	z-index: 96;
+	-webkit-transition: all .3s linear;
+	-moz-transition: all .3s linear;
+	-ms-transition: all .3s linear;
+	-o-transition: all .3s linear;
+	transition: all .3s linear
+}
+
+.cases-hover:hover {
+	opacity: 1;
+	filter: Alpha(Opacity = 1)
+}
+
+.cases-hover * {
+	filter: inherit
+}
+
+.cases-hover {
+	cursor: pointer
+}
+
+h2.visible-xs-block.lj span {
+	background-image:
+		url(${pageContext.request.contextPath}/wuliu/icon1.png);
+}
+
+h2.visible-xs-block.xt span {
+	background-image:
+		url(${pageContext.request.contextPath}/wuliu/icon2.png);
+}
+
+h2.visible-xs-block.ks span {
+	background-image:
+		url(${pageContext.request.contextPath}/wuliu/icon3.png);
+}
+
+h2.visible-xs-block.zn span {
+	background-image:
+		url(${pageContext.request.contextPath}/wuliu/icon4.png);
+}
+
+h2.visible-xs-block span {
+	padding-left: 44px;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.border-block p {
+	font-size: 24px;
+	color: #333333;
+	padding-top: 21px;
+	line-height: 24px;
+	margin-bottom: 40px;
+	text-align: center;
+}
+
+.fuwu.fuwu2 {
+	padding: 60px 0 0 0;
+}
+
+.fuwu.fuwu2 figure {
+	margin-bottom: 60px;
+}
+
+.fuwu {
+	padding: 0;
+}
+
+.fuwu.fuwu-bg h1 {
+	text-align: right;
+	margin-top: 5px;
+	color: #000;
+	font-weight: bold;
+}
+
+.fuwu.fuwu-bg .h-h2 a {
+	margin-top: 20px;
+	text-align: center
+}
+
+.fuwu.fuwu-bg .h-h2 {
+	text-align: right;
+}
+
+.fuwu.fuwu-bg h3 {
+	color: #000;
+	text-align: right;
+}
+
+.go-detail {
+	margin-top: 10px;
+	display: inline-block;
+	text-align: center;
+	background: #56b7ff;
+	border-radius: 5px;
+	padding: 5px 15px;
+}
+</style>
+	</head>
+	<body>
+		<!-- head start -->
+		<header data-headroom id="header"
+			class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<div class="container" style="">
+			<!-- mobile nav start -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="sr-only">测试测试</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<!-- logo start -->
+				<h1 class="logo">
+					<a class="navbar-brand" href="/"> <img
+							src="${pageContext.request.contextPath}/wuliu/logo.png"
+							alt="大驼队-公路货运协同管理工具" title="大驼队-公路货运协同管理工具"
+							class="ylw-img-responsive logo-hidden" /> <img
+							src="${pageContext.request.contextPath}/wuliu/blogo.png"
+							alt="大驼队-公路货运协同管理工具" title="大驼队-公路货运协同管理工具"
+							class="ylw-img-responsive logo-visible" />
+					</a>
+				</h1>
+
+			</div>
+			<!-- mobile nav end -->
+			<!-- nav start -->
+			<nav class="collapse navbar-right navbar-collapse" role="navigation">
+			<ul class="nav navbar-nav" id="nav">
+				<li class="dropdown active">
+					<a class="dropdown-toggle" href="javascript:void(0);">首页</a>
+				</li>
+				<li class="dropdown ">
+					<a id="dLabel" data-toggle="dropdown" 11 href="javascript:void(0);">产品与服务<small></small>
+					</a>
+					<ul class="dropdown-menu dropdown-menu-left">
+
+						<li>
+							<a href="javascript:void(0);">物流cTMS</a>
+						</li>
+
+						<li>
+							<a href="javascript:void(0);">物流管车宝</a>
+						</li>
+
+						<li>
+							<a href="javascript:void(0);">物流司机宝</a>
+						</li>
+
+					</ul>
+				</li>
+				<li class="dropdown ">
+					<a id="dLabel" data-toggle="dropdown" 11 href="javascript:void(0);">客户案例<small></small>
+					</a>
+					<ul class="dropdown-menu dropdown-menu-left">
+
+					</ul>
+				</li>
+				<li class="dropdown ">
+					<a id="dLabel" data-toggle="dropdown" 11 href="javascript:void(0);">资讯<small></small>
+					</a>
+					<ul class="dropdown-menu dropdown-menu-left">
+
+						<li>
+							<a href="javascript:void(0);">综合</a>
+						</li>
+
+						<li>
+							<a href="javascript:void(0);">物流</a>
+						</li>
+
+						<li>
+							<a href="javascript:void(0);">驼圈</a>
+						</li>
+
+					</ul>
+				</li>
+				<li class="dropdown my_dropdown ">
+					<a id="gsyg" class="dropdown-toggle" style="padding-right: 0"
+						href="javascript:void(0);" target="_blank">
+						注册</a>
+				</li>
+				<li class="dropdown  ">
+					<a class="dropdown-toggle"
+						href="javascript:void(0);" target="_blank"> 登录</a>
+				</li>
+			</ul>
+			</nav>
+			<!-- nav end -->
+		</div>
+		</header>
+
+		<!-- head end -->
+
+
+		<!-- banner start -->
+		<div class="banner text-center">
+			<div class="slider">
+				<ul class="slides">
+					<li class="slide">
+						<div class="box"
+							style="background-image: url(${pageContext.request.contextPath}/wuliu/slider_index_1b.jpg); height: 550px;">
+							<!-- <div class="box" style="background-image:url(${pageContext.request.contextPath}/wuliu/slider_index_01.jpg);height:550px;"> -->
+							<div class="container">
+								<div class="top-inner text-right">
+									<p class="sub-title">
+										大驼队cTMS
+									</p>
+									<p class="title">
+										全程透明协同运输管理系统
+									</p>
+									<p class="btn-row">
+										<a class="shiyongbtn" href="javascript:void(0);">免费试用</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="slide">
+						<div class="box"
+							style="background-image: url(${pageContext.request.contextPath}/wuliu/slider_index_2b.jpg); height: 550px;">
+							<!-- <div class="box" style="background-image:url(${pageContext.request.contextPath}/wuliu/slider_index_02.jpg);height:550px;"> -->
+							<div class="container">
+								<div class="top-inner text-left">
+									<p class="sub-title">
+										云端化 社群化 服务化
+									</p>
+									<p class="title">
+										培养精益求精的物流生态链
+									</p>
+									<p class="btn-row">
+										<a class="blue shiyongbtn"
+											href="javascript:void(0);">免费试用</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="slide">
+						<div class="box"
+							style="background-image: url(${pageContext.request.contextPath}/wuliu/slider_index_3b.jpg); height: 550px;">
+							<!-- <div class="box" style="background-image:url(${pageContext.request.contextPath}/wuliu/slider_index_03.jpg);height:550px;"> -->
+							<div class="container">
+								<div class="top-inner text-right">
+									<p class="sub-title">
+										采购 订单 仓储 运输 监管
+									</p>
+									<p class="title">
+										构建上下游和第三方服务供应链信息体系
+									</p>
+									<p class="btn-row">
+										<a class="shiyongbtn" href="javascript:void(0);">免费试用</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+		<!-- banner end -->
+
+		<!-- huanjing start -->
+		<div class="fuwu fuwu2">
+			<section class="container text-center">
+			<h2 class="h-h2">
+				产品与服务
+			</h2>
+			<div class="row">
+				<figure class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
+				<img src="${pageContext.request.contextPath}/wuliu/01.jpg" alt="" />
+				<h2 class="">
+					大驼队cTMS
+				</h2>
+				<h3>
+					货主计划指派
+					<br>
+					承运商运输协同
+					<br>
+					货物在途跟踪
+					<br>
+					运输节点控制
+				</h3>
+				<a target="_blank" href="javascript:void(0);" class="go-detail">查看详情</a>
+				</figure>
+				<figure class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
+				<img src="${pageContext.request.contextPath}/wuliu/02.jpg" alt="" />
+				<h2 class="">
+					大驼队管车宝
+				</h2>
+				<h3>
+					车场找车
+					<br>
+					我的车队管理
+					<br>
+					承运商运输协同
+					<br>
+					可视运输
+				</h3>
+				<a target="_blank" href="javascript:void(0);"
+					class="go-detail">查看详情</a>
+				</figure>
+				<figure class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
+				<img src="${pageContext.request.contextPath}/wuliu/03.jpg" alt="" />
+				<h2 class="">
+					大驼队司机宝
+				</h2>
+				<h3>
+					接单发货
+					<br>
+					上传电子回单
+					<br>
+					高速路况
+					<br>
+					数据信用贷
+				</h3>
+				<a class="go-detail" target="_blank" href="javascript:void(0);">查看详情</a>
+				</figure>
+			</div>
+			</section>
+		</div>
+		<!-- huanjing end -->
+
+
+		<div class="g-block">
+			<section class="container text-center">
+			<div class="mid-pic">
+				<h2 class="title">
+					云端
+				</h2>
+				<h3>
+					云平台是什么？
+					<br>
+					QQ、微信、公司邮件都在“云”上，
+					<br>
+					云已经在您身边了
+					<br>
+					云平台优势：低费用，低成本，免维护
+					<br>
+				</h3>
+			</div>
+			</section>
+
+			<section class="container text-center">
+
+			<div class="row">
+				<figure class="col-xs-12 col-sm-3 col-md-3 col-lg-3 "
+					style="margin-bottom:30px;">
+				<img src="${pageContext.request.contextPath}/wuliu/icon1.png" alt=""
+					class="hidden-xs" />
+				<h2 class="visible-xs-block lj">
+					<span>链接流程</span>
+				</h2>
+				<h2 class="hidden-xs">
+					链接流程
+				</h2>
+				<h3>
+					对传统物流流程优化打造更加流畅，高效的运输管理
+				</h3>
+				</figure>
+				<figure class="col-xs-12 col-sm-3 col-md-3 col-lg-3 "
+					style="margin-bottom:30px;">
+				<img src="${pageContext.request.contextPath}/wuliu/icon2.png" alt=""
+					class="hidden-xs" />
+				<h2 class="visible-xs-block xt">
+					<span>协同运力</span>
+				</h2>
+				<h2 class="hidden-xs">
+					协同运力
+				</h2>
+				<h3>
+					通过线上平台，协同货运管理
+				</h3>
+				</figure>
+				<figure class="col-xs-12 col-sm-3 col-md-3 col-lg-3 "
+					style="margin-bottom:30px;">
+				<img src="${pageContext.request.contextPath}/wuliu/icon3.png" alt=""
+					class="hidden-xs" />
+				<h2 class="visible-xs-block ks">
+					<span>可视运输</span>
+				</h2>
+				<h2 class="hidden-xs">
+					可视运输
+				</h2>
+				<h3>
+					管控每一个运输节点，监控车辆行驶轨迹，让运输链路清晰可见
+				</h3>
+				</figure>
+
+				<figure class="col-xs-12 col-sm-3 col-md-3 col-lg-3 "
+					style="margin-bottom:30px;">
+				<img src="${pageContext.request.contextPath}/wuliu/icon4.png" alt=""
+					class="hidden-xs" />
+				<h2 class="visible-xs-block zn">
+					<span>智能管控</span>
+				</h2>
+				<h2 class="hidden-xs">
+					智能管控
+				</h2>
+				<h3>
+					利用集成智能化技术，打造集互联、互通、智慧化的物流管理体系
+				</h3>
+				</figure>
+			</div>
+			</section>
+		</div>
+
+		<div>
+			<section class="container text-center" style="padding-top:20px;">
+			<div class="row">
+				<div class="with-border col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
+					<div class="border-block">
+						<a target="_blank" href="javascript:void(0);"> <img
+								src="${pageContext.request.contextPath}/wuliu/image_index_app02.jpg"
+								alt="" /> </a>
+						<p>
+							企业物流
+						</p>
+					</div>
+				</div>
+				<div class="with-border col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
+					<div class="border-block">
+						<a target="_blank" href="javascript:void(0);"> <img
+								src="${pageContext.request.contextPath}/wuliu/image_index_app01.jpg"
+								alt="" /> </a>
+						<p>
+							第三方物流
+						</p>
+					</div>
+				</div>
+				<div class="with-border col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
+					<div class="border-block">
+						<a target="_blank" href="javascript:void(0);"> <img
+								src="${pageContext.request.contextPath}/wuliu/image_index_app03.jpg"
+								alt="" /> </a>
+						<p>
+							电商物流
+						</p>
+					</div>
+				</div>
+				</section>
+			</div>
+			<div class="container text-center">
+				<h2>
+					公司介绍
+				</h2>
+				<p style="font-size: 16px; line-height: 35px; margin-top: 20px;">
+					北京普云数海科技有限公司主营业务为互联网供应链软件研发与销售，供应链咨询、整合运作等服务。主要产品是面向货运行业的协同运输管理三大产品：
+					大驼队cTMS、管车宝、司机宝等系列软件。通过大驼队cTMS及配套硬件和生态化综合服务体系，努力帮助用户实现全供应链的商流、信息流、资金流和实物流融合，为用户打造智慧、高效、协同的新一代互联网供应链信息系统。
+				</p>
+			</div>
+			<div class="footer-register">
+				<p>
+					即刻注册 ，免费试用大驼队运输协同管理系统
+				</p>
+				<a class="shiyong" target="_blank"
+					href="javascript:void(0);">立即试用</a>
+			</div>
+			<!-- youshi end -->
+			<!-- news start -->
+			<!-- news end -->
+
+			<!-- kj-contact start -->
+			<!-- <div class="kj-contact text-center hidden-xs">
+  <h4 class="h4"><a href="/a/zixun/" target="_blank">现在致电 0898-688989  OR  查看更多联系方式  &rarr;</a> </h4>
+</div> -->
+			<!-- kj-contact end -->
+			<!-- <div class="kj-contact text-center visible-xs">
+  <h4 class="h4"><a href="/a/zixun/" rel="nofollow">现在致电 0898-688989   OR  查看更多联系方式  &rarr;</a></h4>
+</div> -->
+			<!-- kj-contact end -->
+			<!-- footer start -->
+			<div class="footer" id="yy">
+				<!-- yuyue start -->
+				<footer class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<h3>
+							<span style="margin-right: 20px;"><a
+								href="javascript:void(0);" target="_blank">中国物流与采购联合会</a>
+							</span>
+							<span><a href="javascript:void(0);" target="_blank">平安银行</a>
+							</span>
+						</h3>
+					</div>
+					<!-- <div class="col-xs-4 col-sm-4 col-md-2 col-lg-2">
+      <h3><a  href="http://www.lichendt.com/" target="_blank" >立晨数据 </a></h3>
+    </div> -->
+
+
+
+				</div>
+				<!-- yuyue end -->
+				<!-- copy start -->
+				<div class="copy">
+					<hr style="color: #c7c7c7;" />
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<p class="copy-info">
+								<a href="tel:0539-3116107"><i class="foot-call"></i>客服电话：4001805656</a>
+								<a href="mailto:fuwu@datuodui.com"> <i class="foot-mail"></i>联系我们</a>
+								<br>
+								<!-- COPYRIGHT  LICHENDT.COM 2009-2017 山东立晨数据股份有限公司 版权所有 POWER BY LICHENDT  鲁ICP备09051351号-6 -->
+								COPYRIGHT DATUODUI.COM 2009-2017 个人所有 版权所有 POWER BY PUYUN
+								京ICP备15022540号-1
+								<!-- LINSHANG  DATUODUI.COM 2009-2017 <span style="color:#f5f5f5">济南邻商 版权所有 POWER BY LINSHANG  </span>京ICP备15022540号-1 -->
+							</p>
+						</div>
+					</div>
+				</div>
+				<!-- copy end -->
+				<!-- link start -->
+				<!-- link end -->
+				</footer>
+			</div>
+			<!-- footer end -->
+			<!-- go to top start -->
+			<!-- go to top end -->
+			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+			<script src="https://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+			<!-- Include all compiled plugins (below), or include individual files as needed -->
+			<script src="/skin/js/jpuery.team.scroll.js"></script>
+			<!-- header up start -->
+			<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?5a98191812be8f41f03f327a473a38d6";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+			<script type="text/javascript">
+function IsPC() {
+    var userAgentInfo = navigator.userAgent;
+    var Agents = ["Android", "iPhone",
+                "SymbianOS", "Windows Phone",
+                "iPad", "iPod"];
+    var flag = true;
+    for (var v = 0; v < Agents.length; v++) {
+        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+            flag = false;
+            break;
+        }
+    }
+    if (!flag) {
+      $(".shiyong").attr('href', 'https://tms.datuodui.com/share/to_reg.jsp?type=hz');
+      $("#gsyg").attr('href', 'https://tms.datuodui.com/share/to_reg.jsp?type=hz');
+      $(".shiyongbtn").each(function(index, el) {
+        $(this).attr('href', 'https://tms.datuodui.com/share/to_reg.jsp?type=hz');
+      });
+    }
+}
+IsPC()
+  $('.nav .dropdown').each(function(index, el) {
+    // if (index !=1) {
+    //   $(this).find('a').attr('data-toggle', 'value');;
+    // }
+    if (index !=1 &&index !=3) {
+      $(this).find('ul').remove();
+      $(this).find('a').attr('data-toggle', 'value');;
+    }
+  });
+  $(document).ready(function(){
+  	$(".side ul li").hover(function(){
+  		$(this).find(".sidebox").stop().animate({"width":"200px"},240).css({"opacity":"1","background":"#087ad5","filter":"Alpha(opacity=100)"})
+  	},function(){
+  		$(this).find(".sidebox").stop().animate({"width":"54px"},240).css({"opacity":"0.8","filter":"Alpha(opacity=80)","background":"#115388"})
+  	});
+
+  //   $(this).find(".sideqq").stop().animate({"width":"318px"},200).animate({"height":"219px"},200).css({"opacity":"1","filter":"Alpha(opacity=100)","background":"#087ad5"})
+  // },function(){
+  //   $(this).find(".sideqq").stop().animate({"width":"54px"},200).animate({"height":"54px"},200).css({"opacity":"0.8","filter":"Alpha(opacity=80)","background":"#000"})
+  // });
+  $(".side ul li").hover(function(){
+    $(this).find(".sidewx").stop().animate({"width":"210px"},200).animate({"height":"200px"},200).css({"opacity":"1","filter":"Alpha(opacity=100)","background":"#087ad5","padding":"0 10px"})
+  },function(){
+    $(this).find(".sidewx").stop().animate({"width":"54px"},200).animate({"height":"54px"},200).css({"opacity":"0.8","filter":"Alpha(opacity=80)","background":"#115388","padding":"0 0"})
+  });
+  //
+  });
+
+  //回到顶部
+  function goTop(){
+  	$('html,body').animate({'scrollTop':0},600);
+  }
+</script>
+
+			<script src="/skin/js/jquery.glide.min.js"></script>
+			<script src="/skin/js/jquery.glide.admin.js"></script>
+
+			<!-- banner end -->
+
+			<!-- Team left start -->
+
+			<!-- <script src="/skin/js/headroom.min.js"></script> -->
+
+			<!-- <script src="/skin/js/jquery.headroom.js"></script> -->
+			<!-- <script>$("#header").headroom();</script> -->
+			<!-- header up end -->
+			<!-- banner start -->
+
+
+			<script
+				src="https://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+			<!-- Team left end -->
+			<!-- kefu start -->
+			<div class="side hidden-xs">
+				<ul>
+					<li>
+						<a href="https://tms.datuodui.com/reg.jsp"><div
+								class="sidebox">
+								<img src="${pageContext.request.contextPath}/wuliu/shi.png">
+								免费试用
+							</div>
+						</a>
+					</li>
+					<li>
+						<a href="tencent://message/?uin=800186758&Site=Service&menu=yes"><div
+								class="sidebox">
+								<img src="${pageContext.request.contextPath}/wuliu/qq.png">
+								联系QQ客服
+							</div>
+						</a>
+					</li>
+					<li>
+						<div class="sidewx sidebox">
+							<img src="${pageContext.request.contextPath}/wuliu/wx.png">
+							微信公众号
+							<img class="wximg"
+								src="${pageContext.request.contextPath}/wuliu/qcode.jpg">
+						</div>
+					</li>
+					<li>
+						<a href="javascript:void(0);"><div class="sidebox">
+								<img src="${pageContext.request.contextPath}/wuliu/phone.png">
+								电话:176-0797-5702
+							</div>
+						</a>
+					</li>
+					<li>
+						<a
+							href="javascript:void(0);"><div
+								class="sidebox">
+								<img src="${pageContext.request.contextPath}/wuliu/wb.png">
+								新浪微博
+							</div>
+						</a>
+					</li>
+					<li style="border: none;">
+						<a href="javascript:void(0);" class="sidetop"><div class="sidebox">
+								<img src="${pageContext.request.contextPath}/wuliu/home.png">
+								回到首页
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- kefu end -->
+	</body>
+</html>

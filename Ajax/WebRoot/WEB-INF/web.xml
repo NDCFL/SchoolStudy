@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <servlet>
+    <servlet-name>AjaxServlet</servlet-name>
+    <servlet-class>com.ht.servlet.AjaxServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>XmlServlet</servlet-name>
+    <servlet-class>com.ht.servlet.XmlServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>MenuServlet</servlet-name>
+    <servlet-class>MenuServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>RefreshServlet</servlet-name>
+    <servlet-class>RefreshServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AjaxRequestServlet</servlet-name>
+    <servlet-class>com.ht.servlet.AjaxRequestServlet</servlet-class>
+  </servlet>
+	<servlet>
+		<servlet-name>dwr-invoker</servlet-name>
+		<servlet-class>org.directwebremoting.servlet.DwrServlet</servlet-class>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>true</param-value>
+		</init-param>	
+	</servlet>
+  <servlet>
+    <servlet-name>PostServlet</servlet-name>
+    <servlet-class>com.ht.servlet.PostServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>JsonServlet</servlet-name>
+    <servlet-class>JsonServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>StudServlet</servlet-name>
+    <servlet-class>com.ht.servlet.StudServlet</servlet-class>
+  </servlet>
+
+
+
+	<servlet-mapping>
+		<servlet-name>dwr-invoker</servlet-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</servlet-mapping>
+
+
+
+  <servlet-mapping>
+    <servlet-name>AjaxServlet</servlet-name>
+    <url-pattern>/ajaxServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>XmlServlet</servlet-name>
+    <url-pattern>/xmlServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MenuServlet</servlet-name>
+    <url-pattern>/menuServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RefreshServlet</servlet-name>
+    <url-pattern>/refreshServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AjaxRequestServlet</servlet-name>
+    <url-pattern>/requestServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PostServlet</servlet-name>
+    <url-pattern>/postServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>JsonServlet</servlet-name>
+    <url-pattern>/jsonServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StudServlet</servlet-name>
+    <url-pattern>/studServlet</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

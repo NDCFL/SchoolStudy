@@ -1,0 +1,122 @@
+.news_block{
+    background: url(/images/news_background.png);
+    height: 602px;
+    overflow: hidden;
+}
+
+.news_block .news_block_content{
+    width: 1167px;
+    height: 390px;
+    margin: 108px auto;
+}
+
+.news_block .left-bar{
+    float: left;
+    width: 750px;
+    height: 100%;
+}
+
+.news_block .right-bar{
+    float: right;
+    width: 312px;
+    height: 100%;
+}
+
+.news_block .primary-thumb-container{
+    width: 100%;
+    height: 230px;
+    overflow: hidden;
+    background: none;
+}
+
+.news_block .primary-thumb-container .swiper-scrollbar-drag{
+    background: rgba(74, 163, 254, 1);
+}
+
+.news_block .primary-thumb-container .swiper-slide{
+    padding: 0;
+}
+
+.news_block .secondary-thumb-container{
+    width: 100%;
+    margin-top: 12px;
+    height: 148px;
+}
+
+.thumb {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.thumb img{
+    width: 100%;
+    height: 100%;
+}
+
+.thumb .title{
+    position: absolute;
+    width: 100%;
+    height: 52px;
+    bottom: 0;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5)
+}
+
+.secondary-thumb {
+    float: left;
+    width: 242px;
+    height: 128px;
+    margin-left: 12px;
+}
+
+.secondary-thumb:first-child{
+    margin-left: 0;
+}
+
+.news_block .right-bar h4{
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.news_block .right-bar .title{
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 14px;
+}
+
+.news_block .title a{
+    color: #fff;
+}
+
+.news_block .right-bar .title-container{
+    margin-bottom: 28px;
+    padding-left: 12px;
+    background: url(/images1/news_block_point.png) no-repeat 0 5px;
+}
+
+.news_block .right-bar .title-container .sub-title{
+    color: #b3b3b3;
+}
+
+.primary-thumb-container .thumb .title{
+    font-size: 18px;
+    line-height: 52px;
+}
+
+.secondary-thumb-container .thumb .title{
+    display: table;
+    vertical-align: middle;
+}
+
+.secondary-thumb-container .thumb .title a{
+    display: table-cell;
+    vertical-align: middle;
+}

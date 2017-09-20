@@ -1,0 +1,19 @@
+package T8;
+
+public class Lianxi_2 {
+	class Test{
+		int amethod(){
+			try {
+				return 10;
+			} finally{
+				return 20;
+			}
+		}
+	}
+	public static void main(String[] args) {
+		
+		Test t = new Test();
+		System.out.println(t.amethod());
+		
+	}
+}

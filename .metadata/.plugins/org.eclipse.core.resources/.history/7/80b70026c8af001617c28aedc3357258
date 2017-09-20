@@ -1,0 +1,14 @@
+package T2;
+
+public class Jjcfb {
+
+	public static void main(String[] args) {
+		int sum=1;
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				sum=i*j;
+				System.out.print();
+			}
+		}
+	}
+}

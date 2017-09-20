@@ -1,0 +1,26 @@
+package Loopyuju;
+
+public class Birld {
+
+	public static void main(String[] args) {
+		int bird = 0 ;
+		int big = 0 ; 
+		/*
+		 * bird*2+big*4 = 100 ; bird + big = 36 ;
+		 */ 
+		for(bird = 0 ; bird <= 36 ; bird++) 
+		{ 
+		for(big = 0 ; big <= 36 ; big++) 
+		{ 
+		if((bird*2+big*4==100)&&(bird+big==36)) 
+		{ 
+		System.out.println("bird = "+bird); 
+		System.out.println("big = "+big); 
+		return ; 
+		} 
+		} 
+		} 
+		} 
+
+	}
+}

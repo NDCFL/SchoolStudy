@@ -1,0 +1,54 @@
+package T15_1;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
+
+import T15.DBdemo;
+
+public class SQLyujuimp implements SQLyuju{
+
+	public void add(SQLBean sqlbean) {
+		//静态的无需再new实例
+		Connection con = SQLlianjie.open();
+		String SQL = "insert into QQcard values(?,?,?,?,?,?,?)";
+		
+		try {
+			int n=1;
+			PreparedStatement pst = con.prepareStatement(SQL);
+			pst.setString(n++, sqlbean.getName().trim());
+			pst.setString(n++, sqlbean.getCard().trim());
+			pst.setString(n++, sqlbean.getPassword().trim());
+			pst.setString(n++, sqlbean.getSex().trim());
+			pst.setInt(n++, sqlbean.getAge());
+			pst.setString(n++, sqlbean.getEmail().trim());
+			pst.setString(n++, sqlbean.getShuoming().trim());
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void delete(int id) {
+		
+	}
+
+	public void find(int id) {
+		
+	}
+
+	public void findAll(SQLBean sqlbean) {
+		
+	}
+
+	public List findlike(String name) {
+		return null;
+	}
+
+	public void update(SQLBean sqlbean) {
+		
+	}
+
+	
+}

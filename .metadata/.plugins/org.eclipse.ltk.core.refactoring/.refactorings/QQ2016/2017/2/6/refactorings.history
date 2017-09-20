@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 1 elements(s) to &apos;JSPint/src/SQLup&apos;&#x0D;&#x0A;- Original project: &apos;QQ2016&apos;&#x0D;&#x0A;- Destination element: &apos;JSPint/src/SQLup&apos;&#x0D;&#x0A;- Original element: &apos;QQfase.TipUi.java&apos;" description="Copy compilation unit" destination="/src&lt;SQLup" element1="/src&lt;QQfase{TipUi.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" log="/src&lt;QQfase{TipUi.java&#x09;true&#x09;false" policy="org.eclipse.jdt.ui.copyResources" stamp="1486299995270" units="1" version="1.0"/>
+</session>

@@ -1,0 +1,21 @@
+package XMLClass;
+
+import java.util.HashMap;
+
+import org.jdom.Document;
+import org.jdom.input.SAXBuilder;
+
+public class ReadXml {
+
+	private static HashMap servicename = new HashMap();
+	private static HashMap serviceinterface = new HashMap();
+	static{
+		SAXBuilder sax = new SAXBuilder();
+		try {
+			Document doc = sax.build(ReadXml.class.getResourceAsStream(""));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+}

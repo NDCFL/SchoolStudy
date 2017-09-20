@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="F:/学习总课程/Java/Java作业/QQ2016/sqljdbc4.jar"/>
+	<classpathentry kind="src" path="/JavaStudy"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

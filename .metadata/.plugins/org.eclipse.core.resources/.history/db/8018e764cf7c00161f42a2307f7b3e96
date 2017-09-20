@@ -1,0 +1,44 @@
+package T6;
+
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.Frame;
+import java.awt.Label;
+import java.awt.Panel;
+import java.awt.TextField;
+
+public class Lianxi extends Frame{
+
+	//定义变量名称
+	Panel panel;
+	TextField nameLabel,passLabel;
+	Label name,pass;
+	Button dengru,zhuche;
+	public Lianxi() {
+		
+		setTitle("QQ界面");
+		//声明变量
+		panel = new Panel(null);
+		name = new Label("QQ账号",Label.RIGHT);
+		nameLabel = new TextField();
+		pass = new Label("QQ密码",Label.RIGHT);
+		passLabel = new TextField();
+		dengru = new Button("登入");
+		zhuche = new Button("注册");
+		//添加控件到容器里
+		panel.add(nameLabel);
+		panel.add(passLabel);
+		panel.add(name);
+		panel.add(pass);
+		panel.add(dengru);
+		panel.add(zhuche);
+		add(panel);
+		setSize(200, 200);
+		setVisible(true);
+		setBackground(Color.BLUE);
+		
+	}	
+	public static void main(String[] args) {
+		new Lianxi();
+	}
+}

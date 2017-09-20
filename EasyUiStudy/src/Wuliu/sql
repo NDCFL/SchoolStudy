@@ -1,0 +1,7 @@
+create table wuliu(
+	wuliu int identity(1,1) primary key,
+	proname varchar(20) not null,
+	price int not null,
+	num int not null,
+	date varchar(200) not null
+)

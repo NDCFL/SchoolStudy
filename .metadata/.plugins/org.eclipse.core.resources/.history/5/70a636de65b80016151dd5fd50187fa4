@@ -1,0 +1,43 @@
+package Loopyuju;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+public class socketcon {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		try {
+			//1.创建客户端Socket;
+			Socket socket = new Socket("127.0.0.1",8888);
+			System.out.println("连接服务器成功....");
+			//2.绑定输入输出流
+			OutputStream os = socket.getOutputStream();
+			PrintStream ps = new PrintStream(os);
+			InputStream is = socket.getInputStream();
+			InputStreamReader isr = new InputStreamReader(is);
+			BufferedReader br = new BufferedReader(isr);
+			//3.发送数据
+			ps.println("我是客户端，请求连接...");
+			//4.接收数据
+			System.out.println("客户端接收服务器数据："+br.readLine());
+			//5.关闭Socket
+			socket.close();
+			
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+}

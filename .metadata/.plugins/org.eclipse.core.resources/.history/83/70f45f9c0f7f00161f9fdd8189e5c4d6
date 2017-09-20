@@ -1,0 +1,21 @@
+package T8;
+
+public class Lianxi_2 {
+	//java Example cat;
+	public static void main(String[] args) {
+		//String s = new String("Java");
+//		String s2 = new String("there");
+//		String s3 = new String();
+		//s3=s1+s2;
+		//00000000,00000000,00000000,00000100   4
+		//00000000,00000000,00000000,00000011   3
+		//00000000,00000000,00000000,00000111    
+		//System.out.println(4|3);
+		char c='h';
+		String s = "hello!";
+		c+=s;
+		System.out.println(c);
+		
+		
+	}
+}

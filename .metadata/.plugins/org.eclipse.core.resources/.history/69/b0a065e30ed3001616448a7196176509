@@ -1,0 +1,27 @@
+package TagDemo;
+
+import java.io.IOException;
+
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.tagext.BodyTagSupport;
+
+public class CheckLogin extends BodyTagSupport{
+	@Override
+	public int doStartTag() throws JspException {
+		JspWriter out = pageContext.getOut();
+		try {
+			out.write("request.getParameter('username')");
+			out.write("request.getParameter("userpassword")");
+		} catch (IOException e) {
+			System.out.println("显示登录信息出错！");
+		}
+		return super.doStartTag();
+	}
+	@Override
+	public int doEndTag() throws JspException {
+		// TODO Auto-generated method stub
+		return super.doEndTag();
+	}
+	
+}

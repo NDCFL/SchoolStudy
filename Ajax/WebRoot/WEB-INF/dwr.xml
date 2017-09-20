@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN"
+	"http://getahead.ltd.uk/dwr/dwr20.dtd">
+
+<dwr>
+
+	<allow>
+		<!-- 配置service，new：新建对象 -->
+		<create creator="new" javascript="helloService">
+			<param name="class" value="com.ht.bean.HelloService" />
+			<exclude method="sayHello1"/>
+			<include method="sayHello"/>
+		</create>
+		<create creator="new" javascript="studentService">
+			<param name="class" value="com.ht.service.StudentService"/>
+		</create>
+		<convert converter="bean" match="com.ht.bean.StudentVo">
+			<param name="include" value="studno,studname,classname"/>
+		</convert>
+	</allow>
+	<!-- 可以导入用到的包
+		import java.util.List
+	 -->
+	<signatures>
+		<![CDATA[	
+			
+	]]>
+	</signatures>
+</dwr>

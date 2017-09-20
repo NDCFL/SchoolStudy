@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ajax">
+    <output-path>$PROJECT_DIR$/classes/artifacts/ajax</output-path>
+    <root id="root" />
+  </artifact>
+</component>

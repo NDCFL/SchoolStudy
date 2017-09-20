@@ -1,0 +1,9 @@
+package T11;
+
+public class Date {
+
+	public static void main(String[] args) {
+		Date date = new Date();
+		System.out.println("当前时间为："+date);
+	}
+}

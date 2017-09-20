@@ -1,0 +1,32 @@
+package T9;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
+
+public class Help extends JFrame{
+
+	JPanel panel;
+	JTextArea mianban;
+	public Help() {
+		super("推箱子帮助");
+		setSize(500, 500);
+		panel = new JPanel();
+		mianban = new JTextArea("                    游戏介绍\n游戏名称：推箱子\n制作人：陈飞龙");
+		JScrollPane js = new JScrollPane(mianban);
+		panel.add(js);
+		add(panel);
+		setVisible(true);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}	
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		new Help();
+	}
+
+}

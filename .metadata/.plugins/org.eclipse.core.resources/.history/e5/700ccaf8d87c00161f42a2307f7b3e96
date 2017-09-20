@@ -1,0 +1,45 @@
+package T6;
+
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Button;
+import java.awt.Frame;
+import java.awt.Label;
+import java.awt.Panel;
+import java.awt.TextField;
+
+//在窗口中加入控件
+public class Frame_2 extends Frame{
+	//声明的成员变量
+	Label labelname,labelpasswordLabel,name,pass;
+	TextField textname,textpassword;
+	Button btOK,btclose;
+	Panel panel;
+	public Frame_2() {
+		this.setTitle("控件");
+		panel = new Panel(new FlowLayout());
+		//创建控件
+		labelname = new Label("账号");
+		labelpasswordLabel = new Label("密码");
+		textname = new TextField(10);
+		textpassword = new TextField(10);
+		btOK = new Button("登入");
+		btclose = new Button("注册");
+		//添加到容器里
+		panel.add(labelname);
+		panel.add(textname);
+		panel.add(labelpasswordLabel);
+		panel.add(textpassword);
+		panel.add(btOK);
+		panel.add(btclose);
+		add(panel);
+		this.setSize(200,300);
+		this.setBackground(Color.cyan);
+		this.setVisible(true);
+		
+		
+	}
+	public static void main(String[] args) {
+		new Frame_2();
+	}
+}

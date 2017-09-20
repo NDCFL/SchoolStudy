@@ -1,0 +1,44 @@
+package T11;
+
+public class list_2 {
+
+	private String id;
+	private String name;
+	private String price;
+	private String where;
+	public list_2(String id,String name,String price,String where) {
+		this.id=id;
+		this.name=name;
+		this.price=price;
+		this.where=where;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	public String getWhere() {
+		return where;
+	}
+	public void setWhere(String where) {
+		this.where = where;
+	}
+	@Override
+	public String toString() {
+		
+		return "学号\t"+id+"\t姓名\t"+name+"\t分数\t"+price+"\t地址\t"+where;
+	}
+}

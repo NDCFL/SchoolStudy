@@ -1,0 +1,129 @@
+package edu.ht.main;
+
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
+
+import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+
+import edu.ht.bean.Qquser;
+import edu.ht.service.QquserService;
+import edu.ht.service.impl.QquserServiceImpl;
+
+public class QQFriendInfo extends JFrame {
+	JTextField t1, t2, t3, t4, t5, t6, t7;
+	JPasswordField pwd1, pwd2;
+	JRadioButton sex1, sex2;
+	String[] stars = { "摩羯座", "水瓶座", "双鱼座", "白羊座", "金牛座", "双子座", "巨蟹座", "狮子座",
+			"处女座", "天秤座", "天蝎座", "射手座" };
+	String[] nations = { "汉族", "满族", "藏族", "白族", "傣族", "苗族", "高山族", "畲族", "回族",
+			"壮族", "彝族" };
+	JComboBox com1, com2;
+	JTextArea txt1;
+
+	QquserService qservice = new QquserServiceImpl();
+
+	public QQFriendInfo(Qquser frienduser) {
+		super("查看好友资料");
+		// 设置窗口图标
+		Image image = new ImageIcon("qqmain/tubiao.jpg").getImage();
+		setIconImage(image);
+		Container c = getContentPane();
+
+		// 设置样式
+		try {
+			UIManager
+					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		// 标题
+		JLabel title = new JLabel("好友资料");
+		title.setFont(new Font("隶书", Font.BOLD, 25));
+		title.setBounds(140, 5, 150, 50);
+		c.add(title);
+
+		// 昵称
+		JLabel luname = new JLabel("昵称："+frienduser.getUname());
+		luname.setBounds(75, 70, 240, 20);
+		c.add(luname);
+
+
+		// 头像
+		JLabel face = new JLabel(new ImageIcon(frienduser.getFace()));
+		face.setBounds(75, 120, 60, 60);
+		c.add(face);
+
+
+		// 性别
+		JLabel lsex = new JLabel("性别："+frienduser.getSex());
+		lsex.setBounds(75, 220, 270, 20);
+		c.add(lsex);
+
+
+
+		// 电话
+		JLabel ltel = new JLabel("电话："+frienduser.getTel());
+		ltel.setBounds(75, 270, 240, 20);
+		c.add(ltel);
+
+
+		// 星座
+		JLabel lstar = new JLabel("星座："+frienduser.getStar());
+		lstar.setBounds(75, 320, 240, 20);
+		c.add(lstar);
+
+		// 星座
+		JLabel lnation = new JLabel("民族："+frienduser.getNation());
+		lnation.setBounds(205, 320, 240, 20);
+		c.add(lnation);
+
+
+		// 星座
+		JLabel ltxt = new JLabel("个性签名："+frienduser.getTxt());
+		ltxt.setBounds(55, 370, 270, 20);
+		c.add(ltxt);
+
+		// 背景图片
+		JLabel bgimg = new JLabel(new ImageIcon(""));
+		c.add(bgimg);
+
+		setSize(400, 550);
+		setVisible(true);
+		setLocationRelativeTo(null);
+	}
+
+	class MyActionListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			
+		}
+
+	}
+
+	// QQ号码生成方法
+	public String getQnum() {
+		Random r = new Random();
+		int i = r.nextInt(10000);
+		// 9000
+		// i<1000控制生成QQ号的位数 && 在用户表中不存在
+		while (i < 1000 && qservice.selUser(i + "")) {
+			i = r.nextInt(10000);
+		}
+
+		return i + "";
+	}
+}

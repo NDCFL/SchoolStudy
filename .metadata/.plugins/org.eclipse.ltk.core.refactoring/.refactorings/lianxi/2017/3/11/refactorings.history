@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 1 elements(s) to &apos;lianxi/src/SQLServletTest&apos;&#x0D;&#x0A;- Original project: &apos;lianxi&apos;&#x0D;&#x0A;- Destination element: &apos;lianxi/src/SQLServletTest&apos;&#x0D;&#x0A;- Original element: &apos;T15.SQLConection.java&apos;" description="Copy compilation unit" destination="/src&lt;SQLServletTest" element1="/src&lt;T15{SQLConection.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" log="/src&lt;T15{SQLConection.java&#x09;true&#x09;false" policy="org.eclipse.jdt.ui.copyResources" stamp="1489381567803" units="1" version="1.0"/>
+</session>

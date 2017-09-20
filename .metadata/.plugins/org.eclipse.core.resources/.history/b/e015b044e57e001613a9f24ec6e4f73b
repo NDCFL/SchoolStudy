@@ -1,0 +1,35 @@
+package T8;
+
+import java.awt.Button;
+import java.awt.Panel;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+public class QQ extends JFrame{
+	JTextField textField;
+	JLabel name,passname;
+	JPasswordField password;
+	Button dengru,quxiao;
+	Panel p1;
+	public QQ(){
+		setTitle("QQ");
+		setSize(500,500);
+		p1 = new Panel();
+		name = new JLabel("QQ昵称");
+		password = new JPasswordField();
+		textField = new JTextField(null);
+		setBounds(100, 30, 100, 30);
+		add(textField);
+		
+		setVisible(true);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	public static void main(String[] args) {
+		new QQ();
+	}
+	
+}

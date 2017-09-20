@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 1 elements(s) to &apos;FitmentStore/src/SQLBean&apos;&#x0D;&#x0A;- Original project: &apos;JSPint&apos;&#x0D;&#x0A;- Destination element: &apos;FitmentStore/src/SQLBean&apos;&#x0D;&#x0A;- Original element: &apos;SQLBean.StudentBean.java&apos;" description="Copy compilation unit" destination="/src&lt;SQLBean" element1="/src&lt;SQLBean{StudentBean.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" log="/src&lt;SQLBean{StudentBean.java&#x09;true&#x09;false" policy="org.eclipse.jdt.ui.copyResources" stamp="1491703482137" units="1" version="1.0"/>
+</session>

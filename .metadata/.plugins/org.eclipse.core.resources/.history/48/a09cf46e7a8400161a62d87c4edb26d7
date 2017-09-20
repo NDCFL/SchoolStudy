@@ -1,0 +1,13 @@
+package T11;
+
+import java.util.Vector;
+
+public class Stack {
+
+	public static void main(String[] args) {
+		Vector vector = new Vector();
+		System.out.println(vector.size());
+	}
+
+	
+}

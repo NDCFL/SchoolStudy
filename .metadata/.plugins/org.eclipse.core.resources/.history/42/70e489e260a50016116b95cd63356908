@@ -1,0 +1,305 @@
+package QQfase;
+
+import java.awt.AWTException;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.MenuItem;
+import java.awt.Point;
+import java.awt.PopupMenu;
+import java.awt.SystemTray;
+import java.awt.Toolkit;
+import java.awt.TrayIcon;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Random;
+
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.Sequence;
+import javax.sound.midi.Sequencer;
+import javax.swing.ButtonGroup;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+
+import QQSQL.SQLconnection;
+import QQbean.QQidtable;
+import SQLBase.QQbase;
+import T10.Table;
+
+public class Lookfriendfase extends JFrame{
+
+	JLabel bg, title, touxiang, head1;
+	JLabel QQid, QQname, QQhead, age, sex;
+	JLabel start, blood, nation, hobit, remark;
+	JRadioButton man, weman;
+	QQidtable idtable;
+	JButton jtsave, jtclose, head;
+	private TrayIcon trayIcon = null;
+
+	public Lookfriendfase(){
+		tubiao();
+		bg = new JLabel(new ImageIcon("head/8.jpg"));
+		bg.setLayout(null);
+		add(bg);
+		head = new JButton(new ImageIcon());
+		head.setBounds(20, 100, 60, 60);
+		bg.add(head);
+
+		Icon image1 = new ImageIcon("images/41.gif");
+		title = new JLabel("好友资料");
+		title.setForeground(Color.blue);
+		title.setBounds(65, 30, 300, 30);
+		title.setFont(new Font("华文行楷", Font.BOLD, 30));
+		bg.add(title);
+
+		// 控件
+		QQid = new JLabel("Q Q号码  =123456", image1, 0);
+		QQid.setFont(new Font("黑体", Font.BOLD, 16));
+		QQid.setForeground(Color.gray);
+		QQid.setBounds(60, 100, 200, 40);
+		bg.add(QQid);
+
+
+		QQname = new JLabel("Q  Q昵称  ", image1, 0);
+		QQname.setFont(new Font("黑体", Font.BOLD, 16));
+		QQname.setForeground(Color.gray);
+		QQname.setBounds(40, 130, 200, 40);
+		bg.add(QQname);
+
+
+		age = new JLabel("年    龄  ", image1, 0);
+		age.setFont(new Font("黑体", Font.BOLD, 16));
+		age.setForeground(Color.gray);
+		age.setBounds(200, 215, 50, 40);
+		bg.add(age);
+
+
+		sex = new JLabel("性    别  ", image1, 0);
+		sex.setFont(new Font("黑体", Font.BOLD, 16));
+		sex.setForeground(Color.gray);
+		sex.setBounds(200, 240, 50, 40);
+		bg.add(sex);
+
+
+		nation = new JLabel("民    族  ", image1, 0);
+		nation.setFont(new Font("黑体", Font.BOLD, 16));
+		nation.setForeground(Color.gray);
+		nation.setBounds(200, 285, 110, 40);
+		bg.add(nation);
+
+
+		blood = new JLabel("血    型  ", image1, 0);
+		blood.setFont(new Font("黑体", Font.BOLD, 16));
+		blood.setForeground(Color.gray);
+		
+		blood.setBounds(320, 285, 110, 40);
+		bg.add(blood);
+
+
+		start = new JLabel("星    座  ", image1, 0);
+		start.setFont(new Font("黑体", Font.BOLD, 16));
+		start.setForeground(Color.gray);
+		start.setBounds(430, 285, 110, 40);
+		bg.add(start);
+
+
+
+		hobit = new JLabel("签    名  ", image1, 0);
+		hobit.setFont(new Font("黑体", Font.BOLD, 16));
+		hobit.setForeground(Color.gray);
+		hobit.setBounds(200, 180, 110, 40);
+		bg.add(hobit);
+
+
+		remark = new JLabel("个 人 小 说 明  ");
+		remark.setFont(new Font("黑体", Font.BOLD, 16));
+		remark.setForeground(Color.gray);
+		remark.setBounds(300, 345, 300, 40);
+		bg.add(remark);
+
+		setSize(300, 600);
+		setResizable(false);
+		setVisible(true);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+	}
+	public Lookfriendfase(QQidtable idtable) {
+		super("QQ注册");
+		this.idtable=idtable;
+		tubiao();
+		bg = new JLabel(new ImageIcon("head/8.jpg"));
+		bg.setLayout(null);
+		add(bg);
+		head = new JButton(new ImageIcon(idtable.getQQhead()));
+		head.setBounds(30, 100, 130, 130);
+		bg.add(head);
+
+		Icon image1 = new ImageIcon("images/41.gif");
+		title = new JLabel("好友资料");
+		title.setForeground(Color.blue);
+		title.setBounds(155, 30, 300, 30);
+		title.setFont(new Font("华文行楷", Font.BOLD, 30));
+		bg.add(title);
+
+		// 控件
+		QQid = new JLabel("Q  Q号码  "+idtable.getQQid(), image1, 0);
+		QQid.setFont(new Font("黑体", Font.BOLD, 16));
+		QQid.setForeground(Color.gray);
+		QQid.setBounds(200, 100, 200, 40);
+		bg.add(QQid);
+
+
+		QQname = new JLabel("Q  Q昵称  "+idtable.getQQname(), image1, 0);
+		QQname.setFont(new Font("黑体", Font.BOLD, 16));
+		QQname.setForeground(Color.gray);
+		QQname.setBounds(200, 137, 200, 40);
+		bg.add(QQname);
+
+
+		age = new JLabel("年    龄  "+idtable.getAge(), image1, 0);
+		age.setFont(new Font("黑体", Font.BOLD, 16));
+		age.setForeground(Color.gray);
+		age.setBounds(200, 215, 50, 40);
+		bg.add(age);
+
+
+		sex = new JLabel("性    别  "+idtable.getSex(), image1, 0);
+		sex.setFont(new Font("黑体", Font.BOLD, 16));
+		sex.setForeground(Color.gray);
+		sex.setBounds(200, 240, 50, 40);
+		bg.add(sex);
+
+
+		nation = new JLabel("民    族  "+idtable.getNation(), image1, 0);
+		nation.setFont(new Font("黑体", Font.BOLD, 16));
+		nation.setForeground(Color.gray);
+		nation.setBounds(200, 285, 110, 40);
+		bg.add(nation);
+
+
+		blood = new JLabel("血    型  "+idtable.getBlood(), image1, 0);
+		blood.setFont(new Font("黑体", Font.BOLD, 16));
+		blood.setForeground(Color.gray);
+		
+		blood.setBounds(320, 285, 110, 40);
+		bg.add(blood);
+
+
+		start = new JLabel("星    座  "+idtable.getStart(), image1, 0);
+		start.setFont(new Font("黑体", Font.BOLD, 16));
+		start.setForeground(Color.gray);
+		start.setBounds(430, 285, 110, 40);
+		bg.add(start);
+
+
+
+		hobit = new JLabel("签    名  "+idtable.getHobit(), image1, 0);
+		hobit.setFont(new Font("黑体", Font.BOLD, 16));
+		hobit.setForeground(Color.gray);
+		hobit.setBounds(200, 180, 110, 40);
+		bg.add(hobit);
+
+
+		remark = new JLabel("个 人 小 说 明  "+idtable.getRemark());
+		remark.setFont(new Font("黑体", Font.BOLD, 16));
+		remark.setForeground(Color.gray);
+		remark.setBounds(300, 345, 300, 40);
+		bg.add(remark);
+
+		setSize(600, 670);
+		setResizable(false);
+		setVisible(true);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	// 设置头像函数
+	public void tubiao() {
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+		Image image = toolkit.getImage("Picture/qt.png");
+		setIconImage(image);
+	}
+
+	public static void main(String[] args) {
+		new Lookfriendfase();
+	}
+
+	public void jbInit() {
+		if (SystemTray.isSupported()) { // 检查当前系统是否支持系统托盘
+			SystemTray tray = SystemTray.getSystemTray();// 获取表示桌面托盘区的
+			// SystemTray 实例。
+			Image image = Toolkit.getDefaultToolkit().getImage("image/111.png");
+			PopupMenu popupMenu = new PopupMenu();
+			MenuItem exitItem = new MenuItem("关闭");
+			MenuItem menuItema = new MenuItem("最小化");
+			MenuItem menuItemb = new MenuItem("最大化");
+			MenuItem menuItemc = new MenuItem("登录");
+			MenuItem menuItemd = new MenuItem("menu d");
+			exitItem.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						System.exit(0);
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+			});
+			menuItemc.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						new QQdenglu();
+					} catch (Exception ex) {
+						ex.printStackTrace();
+					}
+				}
+			});
+			popupMenu.add(menuItema);
+			popupMenu.add(menuItemb);
+			popupMenu.add(menuItemc);
+			popupMenu.add(menuItemd);
+			popupMenu.add(exitItem);
+			trayIcon = new TrayIcon(image, "系统托盘{kissjava}", popupMenu);
+			trayIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+			});
+			try {
+				tray.add(trayIcon); // 将 TrayIcon 添加到 SystemTray。
+			} catch (AWTException e) {
+				System.err.println(e);
+			}
+		} else {
+			System.out.println("你的系统不支持系统托盘");
+		}
+		ImageIcon icon = new ImageIcon();
+		try {
+		} catch (Exception e) {
+		}
+		JLabel label = new JLabel();
+		label.setIcon(icon);
+		this.add(label);
+	}
+
+
+
+
+}

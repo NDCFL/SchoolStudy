@@ -1,0 +1,425 @@
+package edu.ht.main;
+
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Cursor;
+import java.awt.FileDialog;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JColorChooser;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import javax.swing.UIManager;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Element;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+
+import edu.ht.bean.QQMsg;
+import edu.ht.bean.Qquser;
+import edu.ht.common.Contents;
+import edu.ht.common.SendMsg;
+
+public class QQChat extends JFrame {
+	
+	JLabel xiao, close,cancel,send;
+	
+	JTextPane t1,t2;
+	
+	JComboBox fnt,fntsize,bq;//字体，字体大小，表情 
+	
+	JButton fntcolor,dd,sendfile;//字体颜色，抖动，发送文件  取消 发送
+	
+	String fonts[]={"宋体","隶书","楷书","微软雅黑","幼圆","仿宋"};
+
+	String [] fontsizes={"12","14","16","18","20","22","24"};
+	
+	//表情 
+	Icon[] bqs=new ImageIcon[96];
+	
+	Qquser me,friend;
+	/***********/
+	//设置界面可以拖动的方法
+	
+	Point loc = null;
+	Point tmp = null;
+	boolean isDragged = false;
+	
+	private void setDragable() {
+		this.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseReleased(java.awt.event.MouseEvent e) {
+				isDragged = false;
+				QQChat.this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			}
+
+			public void mousePressed(java.awt.event.MouseEvent e) {
+				tmp = new Point(e.getX(), e.getY());
+
+				isDragged = true;
+				QQChat.this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			}
+		});
+		this.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+			public void mouseDragged(java.awt.event.MouseEvent e) {
+				if (isDragged) {
+					loc = new Point(QQChat.this.getLocation().x + e.getX() - tmp.x,
+							QQChat.this.getLocation().y + e.getY() - tmp.y);
+					QQChat.this.setLocation(loc);
+				}
+			}
+		});
+	}
+	/***********/
+	public QQChat(Qquser me, Qquser friend) {
+		super("与"+friend.getUname()+"聊天中...");
+		this.setDragable();//设置可以拖动
+		this.me=me;
+		this.friend=friend;
+		//引入表情
+		for (int i = 0; i <=95; i++) {
+			bqs[i]=new ImageIcon("bq/"+i+".gif");
+		}
+		
+		// 设置窗口图标
+		Image image = new ImageIcon(friend.getFace()).getImage();
+		setIconImage(image);
+
+		this.setUndecorated(true); // 去掉窗口的装饰
+
+		// 设置样式
+		try {
+			UIManager
+					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// 给窗口加上鼠标运动时间监听
+		
+		Container c = getContentPane();
+		// 最小化的位置
+		xiao = new JLabel(new ImageIcon("qqmain/xiao1.png"));
+		xiao.setBounds(520, 10, 30, 30);
+		c.add(xiao);
+		xiao.addMouseListener(new MyMouseListener());
+		// 让指针变成手型
+		xiao.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+		// 关闭
+		close = new JLabel(new ImageIcon("qqmain/close1.png"));
+		close.setBounds(553, 5, 30, 30);
+		c.add(close);
+		close.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		close.addMouseListener(new MyMouseListener());
+		
+		
+		//好友头像
+		JLabel face=new JLabel(new ImageIcon(friend.getFace()));
+		face.setBounds(9, 4, 42, 42);
+		c.add(face);
+		
+		//昵称
+		JLabel nickname=new JLabel(friend.getUname());
+		nickname.setBounds(65, 2, 100, 30);
+		c.add(nickname);
+		nickname.setFont(new Font("微软雅黑",Font.PLAIN,15));
+		
+		//签名
+		JLabel qianming=new JLabel(friend.getTxt());
+		qianming.setBounds(65, 25, 200, 30);
+		c.add(qianming);
+		qianming.setFont(new Font("微软雅黑",Font.PLAIN,12));
+		qianming.setForeground(new Color(31,114,146));
+		
+		//接收框
+		t1=new JTextPane();
+		JScrollPane pan1=new JScrollPane(t1);
+		pan1.setBounds(1,84, 444, 288);
+		c.add(pan1);
+		t1.setEditable(false);
+		
+		
+		//中间面板（字体设置、表情）
+		JPanel pcenter=new JPanel();
+		pcenter.setLayout(new FlowLayout());
+		
+		//字体
+		fnt=new JComboBox(fonts);
+		pcenter.add(fnt);
+		fnt.addItemListener(new MyItemListener());
+		
+		//字体大小
+		fntsize=new JComboBox(fontsizes);
+		pcenter.add(fntsize);
+		fntsize.addItemListener(new MyItemListener());
+		
+		//字体颜色选择
+		fntcolor=new JButton(new ImageIcon("qqmain/zt.png"));
+		pcenter.add(fntcolor);
+		fntcolor.addActionListener(new MyActionListener());
+		
+		//抖动
+		dd=new JButton(new ImageIcon("qqmain/zd.png"));
+		pcenter.add(dd);
+		dd.addActionListener(new MyActionListener());
+
+		//发送文件
+		sendfile=new JButton("发送文件");
+		pcenter.add(sendfile);
+		sendfile.addActionListener(new MyActionListener());
+		
+		//表情
+		bq=new JComboBox(bqs);
+		pcenter.add(bq);
+		bq.addItemListener(new MyItemListener());
+
+		pcenter.setBounds(1, 365 , 442, 35);
+		c.add(pcenter);
+		
+		//发送框
+		t2=new JTextPane();
+		JScrollPane pan2=new JScrollPane(t2);
+		pan2.setBounds(1, 400, 443, 105);
+		c.add(pan2);
+		
+
+		//取消
+		cancel=new JLabel(new ImageIcon(""));
+		c.add(cancel);
+		cancel.setBounds(280, 505, 72, 25);
+		cancel.addMouseListener(new MyMouseListener());
+		
+		
+		//发送
+		send=new JLabel(new ImageIcon(""));
+		c.add(send);
+		send.setBounds(356, 505, 87, 25);
+		send.addMouseListener(new MyMouseListener());
+		// 背景图片
+		JLabel bgimg = new JLabel(new ImageIcon("qqmain/chat.png"));
+		c.add(bgimg);
+		
+		setSize(586, 539);
+		setVisible(true);
+		setLocationRelativeTo(null);
+	}
+
+	// 鼠标事件的监听
+	class MyMouseListener extends MouseAdapter {
+		
+		public void mouseClicked(MouseEvent e) {
+			// 最小化按钮
+			if (e.getSource() == xiao) {
+				// 让面板最小化
+				QQChat.this.setExtendedState(QQChat.this.ICONIFIED);
+			} else if (e.getSource() == close) {
+				//将自己隐藏
+				QQChat.this.setVisible(false);
+			}else if(e.getSource()==send){//发送
+				try {
+					//把输入框的内容显示到接受框
+					appendView(me.getUname(), t2.getStyledDocument());
+					
+					//将消息发送给好友
+					QQMsg msg=new QQMsg();
+					msg.setCmd(Contents.CMD_CHAT);//消息字
+					msg.setMyuser(me);
+					msg.setFruser(friend);
+					msg.setDoc(t2.getStyledDocument());//聊天消息内容
+					new SendMsg().send(msg);//发送
+				} catch (BadLocationException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				t2.setText("");
+			}else if(e.getSource()==cancel){
+				//将自己隐藏
+				QQChat.this.setVisible(false);
+			}
+		}
+	}
+//	//给键盘值家监听    按回车可发送消息
+//	class MyKeyListener extends KeyAdapter {
+//		@Override
+//		public void keyPressed(KeyEvent e) {
+//			// 获取键盘的值
+//			int keycode = e.getKeyCode();
+//			if (keycode == e.VK_RETURN ) {
+//				
+//			}
+//		
+//		}
+//	}
+	
+	//下拉框监听
+	class MyItemListener implements ItemListener{
+		public void itemStateChanged(ItemEvent e) {
+			if(e.getSource()==fnt||e.getSource()==fntsize){
+				//字体
+				String fontname=fnt.getSelectedItem().toString();
+				//字号
+				int fontsizes=Integer.parseInt(fntsize.getSelectedItem().toString());
+				//给发送框设置字体
+				t2.setFont(new Font(fontname,Font.PLAIN,fontsizes));
+			}else if(e.getSource()==bq){//表情
+				Icon icon=(Icon) bq.getSelectedItem();
+				t2.insertIcon(icon);
+			}
+		}
+	}
+	
+	class MyActionListener implements ActionListener{
+
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource()==fntcolor){//字体颜色
+				//初始化一个颜色 选择器
+				JColorChooser choose=new JColorChooser();
+				//弹出颜色选择器
+				Color mycolor= choose.showDialog(null, "颜色选择器", Color.BLACK);
+				//给发送框的文字设置颜色
+				t2.setForeground(mycolor);
+			}else if(e.getSource()==dd){//抖动
+				//让自己抖
+				shake();
+				//让别人抖
+				//发送抖动通知
+				QQMsg msg=new QQMsg();
+				msg.setCmd(Contents.CMD_SHKAE);
+				msg.setMyuser(me);
+				msg.setFruser(friend);
+				t2.setText("我给你发送了一个抖动！");
+				msg.setDoc(t2.getStyledDocument());
+				new SendMsg().send(msg);
+				t2.setText("");
+				
+			}else if(e.getSource()==sendfile){//发送文件
+				//弹出文件选择框 
+				FileDialog fd=new FileDialog(QQChat.this,"请选择文件",FileDialog.LOAD);
+				fd.show();
+				//获取文件的路径和名称
+				String filename=fd.getDirectory()+"\\"+fd.getFile();
+				//构建文件对象
+				File file=new File(filename);
+				
+				if(file.length()>1024*64){
+					JOptionPane.showMessageDialog(null, "文件大小不能超过64K");
+					return ;
+				}
+				try {
+					byte[] b=new byte[(int)file.length()]; 
+					//用输入流读取文件
+					FileInputStream fi=new FileInputStream(file);
+					//读取文件在字节数组中
+					fi.read(b);
+					//关闭输入流
+					fi.close();
+					
+					//发送文件通知
+					QQMsg msg=new QQMsg();
+					msg.setCmd(Contents.CMD_SENDFILE);
+					msg.setMyuser(me);
+					msg.setFruser(friend);
+					msg.setFileName(fd.getFile());
+					msg.setB(b);
+					new SendMsg().send(msg);
+					
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		}
+		
+	}
+	
+	public void shake(){
+		//获取窗口当前位置的点
+		Point p=QQChat.this.getLocationOnScreen();
+		for (int i = 0; i < 20; i++) {
+			if(i%2==0){
+				QQChat.this.setLocation(p.x+5, p.y+5);
+			}else{
+				QQChat.this.setLocation(p.x-5, p.y-5);
+			}
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
+	
+	//把发送框的内容提交到接收框，同时清除发送框的内容 (自己的昵称，发送框的内容)
+	public  void appendView(String name, StyledDocument xx)throws BadLocationException {
+		//获取接收框的文档（内容）
+		StyledDocument vdoc = t1.getStyledDocument();//获取接收框的内容
+		
+		// 格式化时间
+		Date date = new Date();//获取系统当前时间
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss"); //设置显示时分秒的格式
+		String time = sdf.format(date);//获取时分秒
+		//创建一个属性集合
+		SimpleAttributeSet as = new SimpleAttributeSet();
+		// 显示谁说
+		//vdoc.getLength()获取接收框中的原来内容的长度
+		String s =name + "  " + time + "\n";
+//		saveRecord(name,s);//保存聊天记录
+		//显示到接收框
+		vdoc.insertString(vdoc.getLength(), s, as);
+		int end = 0;
+		//处理显示的内容
+		while (end < xx.getLength()) {
+			// 获得一个元素
+			Element e0 = xx.getCharacterElement(end);
+			//获取对应的风格，
+			SimpleAttributeSet as1 = new SimpleAttributeSet();
+			StyleConstants.setForeground(as1, StyleConstants.getForeground(e0.getAttributes()));
+			StyleConstants.setFontSize(as1, StyleConstants.getFontSize(e0.getAttributes()));
+			StyleConstants.setFontFamily(as1, StyleConstants.getFontFamily(e0.getAttributes()));
+			//获取该元素的内容
+			s = e0.getDocument().getText(end, e0.getEndOffset() - end);
+			// 将元素加到浏览窗中
+			if("icon".equals(e0.getName())){
+				vdoc.insertString(vdoc.getLength(), s, e0.getAttributes());
+			}
+			else{
+				vdoc.insertString(vdoc.getLength(), s, as1);
+//				saveRecord(name,s+"\n");//保存聊天记录
+			}
+			//getEndOffset（）函数就是获取当前元素的长度
+			end = e0.getEndOffset(); 
+		}
+		// 输入一个换行
+		vdoc.insertString(vdoc.getLength(), "\n", as);
+		
+		// 设置显示视图加字符的位置与文档结尾，以便视图滚动
+		t1.setCaretPosition(vdoc.getLength());
+	}
+}

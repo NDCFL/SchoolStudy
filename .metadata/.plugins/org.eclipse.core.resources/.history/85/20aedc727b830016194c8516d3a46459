@@ -1,0 +1,16 @@
+package T11;
+
+import java.util.Calendar;
+
+public class Test {
+	
+	public static void main(String[] args){
+	    
+        if(Calendar.getInstance().get(Calendar.WEEK_OF_MONTH)==Calendar.AM){
+        
+              System.out.println("早上好");
+        }else{
+              System.out.println("下午好");
+        }
+  }
+}

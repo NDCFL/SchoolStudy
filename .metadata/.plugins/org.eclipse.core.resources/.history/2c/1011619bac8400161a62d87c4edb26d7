@@ -1,0 +1,21 @@
+package T11;
+
+public class J_test {
+
+	public static void mb_method(int i){
+		try {
+			System.out.print("1");
+			
+		} finally{
+			System.out.print("3");
+			
+		}
+		System.out.print("4");
+		return;
+	}
+	public static void main(String[] args) {
+		mb_method(0);
+		mb_method(1);
+		
+	}
+}

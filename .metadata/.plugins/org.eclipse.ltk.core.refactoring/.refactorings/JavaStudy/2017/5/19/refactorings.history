@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 1 elements(s) to &apos;info&apos;&#x0D;&#x0A;- Original project: &apos;JavaStudy&apos;&#x0D;&#x0A;- Destination element: &apos;info&apos;&#x0D;&#x0A;- Original element: &apos;694.mid&apos;" description="Copy file" element1="musics/694.mid" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" log="musics/694.mid&#x09;true&#x09;false" policy="org.eclipse.jdt.ui.copyResources" stamp="1494161713985" target="/AJAXObject/WebRoot/info" units="0" version="1.0"/>
+</session>

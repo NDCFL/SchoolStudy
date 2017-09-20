@@ -1,0 +1,9 @@
+create table studentmanager(
+	sno int  primary key,
+	studentname varchar(20) not null,
+	ssex  varchar(2) not null,
+	sage int not null,
+	shobit varchar(20) not null,
+	szhuanye varchar(20) not null,
+
+)

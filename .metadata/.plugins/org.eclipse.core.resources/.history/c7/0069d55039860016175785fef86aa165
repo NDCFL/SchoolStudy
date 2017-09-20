@@ -1,0 +1,28 @@
+package T9;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
+import sun.font.Script;
+
+public class Help extends JFrame{
+
+	JPanel panel;
+	public Help() {
+		super("推箱子帮助");
+		setSize(500, 500);
+		JScrollPane js = new JScrollPane();
+		panel.add(js);
+		setVisible(true);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}	
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		new Help();
+	}
+
+}

@@ -1,0 +1,9 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+
+<html>
+  <body>
+    <h1 align="center">你已经支付成功！!</h1>
+    <h1 align="center">欢迎下次光临！！!</h1>
+	<a href="T5doc/loginshop.jsp">回到登录界面</a>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@page import="T7.SQL"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.ResultSet"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'privaceselect.jsp' starting page</title>
+  </head>
+  
+  <body>
+  	<jsp:useBean id="ue" class="T7.SQL"></jsp:useBean>
+	<%
+		String str;
+		Class.forName(ue.getDriver());
+		Connection con = DriverManager.getConnection(ue.getUrl(),ue.getUsername(),ue.getPassword());
+		Statement st = con.createStatement();
+ 		ResultSet rs = st.executeQuery("select * from privace order by id asc");
+		out.println("<html><head><h1 align='center'>省份信息览表</h1></head><body><table align='center'><tr><td><a href='T7doc/privaceadd.jsp'> 新 增</a></td></tr></table><table border='1' align='center' width='500'>");
+		out.println("<tr height='40'><th align='center'>省份编号</th><th align='center'>省份名称</th><th align='center'>操作</th></tr>");
+		while(rs.next()){
+			out.println("<tr height='40'><td align='center'>"+rs.getInt(1)+"</td><td align='center'>"+rs.getString(2)+"</td>");
+	%>
+			<td align="center">
+			<a href="T7doc/privacealter.jsp?id=<%=rs.getInt(1) %>&name=<%=rs.getString("name")%>"> 修 改 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="T7doc/privacedel.jsp?id=<%=rs.getInt(1) %>" onclick="javascript:if(confirm('删除确认')){return true;}else{return false;}"> 删 除 </a>
+			</td>
+	<%
+			out.println("</tr>");
+		}
+		out.println("</table></body></html>");
+		rs.close();
+		st.close();
+		con.close();
+	%>
+  </body>
+</html>

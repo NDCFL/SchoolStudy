@@ -1,0 +1,179 @@
+package T10;
+
+import java.awt.Container;
+import java.io.IOException;
+
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.JTree;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeSelectionModel;
+
+public class Tree extends JFrame implements TreeSelectionListener{
+	JEditorPane esit ;
+	public Tree() {
+		super("文件管理器");
+		setSize(500, 500);
+		Container container = this.getContentPane();
+		//根文件
+		DefaultMutableTreeNode  first = new DefaultMutableTreeNode ("课程管理");
+		//子文件
+		DefaultMutableTreeNode  firs_1 = new DefaultMutableTreeNode ("Java课程");
+		DefaultMutableTreeNode  firs_2 = new DefaultMutableTreeNode ("HTML课程");
+		DefaultMutableTreeNode  firs_3 = new DefaultMutableTreeNode ("C语言课程");
+		DefaultMutableTreeNode  firs_4 = new DefaultMutableTreeNode ("PS课程");
+		
+		//添加子文件
+		first.add(firs_1);
+		first.add(firs_2);
+		first.add(firs_3);
+		first.add(firs_4);
+		//增加子文件的节点
+		DefaultMutableTreeNode  firs_1_1 = new DefaultMutableTreeNode ("Java第一讲");
+		DefaultMutableTreeNode  firs_1_2 = new DefaultMutableTreeNode ("Java第二讲");
+		DefaultMutableTreeNode  firs_1_3 = new DefaultMutableTreeNode ("Java第三讲");
+		DefaultMutableTreeNode  firs_1_4 = new DefaultMutableTreeNode ("Java第四讲");
+		//增加子文件节点
+		firs_1.add(firs_1_1);
+		firs_1.add(firs_1_2);
+		firs_1.add(firs_1_3);
+		firs_1.add(firs_1_4);
+		
+		//增加子文件的节点
+		DefaultMutableTreeNode  firs_1_1_1 = new DefaultMutableTreeNode ("Java入门.tex");
+		DefaultMutableTreeNode  firs_1_1_2 = new DefaultMutableTreeNode ("Java流程.tex");
+		DefaultMutableTreeNode  firs_1_1_5 = new DefaultMutableTreeNode ("Java运算.tex");
+		DefaultMutableTreeNode  firs_1_1_3 = new DefaultMutableTreeNode ("类与对象");
+		DefaultMutableTreeNode  firs_1_1_6 = new DefaultMutableTreeNode ("深入对象");
+		DefaultMutableTreeNode  firs_1_1_7 = new DefaultMutableTreeNode ("类之间的调用");
+		DefaultMutableTreeNode  firs_1_1_4 = new DefaultMutableTreeNode ("异常处理");
+		DefaultMutableTreeNode  firs_1_1_8 = new DefaultMutableTreeNode ("try语句的作用");
+		DefaultMutableTreeNode  firs_1_1_9 = new DefaultMutableTreeNode ("catch语句的作用");
+		DefaultMutableTreeNode  firs_1_1_10 = new DefaultMutableTreeNode ("final语句的作用");
+		//增加子文件节点
+		firs_1_1.add(firs_1_1_1);
+		
+		firs_1_2.add(firs_1_1_2);
+		firs_1_2.add(firs_1_1_5);
+		
+		firs_1_3.add(firs_1_1_3);
+		firs_1_3.add(firs_1_1_6);
+		firs_1_3.add(firs_1_1_7);
+		
+		firs_1_4.add(firs_1_1_4);
+		firs_1_4.add(firs_1_1_8);
+		firs_1_4.add(firs_1_1_9);
+		firs_1_4.add(firs_1_1_10);
+		
+		
+		//增加子文件的节点
+		DefaultMutableTreeNode  second_1_1 = new DefaultMutableTreeNode ("HTML第一讲");
+		DefaultMutableTreeNode  second_1_2 = new DefaultMutableTreeNode ("HTML第二讲");
+		DefaultMutableTreeNode  second_1_3 = new DefaultMutableTreeNode ("HTML第三讲");
+		DefaultMutableTreeNode  second_1_4 = new DefaultMutableTreeNode ("HTML第四讲");
+		//增加子文件节点
+		firs_2.add(second_1_1);
+		firs_2.add(second_1_2);
+		firs_2.add(second_1_3);
+		firs_2.add(second_1_4);
+		
+		//增加子文件的节点
+		DefaultMutableTreeNode  second_1_1_1 = new DefaultMutableTreeNode ("了解HTML");
+		DefaultMutableTreeNode  second_1_1_2 = new DefaultMutableTreeNode ("表格的制作");
+		DefaultMutableTreeNode  second_1_1_3 = new DefaultMutableTreeNode ("简单的个人简历");
+		DefaultMutableTreeNode  second_1_1_4 = new DefaultMutableTreeNode ("文字的排版");
+		DefaultMutableTreeNode  second_1_1_5 = new DefaultMutableTreeNode ("css界面的美化");
+		DefaultMutableTreeNode  second_1_1_6 = new DefaultMutableTreeNode ("滚动字符");
+		DefaultMutableTreeNode  second_1_1_7 = new DefaultMutableTreeNode ("框架集");
+		DefaultMutableTreeNode  second_1_1_8= new DefaultMutableTreeNode ("插入媒体音乐");
+		DefaultMutableTreeNode  second_1_1_9 = new DefaultMutableTreeNode ("插入媒体视频");
+		DefaultMutableTreeNode  second_1_1_10 = new DefaultMutableTreeNode ("控件的使用");
+		//增加子文件节点
+		second_1_1.add(second_1_1_1);
+		
+		second_1_2.add(second_1_1_2);
+		second_1_2.add(second_1_1_3);
+		
+		second_1_3.add(second_1_1_4);
+		second_1_3.add(second_1_1_5);
+		second_1_3.add(second_1_1_6);
+		
+		second_1_4.add(second_1_1_7);
+		second_1_4.add(second_1_1_8);
+		second_1_4.add(second_1_1_9);
+		second_1_4.add(second_1_1_10);
+		
+		
+		
+		//增加子文件的节点
+		DefaultMutableTreeNode  three_1_1 = new DefaultMutableTreeNode ("C语言第一讲");
+		DefaultMutableTreeNode  three_1_2 = new DefaultMutableTreeNode ("C语言第二讲");
+		DefaultMutableTreeNode  three_1_3 = new DefaultMutableTreeNode ("C语言第三讲");
+		DefaultMutableTreeNode  three_1_4 = new DefaultMutableTreeNode ("C语言第四讲");
+		//增加子文件节点
+		firs_3.add(three_1_1);
+		firs_3.add(three_1_2);
+		firs_3.add(three_1_3);
+		firs_3.add(three_1_4);
+		
+		//增加子文件的节点
+		DefaultMutableTreeNode  four_1_1 = new DefaultMutableTreeNode ("PS第一讲");
+		DefaultMutableTreeNode  four_1_2 = new DefaultMutableTreeNode ("PS第二讲");
+		DefaultMutableTreeNode  four_1_3 = new DefaultMutableTreeNode ("PS第三讲");
+		
+		//增加子文件节点
+		firs_4.add(four_1_1);
+		firs_4.add(four_1_2);
+		firs_4.add(four_1_3);
+		
+		
+		JTree jTree = new JTree(first);
+		//设置为单选
+		jTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+		//监听
+		jTree.addTreeSelectionListener(this);
+		JScrollPane j = new JScrollPane(jTree);
+		//富文本区域
+		esit = new JEditorPane();
+		JScrollPane j2 = new JScrollPane(esit);
+		JSplitPane jP = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,true,j,j2);
+		container.add(jP);
+		//pack();
+		setVisible(true);	
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	public static void main(String[] args) {
+		new Tree();
+	}
+	public void valueChanged(TreeSelectionEvent e) {
+		JTree tree = (JTree) e.getSource();
+        //获取选中的选项
+        DefaultMutableTreeNode selectionNode = (DefaultMutableTreeNode) tree.
+                                               getLastSelectedPathComponent();
+        //获取选项中的内容
+        String nodeName = selectionNode.toString();
+        //判断选中的节点是不是叶节点isLeaf()
+        //获取系统属性,应用程序的当前路径:System.getProperty("user.dir")
+        //获取分隔符System.getProperty("file.separator")
+        if (selectionNode.isLeaf()) {
+            String filepath = "file:" + System.getProperty("user.dir") +
+                              System.getProperty("file.separator") + nodeName;
+            System.out.println("filepath-->" + filepath);
+            try {
+            	
+				//清空文本面板的值
+            	esit.setText("");
+            	//想文本面板中打开该文件，并显示内容到文本面板中
+            	esit.setPage(filepath);
+                
+            } catch (IOException ie) {
+                System.out.println("找不到此文件！");
+            }
+        }
+	}
+}

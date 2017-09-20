@@ -1,0 +1,78 @@
+!SESSION 2016-10-18 19:30:06.192 -----------------------------------------------
+eclipse.buildId=M20070921-1145
+java.version=1.5.0_11
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_CN
+Command-line arguments:  -data F:\学习总课程\Java\Java作业\zuoye -os win32 -ws win32 -arch x86
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2016-10-18 19:30:23.493
+!MESSAGE Installed snippet library: C:\Users\Administrator\MyEclipse 6.0\myeclipse\eclipse\plugins\com.genuitec.eclipse.wizards_6.0.1.zmyeclipse601200710\snippets\html\css_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2016-10-18 19:30:23.555
+!MESSAGE Installed snippet library: C:\Users\Administrator\MyEclipse 6.0\myeclipse\eclipse\plugins\com.genuitec.eclipse.wizards_6.0.1.zmyeclipse601200710\snippets\html\forms_lists_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2016-10-18 19:30:23.586
+!MESSAGE Installed snippet library: C:\Users\Administrator\MyEclipse 6.0\myeclipse\eclipse\plugins\com.genuitec.eclipse.wizards_6.0.1.zmyeclipse601200710\snippets\html\htmlform_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2016-10-18 19:30:23.633
+!MESSAGE Installed snippet library: C:\Users\Administrator\MyEclipse 6.0\myeclipse\eclipse\plugins\com.genuitec.eclipse.wizards_6.0.1.zmyeclipse601200710\snippets\html\html_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2016-10-18 19:30:23.680
+!MESSAGE Installed snippet library: C:\Users\Administrator\MyEclipse 6.0\myeclipse\eclipse\plugins\com.genuitec.eclipse.wizards_6.0.1.zmyeclipse601200710\snippets\html\javascript_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2016-10-18 19:30:23.727
+!MESSAGE Installed snippet library: C:\Users\Administrator\MyEclipse 6.0\myeclipse\eclipse\plugins\com.genuitec.eclipse.wizards_6.0.1.zmyeclipse601200710\snippets\jsp\jsf_f_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2016-10-18 19:30:23.774
+!MESSAGE Installed snippet library: C:\Users\Administrator\MyEclipse 6.0\myeclipse\eclipse\plugins\com.genuitec.eclipse.wizards_6.0.1.zmyeclipse601200710\snippets\jsp\jsf_h_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2016-10-18 19:30:23.805
+!MESSAGE Installed snippet library: C:\Users\Administrator\MyEclipse 6.0\myeclipse\eclipse\plugins\com.genuitec.eclipse.wizards_6.0.1.zmyeclipse601200710\snippets\jsp\struts_bean_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2016-10-18 19:30:23.852
+!MESSAGE Installed snippet library: C:\Users\Administrator\MyEclipse 6.0\myeclipse\eclipse\plugins\com.genuitec.eclipse.wizards_6.0.1.zmyeclipse601200710\snippets\jsp\struts_html_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2016-10-18 19:30:23.883
+!MESSAGE Installed snippet library: C:\Users\Administrator\MyEclipse 6.0\myeclipse\eclipse\plugins\com.genuitec.eclipse.wizards_6.0.1.zmyeclipse601200710\snippets\jsp\struts_logic_snippets.xml
+
+!ENTRY com.genuitec.eclipse.wizards 1 0 2016-10-18 19:30:23.930
+!MESSAGE Installed snippet library: C:\Users\Administrator\MyEclipse 6.0\myeclipse\eclipse\plugins\com.genuitec.eclipse.wizards_6.0.1.zmyeclipse601200710\snippets\jsp\struts_tiles_snippets.xml
+
+!ENTRY com.tikal.eclipse.updatemanager.quicksetup 4 4 2016-10-18 19:30:29.717
+!MESSAGE Network connection problems encountered during search.
+!SESSION 2016-10-18 19:39:14.235 -----------------------------------------------
+eclipse.buildId=M20070921-1145
+java.version=1.5.0_11
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_CN
+Command-line arguments:  -data F:\学习总课程\Java\Java作业\zuoye -os win32 -ws win32 -arch x86
+
+!ENTRY com.tikal.eclipse.updatemanager.quicksetup 4 4 2016-10-18 19:39:27.511
+!MESSAGE Network connection problems encountered during search.
+!SESSION 2016-11-07 12:49:26.941 -----------------------------------------------
+eclipse.buildId=M20070921-1145
+java.version=1.5.0_11
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_CN
+Command-line arguments:  -data F:\学习总课程\Java\Java作业\zuoye -os win32 -ws win32 -arch x86
+
+!ENTRY com.tikal.eclipse.updatemanager.quicksetup 4 4 2016-11-07 12:49:39.019
+!MESSAGE Network connection problems encountered during search.
+!SESSION 2017-01-03 19:35:39.378 -----------------------------------------------
+eclipse.buildId=M20070921-1145
+java.version=1.5.0_11
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_CN
+Command-line arguments:  -data F:\学习总课程\Java\Java作业\zuoye -os win32 -ws win32 -arch x86
+
+!ENTRY com.tikal.eclipse.updatemanager.quicksetup 4 4 2017-01-03 19:35:54.916
+!MESSAGE Network connection problems encountered during search.
+!SESSION 2017-01-08 20:44:42.050 -----------------------------------------------
+eclipse.buildId=M20070921-1145
+java.version=1.5.0_11
+java.vendor=Sun Microsystems Inc.
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_CN
+Command-line arguments:  -data F:\学习总课程\Java\Java作业\zuoye -os win32 -ws win32 -arch x86
+
+!ENTRY com.tikal.eclipse.updatemanager.quicksetup 4 4 2017-01-08 20:44:55.122
+!MESSAGE Network connection problems encountered during search.

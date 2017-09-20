@@ -1,0 +1,50 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'jisuanji.jsp' starting page</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+
+  </head>
+  
+  <body>
+  <h1 align="center">计算器</h1>
+  <hr color="blue" size="5px"/>
+  <jsp:useBean id="bean" class="Lianxi.NumBean">
+  		<jsp:setProperty name="bean" 
+  		="*"/>
+  </jsp:useBean>
+  <%
+  	double result=bean.result(bean.getNum1(),bean.getNum2(),bean.getNum4());
+  	out.println(result);
+  %>
+    <form name="form1" method="post" action="lianxi/jisuanji.jsp">
+    	<input type="text" name="num1">
+    	<select name="num4">
+    		<option value="1">+</option>
+    		<option value="2">-</option>
+    		<option value="3">*</option>
+    		<option value="4">/</option>
+    		<option value="5">%</option>
+    	</select>
+    	<input type="text" name="num2">
+    	<input type="submit" name="sub" value="=">
+    	<input type="text" name="res">
+    </form>
+  </body>
+</html>

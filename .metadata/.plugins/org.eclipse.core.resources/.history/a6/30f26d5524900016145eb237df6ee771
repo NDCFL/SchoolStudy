@@ -1,0 +1,23 @@
+package T12;
+
+import java.io.File;
+import java.io.FileInputStream;
+
+public class FileInputStream_1 {
+
+	public static void main(String[] args) {
+		File file = new File("F:\\file\\file.txt");
+		try {
+			FileInputStream fis = new FileInputStream(file);
+			byte b[]=new byte[1024];
+			String str = " ";
+			int n = fis.read(b, 0, b.length);
+			while (n!=-1) {
+				str+=new String(b,0,b.length);
+			}
+			System.out.println(str);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}

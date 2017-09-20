@@ -1,0 +1,29 @@
+package T11;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
+public class List_1 {
+	public static void main(String[] args) {
+		Collection<Integer> col = new ArrayList<Integer>();
+		col.add(1);
+		col.add(2);
+		col.add(3);
+		col.add(4);
+		col.add(5);
+		col.add(6);
+		col.add(7);
+		col.add(8);
+		col.add(9);
+		Iterator<Integer> iterator = col.iterator();
+		while (iterator.hasNext()) {
+			
+			System.out.println(iterator.next());
+		}
+		col.remove(1);
+		System.out.println("元素个数为："+col.size());
+		System.out.println("是否存在："+col.contains(1));
+		
+	}
+}

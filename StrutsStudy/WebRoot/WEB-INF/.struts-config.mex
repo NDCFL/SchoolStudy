@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlowViewLayout Version="1.2">
+  <StrutsActivity path="/strtusaction.do" location="50,50" dimension="205,96" />
+  <StrutsActivity path="/stud.do" location="350,150" dimension="166,96" />
+  <StrutsActivity path="/succ.jsp" location="650,50" dimension="77,51" />
+  <StrutsActivity path="/Stud/studlist.jsp" location="50,250" dimension="120,51" />
+  <StrutsActivity path="/studlist.jsp" location="950,50" dimension="91,51" />
+  <StrutsActivity path="succ;6" />
+  <StrutsActivity path="reg;6" />
+  <StrutsTransition id="succ;6,null,/succ.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="688,75" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/stud.do,reg,/Stud/studlist.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="350,198" />
+      <AbsolutePoint location="110,198" />
+      <AbsolutePoint location="110,250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="reg;6,null,/Stud/studlist.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="0,0" />
+      <AbsolutePoint location="110,275" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/Stud/studlist.jsp,null,/stud.do,2" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="80,250" />
+      <AbsolutePoint location="80,168" />
+      <AbsolutePoint location="350,168" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/strtusaction.do,succ,/succ.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="255,86" />
+      <AbsolutePoint location="650,86" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+</FlowViewLayout>
+

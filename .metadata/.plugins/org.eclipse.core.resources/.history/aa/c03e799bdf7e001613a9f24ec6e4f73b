@@ -1,0 +1,31 @@
+package T8;
+
+import java.awt.Graphics;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Test extends JFrame {
+
+	public static void main(String[] args) {
+		new Test();
+	}
+	public Test() {
+		JPanel panel = new JPanel() {
+			@Override
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				Image image = new ImageIcon("image/6.jpg").getImage();
+//				int width = Test.getFrames()[0].getWidth();
+//				int heigh = Test.getFrames()[0].getHeight();
+				g.drawImage(image, 0, 0, width, heigh, null);
+			}
+		};
+		add(panel);
+		setBounds(0, 0, 1000, 700);
+		setVisible(true);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+	}
+}

@@ -1,0 +1,42 @@
+﻿body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,figure,figcaption{padding: 0;margin: 0;}
+table {border-collapse: collapse;border-spacing: 0;}
+fieldset,img {border: 0;}
+address,caption,cite,code,dfn,em,strong,th,var {font-weight: normal;font-style: normal;}
+ol,ul {list-style: none;}
+caption,th {text-align: left;}
+h1,h2,h3,h4,h5,h6 {font-weight: normal;font-size: 100%;}
+q:before,q:after {content:'';}
+abbr,acronym {border: 0;font-variant:normal;}
+a{text-decoration: none;transition:all .2s;}
+sup{vertical-align:baseline;}
+sub{vertical-align:baseline;}
+legend{color:#000;}
+input,button,textarea,select,optgroup,option{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit;}
+input,button,textarea,select{*font-size:100%;}
+/*兼容IE6/7*/
+.cl {*zoom: 1;}
+.cl:before,.cl:after{display: table;line-height: 0;content: "";}
+.cl:after {clear: both;}
+@media (max-width:1080px){
+	body{width:122%;}
+}
+.inner{width: 1150px;margin: 0 auto;}
+.news_main{ width:1144px; margin:0 auto;}
+.tit5{ margin-left:120px; color:#b3b3b3; font-size:14px;letter-spacing: 1px;}
+.box2{ width:100%; height:192px;position:relative;background: url(../images/2.jpg) no-repeat;background-position: 50% 50%;}
+.box2 .a8{ display:block; position:absolute; width:96px; height:34px; color:#fff; line-height:34px; text-align:center; font-size:14px; border-radius:4px; background-color:#4aacff; position:absolute;top:120px;left: 50% !important;margin-left: 10px}
+.box2 .a8:hover{ background-color:#319bf4;}
+.box2 .a9{ display:block; position:absolute; width:96px; height:34px; color:#fff; line-height:34px; text-align:center; font-size:14px; border-radius:4px; background-color:#4aacff; position:absolute;top:120px;left: 50%;margin-left: -104px;}
+.box2 .a9:hover{ background-color:#319bf4;}
+
+.jiathis_style_32x32 .jiathis_button_tsina .jtico,
+.jiathis_style_32x32 .jiathis_button_weixin .jtico {
+	padding-right: 40px!important;
+}
+.sl_news_detail .share_box .jiathis_style_32x32 .s_weixin span.jtico{
+	padding-right: 40px!important;
+	margin-right: 0;
+}
+.sl_news_detail .share_box .jiathis_style_32x32 .s_weibo span.jtico{
+	padding-right: 40px!important;
+}

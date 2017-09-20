@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="F:/学习总课程/Java/Java课程/jar/sqljdbc4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/MyEclipse 6.0"/>
+	<classpathentry kind="lib" path="F:/学习总课程/Java/Java作业/ojdbc14.jar"/>
+	<classpathentry kind="lib" path="F:/课外资料/源码/FaceRecongizer/ForFun/lib/javacpp.jar"/>
+	<classpathentry kind="lib" path="F:/课外资料/源码/FaceRecongizer/ForFun/lib/javacv.jar"/>
+	<classpathentry kind="lib" path="F:/课外资料/源码/FaceRecongizer/ForFun/lib/javacv-windows-x86.jar"/>
+	<classpathentry kind="lib" path="F:/课外资料/源码/FaceRecongizer/ForFun/lib/javacv-windows-x86_64.jar"/>
+	<classpathentry kind="lib" path="F:/课外资料/源码/FaceRecongizer/ForFun/swt_32.jar"/>
+	<classpathentry kind="lib" path="F:/课外资料/源码/FaceRecongizer/ForFun/swt-64.jar"/>
+	<classpathentry kind="lib" path="F:/学习总课程/jar包/mysql-connector-java-5.1.40-bin.jar"/>
+	<classpathentry kind="lib" path="F:/学习总课程/Java/java读取excel/jexcelapi_2_6_9/jexcelapi/jxl.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

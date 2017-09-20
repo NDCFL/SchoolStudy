@@ -1,0 +1,44 @@
+package T11;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.TreeSet;
+
+public class Set {
+
+	public static void main(String[] args) {
+		TreeSet<String> treeSet = new TreeSet<String>();
+		HashSet<String> hashSet = new HashSet<String>();
+		treeSet.add("花千骨");
+		treeSet.add("白子画");
+		treeSet.add("张小凡");
+		treeSet.add("吕雪琪");
+		//treeSet.add("蒙航");
+		treeSet.add("吕布");
+		//treeSet.add("白子画");
+		treeSet.add("蒙航");
+		
+		hashSet.add("长留");
+		hashSet.add("青云");
+		hashSet.add("蜀山");
+		hashSet.add("鬼王宗");
+		hashSet.add("万毒门");
+		hashSet.add("合欢派");
+		hashSet.add("观星崖");
+		//hashSet.add("长留");
+		//hashSet.add("万毒门");
+		
+		Iterator<String> iterator = treeSet.iterator();
+		while (iterator.hasNext()) {
+			System.out.println(iterator.next());
+		}
+		System.out.println("--------------------------------");
+		System.out.println("--------------------------------");
+		System.out.println("--------------------------------");
+		System.out.println("--------------------------------");
+		Iterator<String> iterator1 = hashSet.iterator();
+		while (iterator1.hasNext()) {
+			System.out.println(iterator1.next());
+		}
+	}
+}

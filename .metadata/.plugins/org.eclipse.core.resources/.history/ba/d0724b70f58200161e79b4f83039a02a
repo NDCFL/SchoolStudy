@@ -1,0 +1,45 @@
+package T10;
+
+import java.awt.GridLayout;
+
+import javax.swing.JFrame;
+import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
+
+public class Table extends JFrame{
+
+	public Table() {
+		super("表格制作");
+		getContentPane().setLayout(new GridLayout(1,0));
+		JTable = new JTable();
+	
+		setSize(500, 500);
+		setVisible(true);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+	}
+	public static void main(String[] args) {
+		new Table();
+	}
+	class table extends AbstractTableModel{
+		private String [] title={"姓名","性别","年龄","住址","联系方式"};
+		private Object [][] neirong = {
+				{"张三","男",new Integer(30),"北京","1234634"},
+				{"李四","女",new Integer(32),"上海","1734634"},
+				{"马六","男",new Integer(36),"青岛","1234634"},
+				{"马华","女",new Integer(32),"广州","1434634"}
+		};
+		public int getColumnCount() {
+			return title.length;
+		}
+		public int getRowCount() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+		public Object getValueAt(int arg0, int arg1) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+	}
+}

@@ -1,0 +1,80 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@page import="SQLBean.Privacebean"%>
+<%@page import="SQLBase.Citysqlsentenceimp"%>
+<%@page import="SQLBean.Citybean"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'privaceadd.jsp' starting page</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+	<script type="text/javascript">
+		function check(){
+			if(form1.name.value==""){
+				alert("城市名称不能为空！");
+				form1.name.focus();
+				return false;
+			}
+			return true;
+		}
+	</script>
+  </head>
+  
+  <body>
+	
+  <form name="form1" method="post" action="<%=basePath %>cityservlet?order=privaceupdate" onsubmit="return check();">
+  <h1 align='center'>城市信息的修改</h1>
+  <%
+		Citybean city = (Citybean)request.getAttribute("citybean");
+  %>
+  	<table border="0" align="center" >
+  	<input type="hidden" name="cityid" value="<%=city.getCityid() %>">
+    	<tr>
+    		<th>省份名称</th>
+	    	<td>
+	    		<select name="privaceid" style="width:150px">
+	    		<%
+					request.setCharacterEncoding("utf-8");
+					List<Privacebean> list = (List<Privacebean>)request.getAttribute("privacelist");
+					for(int i=0;i<list.size();i++){
+						Privacebean privacebean = list.get(i);
+						if(privacebean.getPrivaceid()==city.getPrivaceid()){
+						%>
+			    			<option value="<%=privacebean.getPrivaceid() %>" selected="selected"><%=privacebean.getPrivaceName() %></option>
+						<%
+							
+						}else {
+						%>
+			    			<option value="<%=privacebean.getPrivaceid() %>"><%=privacebean.getPrivaceName() %></option>
+						<%
+						}
+					}
+				%>
+	    		</select>
+	    	</td>
+    		<td></td>
+    	</tr>
+  		<tr>
+  		<th>城市名称</th>
+  		<td><input type="text" name="cityname" style="width:150px" value="<%=city.getCityname() %>"></td>
+  		<td><font color="red" size="5">*必填内容</font></td>
+  		</tr>
+    	<tr><td colspan="3" align="center"><input type="submit" name="sub" value="  修    改  " ></td></tr>
+    </table>
+  </form>
+  </body>
+</html>

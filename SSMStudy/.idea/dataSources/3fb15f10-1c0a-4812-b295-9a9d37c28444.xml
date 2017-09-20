@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="SpringMVC@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.2">
+    <root id="1"/>
+    <schema id="2" parent="1" name="springmvc">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="mysqlstudy"/>
+    <schema id="6" parent="1" name="performance_schema"/>
+    <schema id="7" parent="1" name="sakila"/>
+    <schema id="8" parent="1" name="salehome"/>
+    <schema id="9" parent="1" name="sshproject"/>
+    <schema id="10" parent="1" name="sys"/>
+    <schema id="11" parent="1" name="test"/>
+    <schema id="12" parent="1" name="totcms"/>
+    <schema id="13" parent="1" name="world"/>
+    <table id="14" parent="2" name="deal"/>
+    <table id="15" parent="2" name="money"/>
+    <table id="16" parent="2" name="orders"/>
+    <table id="17" parent="2" name="ordersitems"/>
+    <table id="18" parent="2" name="play"/>
+    <table id="19" parent="2" name="product"/>
+    <table id="20" parent="2" name="prop"/>
+    <table id="21" parent="2" name="student"/>
+    <table id="22" parent="2" name="users"/>
+    <column id="23" parent="14" name="deal_id">
+      <Position>1</Position>
+      <DataType>varchar(36)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="24" parent="14" name="deal_bill">
+      <Position>2</Position>
+      <DataType>varchar(36)|0</DataType>
+    </column>
+    <column id="25" parent="14" name="play_id">
+      <Position>3</Position>
+      <DataType>varchar(36)|0</DataType>
+    </column>
+    <column id="26" parent="14" name="deal_price">
+      <Position>4</Position>
+      <DataType>decimal(10)|0</DataType>
+    </column>
+    <column id="27" parent="14" name="prop_id">
+      <Position>5</Position>
+      <DataType>varchar(36)|0</DataType>
+    </column>
+    <column id="28" parent="14" name="deal_createtime">
+      <Position>6</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <key id="29" parent="14" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>deal_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="30" parent="15" name="money_id">
+      <Position>1</Position>
+      <DataType>varchar(36)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="31" parent="15" name="money">
+      <Position>2</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="32" parent="15" name="play_id">
+      <Position>3</Position>
+      <DataType>varchar(36)|0</DataType>
+    </column>
+    <key id="33" parent="15" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>money_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="34" parent="16" name="id">
+      <Position>1</Position>
+      <DataType>varchar(36)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="16" name="name">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="36" parent="16" name="price">
+      <Position>3</Position>
+      <DataType>decimal(10)|0</DataType>
+    </column>
+    <column id="37" parent="16" name="createtime">
+      <Position>4</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="38" parent="16" name="userid">
+      <Position>5</Position>
+      <DataType>varchar(36)|0</DataType>
+    </column>
+    <key id="39" parent="16" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="40" parent="17" name="id">
+      <Position>1</Position>
+      <DataType>varchar(36)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="41" parent="17" name="orderid">
+      <Position>2</Position>
+      <DataType>varchar(36)|0</DataType>
+    </column>
+    <column id="42" parent="17" name="count">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="43" parent="17" name="price">
+      <Position>4</Position>
+      <DataType>decimal(10)|0</DataType>
+    </column>
+    <column id="44" parent="17" name="summoney">
+      <Position>5</Position>
+      <DataType>decimal(10)|0</DataType>
+    </column>
+    <column id="45" parent="17" name="createtime">
+      <Position>6</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="46" parent="17" name="userid">
+      <Position>7</Position>
+      <DataType>varchar(36)|0</DataType>
+    </column>
+    <column id="47" parent="17" name="productid">
+      <Position>8</Position>
+      <DataType>varchar(36)|0</DataType>
+    </column>
+    <key id="48" parent="17" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="49" parent="18" name="play_id">
+      <Position>1</Position>
+      <DataType>varchar(36)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="50" parent="18" name="play_nickname">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="51" parent="18" name="play_account">
+      <Position>3</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="52" parent="18" name="play_password">
+      <Position>4</Position>
+      <DataType>varchar(30)|0</DataType>
+    </column>
+    <column id="53" parent="18" name="play_isvip">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="54" parent="18" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>play_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="55" parent="19" name="id">
+      <Position>1</Position>
+      <DataType>varchar(36)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="56" parent="19" name="name">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="57" parent="19" name="price">
+      <Position>3</Position>
+      <DataType>decimal(10)|0</DataType>
+    </column>
+    <key id="58" parent="19" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="59" parent="20" name="prop_id">
+      <Position>1</Position>
+      <DataType>varchar(36)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="60" parent="20" name="prop_name">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="61" parent="20" name="prop_price">
+      <Position>3</Position>
+      <DataType>decimal(10)|0</DataType>
+    </column>
+    <column id="62" parent="20" name="prop_skill">
+      <Position>4</Position>
+      <DataType>varchar(30)|0</DataType>
+    </column>
+    <column id="63" parent="20" name="prop_genre">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="64" parent="20" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>prop_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="65" parent="21" name="id">
+      <Position>1</Position>
+      <DataType>varchar(36)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="66" parent="21" name="name">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="67" parent="21" name="age">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="68" parent="21" name="sex">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="69" parent="21" name="classno">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="70" parent="21" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="71" parent="22" name="id">
+      <Position>1</Position>
+      <DataType>varchar(36)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="72" parent="22" name="name">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="73" parent="22" name="age">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <key id="74" parent="22" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>

@@ -1,0 +1,82 @@
+package Listener;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+import java.util.Date;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpSessionAttributeListener;
+import javax.servlet.http.HttpSessionBindingEvent;
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
+
+public class SessionListener extends HttpServlet implements HttpSessionListener,
+		HttpSessionAttributeListener {
+	private int count = 0;
+    public void sessionCreated(HttpSessionEvent arg0) {
+    	setCount(1);
+		WriteLogin("正在创建一个session对象");
+	}
+
+	public void sessionDestroyed(HttpSessionEvent arg0) {
+		setCount(-1);
+		WriteLogin("正在销毁一个Application对象");
+
+	}
+
+	public void attributeAdded(HttpSessionBindingEvent arg0) {
+		WriteLogin("sessionID为：" + arg0.getSession().getId() + "      昵称为："
+				+ arg0.getValue() + "登录了" + "你是第" + getCount() + "位用户登录"+"      在线人数为："+getCount()+"人");
+
+	}
+
+	public void attributeRemoved(HttpSessionBindingEvent arg0) {
+		WriteLogin("sessionID为：" + arg0.getSession().getId() + "      昵称为："
+				+ arg0.getValue() + "离开了" + "剩余" + getCount() + "位用户在线");
+
+	}
+
+	public void attributeReplaced(HttpSessionBindingEvent arg0) {
+		WriteLogin("sessionID为：" + arg0.getSession().getId() + "      昵称为："
+				+ arg0.getValue() + "修改了session");
+
+	}
+
+	@SuppressWarnings("deprecation")
+	public void WriteLogin(String record) {
+		try {
+			PrintWriter out = new PrintWriter(new FileOutputStream(
+					"f:\\login.log", true));
+			out.println(new Date().toLocaleString() + "-----" + record);
+			out.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("书写日志文件出错！");
+		}
+
+	}
+	public ServletContext getApplication() {
+		System.out.println("222222");
+		return application;
+	}
+	public void setApplication(ServletContext application) {
+		this.application = application;
+	}
+
+	public int getCount() {
+		System.out.println("44444444");
+		return count;
+	}
+
+	public void setCount(int n) {
+		application = getServletConfig().getServletContext();
+		application.setAttribute("count", 1);
+		System.out.println("111111111");
+		count = Integer.parseInt(application.getAttribute("count").toString());
+		application.setAttribute("count", count+n);
+		this.count = count;
+	}
+	
+}

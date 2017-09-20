@@ -1,0 +1,31 @@
+package Loopyuju;
+
+import java.util.Scanner;
+
+public class Money extends Thread{
+	double Allmoeny=10000.0;
+	public static void main(String[] args) {
+		Money m = new Money();
+		new Thread(m,"卡").start();
+		new Thread(m,"存折").start();
+	}
+	@Override
+	public void run() {
+		while (true) {
+			synchronized (this) {
+				if ((Allmoeny-100)<0) {
+					System.out.println("金额不足");
+					return;
+				}
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				Allmoeny-=100;
+				System.out.println(Thread.currentThread().getName()+"取了"+100+"元"+"\t还剩余："+Allmoeny+"元");
+			}
+			
+		}
+	}
+}

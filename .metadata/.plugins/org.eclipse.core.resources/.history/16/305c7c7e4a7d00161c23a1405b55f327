@@ -1,0 +1,51 @@
+package T7;
+
+import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JPasswordField;
+import java.awt.FlowLayout;
+import sun.security.util.Password;
+public class Event_1 extends JFrame{
+	
+	Button btOK,btClose;//登入，关闭的控件
+	TextField usenameField;//用户名的输入文本框
+	JPasswordField usePass;//用户密码的输入文本框
+	Label name,pass;//用户名，用户密码的控件
+	Password texPassword;//用户密码的输入文本框
+	//定义构造方法
+	public Event_1() {
+		//创建容器的实例,设置布局方式,流布局，默认是边框布局
+		Container c =  getContentPane();
+		c.setLayout(new GridLayout(3,2,10,10));
+		//设置大小
+		setSize(200, 200);
+		//设置窗口的名称
+		setTitle("QQ登入");
+		//创建控件的实例
+		name = new Label("QQ账号");
+		pass = new Label("QQ密码");
+		usenameField = new TextField();
+		usePass = new JPasswordField();
+		btOK = new Button("登入");
+		btClose = new Button("关闭");
+		//加入容器
+		add(name);
+		add(usenameField);
+		add(pass);
+		add(usePass);
+		add(btOK);
+		add(btClose);
+		//设置背景颜色
+		setBackground(Color.CYAN);
+		//设置是否显示窗口
+		setVisible(true);
+		//设置窗口居中
+		setLocationRelativeTo(null);
+		
+		
+	}
+	public static void main(String[] args) {
+		new Event_1();
+	}
+	
+}

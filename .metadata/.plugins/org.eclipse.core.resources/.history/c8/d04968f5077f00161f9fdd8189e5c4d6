@@ -1,0 +1,37 @@
+package T8;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Panel;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Bianhua extends JFrame{
+
+	JPanel p1,p2;
+	JButton fang,yuan;
+	public Bianhua() {
+		super("方圆转换");
+		setSize(500, 500);
+//		fang = new JButton("变方");
+//		yuan = new JButton("变圆");
+//		add(fang);
+//		add(yuan);
+		setBackground(Color.cyan);
+		setVisible(true);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+	}
+	public static void main(String[] args) {
+		new Bianhua();
+	}
+	@Override
+	public void paint(Graphics g) {
+		g.drawArc(100, 100, 100, 100, 360, 360);
+		g.draw3DRect(200, 200, 50, 50, 60);
+	}
+}

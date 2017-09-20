@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 3 elements(s) to &apos;Struts_T1&apos;&#x0D;&#x0A;- Original project: &apos;JSPStudy&apos;&#x0D;&#x0A;- Destination element: &apos;Struts_T1&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     huikui.jsp&#x0D;&#x0A;     sess.jsp&#x0D;&#x0A;     Login2.jsp" description="Copy files" element1="WebRoot/T2doc/huikui.jsp" element2="WebRoot/T2doc/sess.jsp" element3="WebRoot/T2doc/Login2.jsp" files="3" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" log="WebRoot/T2doc/huikui.jsp&#x09;true&#x09;false&#x0A;WebRoot/T2doc/sess.jsp&#x09;true&#x09;false&#x0A;WebRoot/T2doc/Login2.jsp&#x09;true&#x09;false" policy="org.eclipse.jdt.ui.copyResources" stamp="1491743136615" target="/SSH/WebRoot/Struts_T1" units="0" version="1.0"/>
+</session>

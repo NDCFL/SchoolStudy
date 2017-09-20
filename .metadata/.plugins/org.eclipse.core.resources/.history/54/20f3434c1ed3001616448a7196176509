@@ -1,0 +1,44 @@
+package T7;
+
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import SQLBase.Citysqlsentenceimp;
+import SQLBean.Citybean;
+import SQLBean.PagingBean;
+import TagDemo.PagingTagDemo;
+
+public class TagDemoServlet extends HttpServlet {
+
+	Citysqlsentenceimp sql = new Citysqlsentenceimp();
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		doPost(request, response);
+	}
+
+	
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String order = request.getParameter("order");
+		if(order.equals("list")){
+			
+			
+		}
+		
+	}
+	public void paginglist(HttpServletRequest request, HttpServletResponse response)
+	throws ServletException, IOException {
+		PagingTagDemo page = new PagingTagDemo();
+		List<Citybean> citylist = sql.citylist(page.getPagebarsize(), page.getStarlocal());
+		request.setAttribute("citylist", citylist);
+		request.setAttribute("page", page);
+	}
+
+
+}

@@ -1,0 +1,867 @@
+package edu.ht.main;
+
+import java.awt.AWTException;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Cursor;
+import java.awt.FileDialog;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.MenuItem;
+import java.awt.Point;
+import java.awt.PopupMenu;
+import java.awt.SystemTray;
+import java.awt.TrayIcon;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.SocketException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Vector;
+
+import javax.swing.AbstractListModel;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+
+import edu.ht.border.SetbtnBorder;
+
+import edu.ht.bean.QQMsg;
+import edu.ht.bean.Qquser;
+import edu.ht.common.ClarityButton;
+import edu.ht.common.Contents;
+import edu.ht.common.SendMsg;
+import edu.ht.common.Sound;
+import edu.ht.common.TipUi;
+import edu.ht.main.QQLogin.MyActionListener;
+import edu.ht.main.QQLogin.MyMouseListener;
+import edu.ht.service.QquserService;
+import edu.ht.service.impl.QquserServiceImpl;
+
+public class QQMain extends JFrame {
+	JLabel xiao, close, state, findUser, nickname,qianming,face,bk;
+	JTextArea chazhao;
+	JList flist, famlist, classmlist, blackslist;
+	//
+	Vector<Qquser> fvecot, famvecot, classvecot, blackvecot;
+	ClarityButton cb,cb1;
+	QquserService qservice = new QquserServiceImpl();
+	Qquser quser, frienduser;
+	JPopupMenu popup, pop;// 弹出式菜单
+	JMenuItem talk, sel, del, mfriend, mfamily, mclass, mblacks, i1, i2, i3,
+			i4;// 菜单项
+	JButton kj ;
+	// 保存聊天面板
+	Map<String, QQChat> chats;
+
+	// 系统托盘类
+	TrayIcon tray;// (需要导入自己的JDK)
+	PopupMenu traypop;// 托盘图标的右键菜单
+	MenuItem it1, it2,it3,it4,it5,it6;// 菜单
+	/***********/
+	//设置界面可以拖动的方法
+	Point loc = null;
+	Point tmp = null;
+	boolean isDragged = false;
+	
+	private void setDragable() {
+		this.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseReleased(java.awt.event.MouseEvent e) {
+				isDragged = false;
+				QQMain.this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			}
+
+			public void mousePressed(java.awt.event.MouseEvent e) {
+				tmp = new Point(e.getX(), e.getY());
+
+				isDragged = true;
+				QQMain.this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			}
+		});
+		this.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+			public void mouseDragged(java.awt.event.MouseEvent e) {
+				if (isDragged) {
+					loc = new Point(QQMain.this.getLocation().x + e.getX() - tmp.x,
+							QQMain.this.getLocation().y + e.getY() - tmp.y);
+					QQMain.this.setLocation(loc);
+				}
+			}
+		});
+	}
+	/***********/
+	public QQMain(Qquser qu) {
+		super("QQ");
+		this.quser = qu;
+		this.setUndecorated(true); // 去掉窗口的装饰
+		this.setDragable();//设置可以拖动
+		this.createPopupMenu();// 创建弹出式菜单
+		// 设置窗口图标
+		Image image = new ImageIcon("qqmain/tubiao.jpg").getImage();
+		setIconImage(image);
+		// 设置样式
+		try {
+			UIManager
+					.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// 窗口关闭监听
+		this.addWindowListener(new MyWindowListener());
+
+		Container c = getContentPane();
+
+		// 最小化的位置
+		xiao = new JLabel(new ImageIcon("qqmain/xiao1.png"));
+		xiao.setBounds(230, 7, 25, 20);
+		c.add(xiao);
+		xiao.addMouseListener(new MyMouseListener());
+		// 让指针变成手型
+		xiao.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+		// 关闭
+		close = new JLabel(new ImageIcon("qqmain/close1.png"));
+		close.setBounds(255, 4, 25, 20);
+		c.add(close);
+		close.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		close.addMouseListener(new MyMouseListener());
+
+		// 状态选择
+		String stateimg = "qqmain/s_online.png";
+		if (quser.getState() == Contents.STATE_HIDE) {// 如果隐身
+			stateimg = "qqmain/s_hide.png";
+		} else if (quser.getState() == Contents.STATE_BUSY) {// 如果隐身
+			stateimg = "qqmain/s_busy.png";
+		} else if (quser.getState() == Contents.STATE_LEAVE) {// 如果隐身
+			stateimg = "qqmain/s_leave.png";
+		}
+		state = new JLabel(new ImageIcon("qqmain/s_online.png"));
+		state.setBounds(116, 44, 15, 15);
+		c.add(state);
+		state.addMouseListener(new MyMouseListener());
+
+		pop = new JPopupMenu();
+		i1 = new JMenuItem("在线", new ImageIcon("state/s_online.png"));
+		i2 = new JMenuItem("隐身", new ImageIcon("state/s_hide.png"));
+		i3 = new JMenuItem("忙碌", new ImageIcon("state/s_busy.png"));
+		i4 = new JMenuItem("离开", new ImageIcon("state/s_leave.png"));
+		pop.add(i1);
+		pop.add(i2);
+		pop.add(i3);
+		pop.add(i4);
+
+		i1.addActionListener(new MyActionListener());
+		i2.addActionListener(new MyActionListener());
+		i3.addActionListener(new MyActionListener());
+		i4.addActionListener(new MyActionListener());
+
+		// 显示昵称
+		nickname = new JLabel(quser.getUname());
+		nickname.setFont(new Font("微软雅黑", Font.BOLD, 18));
+		nickname.setBounds(72, 30, 100, 50);
+		c.add(nickname);
+		
+		
+		face = new JLabel(new ImageIcon(quser.getFace()));
+		face.setBounds(5, 42, 64, 64);
+		c.add(face);
+		face.setForeground(Color.BLACK);
+		face.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		face.addMouseListener(new MyMouseListener());
+		face.setToolTipText("个人资料");
+		
+		//头像边框
+		bk = new JLabel(new ImageIcon("qqmain/txbk.png"));
+		bk.setBounds(5, 42, 64, 64);
+		c.add(bk);
+		
+		// 显示个性签名
+		qianming = new JLabel(quser.getTxt());
+		qianming.setFont(new Font("微软雅黑", Font.PLAIN, 14));
+		qianming.setBounds(75, 55, 100, 40);
+		c.add(qianming);
+		qianming.setForeground(Color.BLACK);
+
+		flist = new JList();
+		famlist = new JList();
+		classmlist = new JList();
+		blackslist = new JList();
+
+		flist.addMouseListener(new MyMouseListener());
+		famlist.addMouseListener(new MyMouseListener());
+		classmlist.addMouseListener(new MyMouseListener());
+		blackslist.addMouseListener(new MyMouseListener());
+
+		// 动态设置内容
+		this.flushMain();
+		// 好友切换面板
+		JTabbedPane tab = new JTabbedPane();
+
+		tab.add("好友", flist);
+		tab.add("家人", famlist);
+		tab.add("同学", classmlist);
+		tab.add("黑名单", blackslist);
+//		tab.add("qq群/讨论组",qunlist);
+		c.add(tab);
+		tab.setBounds(0, 144, 281, 471);
+		
+		//查找查找本地好友出入匡
+		chazhao = new JTextArea();
+		setBounds(1, 107, 260, 30);
+		c.add(chazhao);
+		
+		//透明按钮 查找本地好友
+		cb=new ClarityButton("");  
+		cb.setBounds(74, 87, 20, 20);  
+		c.add(cb); 
+		
+		// 查找好友（广范围的搜索）
+		findUser = new JLabel(new ImageIcon(""));
+		findUser.setBounds(160, 645, 60, 20);
+		c.add(findUser);
+		findUser.addMouseListener(new MyMouseListener());
+		findUser.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+		// 背景图片
+		JLabel bgimg = new JLabel(new ImageIcon("qqmain/qqmain1.png"));
+		c.add(bgimg);
+		setSize(281, 673);
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocation(1000, 50);
+		// 启动接受线程
+		new MyThread().start();
+		System.out.println(quser.getState());
+		// 登录面板上选择的是在线 才去通知别人
+		if (quser.getState() == Contents.STATE_ONLINE) {
+			// 上线通知所有好友
+			this.notice(Contents.CMD_INLINE);
+		} else if (quser.getState() == Contents.STATE_HIDE) {
+			// 上线通知所有好友
+			this.notice(Contents.CMD_HIDE);
+		} else if (quser.getState() == Contents.STATE_BUSY) {
+			// 上线通知所有好友
+			this.notice(Contents.CMD_BUSY);
+		} else if (quser.getState() == Contents.STATE_LEAVE) {
+			// 上线通知所有好友
+			this.notice(Contents.CMD_LEAVE);
+		}
+
+	}
+
+	// 创建托盘图标的方法 (在窗口最小化时调用 )
+	public void createTray() {
+		createTrayPop();// 创建托盘右键弹出菜单
+		Image image = new ImageIcon(quser.getFace()).getImage();
+		tray = new TrayIcon(image, quser.getUname() + "[" + quser.getQqnum()
+				+ "]", traypop);
+		tray.setImageAutoSize(true);// 让图标自动调整大小
+		tray.addMouseListener(new MyMouseListener());// 给托盘图标加监听
+	}
+
+	public void createTrayPop() {
+		traypop = new PopupMenu();
+		it1 = new MenuItem("打开主面板");
+		it2 = new MenuItem("退出");
+		traypop.add(it1);
+		traypop.add(it2);
+
+		it1.addActionListener(new MyActionListener());
+		it2.addActionListener(new MyActionListener());
+	}
+
+	class MyListModel extends AbstractListModel {
+		Vector<Qquser> vv = new Vector<Qquser>();
+
+		public MyListModel(Vector<Qquser> users) {
+			this.vv = users;
+		}
+
+		public Object getElementAt(int index) {
+			return null;
+		}
+
+		public int getSize() {
+			return vv.size();
+		}
+	}
+
+	// 动态更改Jlist中的选项
+	class MyDefaultListCellRenderer extends DefaultListCellRenderer {
+		Vector<Qquser> datas = new Vector<Qquser>();
+
+		public MyDefaultListCellRenderer(Vector<Qquser> users) {
+			this.datas = users;
+		}
+
+		@Override
+		public Component getListCellRendererComponent(JList list, Object value,
+				int index, boolean isSelected, boolean cellHasFocus) {
+			// JList 有数据 才进去
+			if (index >= 0 && index <= datas.size()) {
+				Qquser quser = datas.get(index);
+				String icon = quser.getFace();// 图片路径
+				// 设置头像
+				// 如果是隐身或者离线
+				if (quser.getState() == Contents.STATE_HIDE
+						|| quser.getState() == Contents.STATE_DOWNLINE) {
+					// 从
+					icon = icon.substring(0, icon.indexOf("."));
+					icon = icon + "_h.png"; // imgs/0_h.png
+					// 在线
+				} else if (quser.getState() == Contents.STATE_ONLINE) {
+					// 请勿打扰
+				} else if (quser.getState() == Contents.STATE_BUSY) {
+					icon = icon.substring(0, icon.indexOf("."));
+					icon = icon + "_w.png"; // imgs/0_h.png
+					// 离开
+				} else if (quser.getState() == Contents.STATE_LEAVE) {
+					icon = icon.substring(0, icon.indexOf("."));
+					icon = icon + "_l.png"; // imgs/0_h.png
+				}
+				// 给jlist设置图标头像
+				setIcon(new ImageIcon(icon));
+				// 给jlist设置QQ号和签名
+				setText(quser.getUname() + "[" + quser.getQqnum() + "]"
+						+ quser.getTxt());
+			}
+
+			// 设置鼠标经过的样式
+			if (isSelected) {// 如果被选中了
+				setBackground(list.getSelectionBackground());
+				setForeground(list.getSelectionForeground());
+			} else {
+				setBackground(list.getBackground());
+				setForeground(list.getForeground());
+			}
+			setEnabled(list.isEnabled());
+			setFont(list.getFont());
+
+			return this;
+		}
+	}
+
+	// 刷新面板
+	public void flushMain() {
+		// 从数据库中根据用户QQ号和分组名称 查询出４个vector
+		fvecot = qservice.selFriendByGroup(quser.getQqnum(),
+				Contents.GROUP_FRIEND);
+		famvecot = qservice.selFriendByGroup(quser.getQqnum(),
+				Contents.GROUP_FAMILY);
+		classvecot = qservice.selFriendByGroup(quser.getQqnum(),
+				Contents.GROUP_CLASSMATE);
+		blackvecot = qservice.selFriendByGroup(quser.getQqnum(),
+				Contents.GROUP_BLACK);
+
+		// 动态给JList设置内容
+		flist.setModel(new MyListModel(fvecot));
+		flist.setCellRenderer(new MyDefaultListCellRenderer(fvecot));
+
+		famlist.setModel(new MyListModel(famvecot));
+		famlist.setCellRenderer(new MyDefaultListCellRenderer(famvecot));
+
+		classmlist.setModel(new MyListModel(classvecot));
+		classmlist.setCellRenderer(new MyDefaultListCellRenderer(classvecot));
+
+		blackslist.setModel(new MyListModel(blackvecot));
+		blackslist.setCellRenderer(new MyDefaultListCellRenderer(blackvecot));
+	}
+
+	// 创建弹出式菜单
+	public void createPopupMenu() {
+		popup = new JPopupMenu();
+		talk = new JMenuItem("聊天");
+		sel = new JMenuItem("查看好友资料");
+		del = new JMenuItem("删除好友");
+		mfriend = new JMenuItem("移动到好友");
+		mfamily = new JMenuItem("移动到家人");
+		mclass = new JMenuItem("移动到同学");
+		mblacks = new JMenuItem("移动到黑名单");
+
+		popup.add(talk);
+		popup.add(sel);
+		popup.add(del);
+		popup.add(mfriend);
+		popup.add(mfamily);
+		popup.add(mclass);
+		popup.add(mblacks);
+
+		talk.addActionListener(new MyActionListener());
+		sel.addActionListener(new MyActionListener());
+		del.addActionListener(new MyActionListener());
+		mfriend.addActionListener(new MyActionListener());
+		mfamily.addActionListener(new MyActionListener());
+		mclass.addActionListener(new MyActionListener());
+		mblacks.addActionListener(new MyActionListener());
+
+	}
+
+
+	// 按钮监听
+	class MyActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == talk) {// （弹出式菜单）聊天
+				openChat(frienduser.getQqnum(), null);
+			} else if (e.getSource() == sel) {// （弹出式菜单）查看好友资料
+				System.out.println("点击了 查看好友资料");
+
+				new QQFriendInfo(frienduser);
+
+			} else if (e.getSource() == del) {// 删除好友 （弹出式菜单）
+				// 数据库删除数据
+				qservice.delFF(quser, frienduser);
+
+				// 刷新主面板
+				flushMain();
+
+				// 发送通知
+				QQMsg msg = new QQMsg();
+				msg.setCmd(Contents.CMD_DELFRIEND);// 删除好友
+				msg.setMyuser(quser);
+				msg.setFruser(frienduser);
+				new SendMsg().send(msg);
+			} else if (e.getSource() == mfriend) {// （弹出式菜单）
+				// 更该数据库
+				qservice.moveFF(quser, frienduser, Contents.GROUP_FRIEND);
+				// 刷新面板
+				flushMain();
+			} else if (e.getSource() == mfamily) {// （弹出式菜单）
+				// 更该数据库
+				qservice.moveFF(quser, frienduser, Contents.GROUP_FAMILY);
+				// 刷新面板
+				flushMain();
+			} else if (e.getSource() == mclass) {// （弹出式菜单）
+				// 更该数据库
+				qservice.moveFF(quser, frienduser, Contents.GROUP_CLASSMATE);
+				// 刷新面板
+				flushMain();
+			} else if (e.getSource() == mblacks) {// （弹出式菜单）
+				// 更该数据库
+				qservice.moveFF(quser, frienduser, Contents.GROUP_BLACK);
+				// 刷新面板
+				flushMain();
+			}
+
+			Qquser q = new Qquser();
+			q.setQqnum(quser.getQqnum());
+			if (e.getSource() == i1) {
+				// /更改数据库状态
+				q.setState(Contents.STATE_ONLINE);
+				qservice.updUserState(q);
+				state.setIcon(new ImageIcon("state/s_online.png"));// 更改图片
+				notice(Contents.CMD_INLINE);// 发送通知
+			} else if (e.getSource() == i2) {
+				// /更改数据库状态
+				q.setState(Contents.STATE_HIDE);
+				qservice.updUserState(q);
+				state.setIcon(new ImageIcon("state/s_hide.png"));
+				notice(Contents.CMD_HIDE);
+			} else if (e.getSource() == i3) {
+				// /更改数据库状态
+				q.setState(Contents.STATE_BUSY);
+				qservice.updUserState(q);
+				state.setIcon(new ImageIcon("state/s_busy.png"));
+				notice(Contents.CMD_BUSY);
+			} else if (e.getSource() == i4) {
+				// /更改数据库状态
+				q.setState(Contents.STATE_LEAVE);
+				qservice.updUserState(q);
+				notice(Contents.CMD_LEAVE);
+				state.setIcon(new ImageIcon("state/s_leave.png"));
+			}
+
+			
+		//按钮监听  托盘右键菜单
+			if (e.getSource() == it1) {// 打开主面板
+				QQMain.this.setVisible(true);
+				// 使窗口以正常模式显示
+				QQMain.this.setState(JFrame.NORMAL);
+			} else if (e.getSource() == it2) {// 退出
+				//更改用户状态
+				Qquser qq=new Qquser();
+				qq.setQqnum(quser.getQqnum());
+				qq.setState(Contents.STATE_DOWNLINE);
+				qservice.updUserState(qq);
+				//发送下线通知
+				notice(Contents.CMD_OFFLINE);
+				System.exit(0); 
+			}
+		}
+
+	}
+
+	// 窗口监听
+	class MyWindowListener extends WindowAdapter {
+		
+		public void windowClosing(WindowEvent e) {
+			System.out.println("正在被关闭");
+			// 更改用户状态
+			Qquser q = new Qquser();
+			q.setQqnum(quser.getQqnum());
+			q.setState(Contents.STATE_DOWNLINE);
+			qservice.updUserState(q);
+
+			// 发送下线通知
+			notice(Contents.CMD_OFFLINE);
+		}
+
+		// 窗口最小化时 创建托盘图标
+		
+		public void windowIconified(WindowEvent e) {
+			System.out.println("最小化");
+			// 获取系统托盘图标
+			SystemTray systray = SystemTray.getSystemTray();
+			if (tray != null) {// 如果面板的图标存在了
+				systray.remove(tray);// 从系统托盘中移除
+			}
+			// 创建托盘图标
+
+			createTray();
+			try {
+				systray.add(tray);// 将面板的图标加在系统图标中
+				QQMain.this.setVisible(false);// 隐藏主面板
+			} catch (AWTException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
+
+	// 鼠标事件的监听
+	class MyMouseListener extends MouseAdapter {
+		
+		public void mouseClicked(MouseEvent e) {
+			if(e.getSource()==face){//如果修改资料
+				new QQUpdInfo(quser,QQMain.this);
+			}
+			if (e.getSource() == tray && e.getButton() == 1) {// 如果左键点击了托盘图标
+				QQMain.this.setVisible(true);
+				// 使窗口以正常模式显示
+				QQMain.this.setState(JFrame.NORMAL);
+			}
+
+			if (e.getSource() == findUser) {// 查找好友
+				new QQFind(quser);
+			}
+
+			if (e.getSource() == state) {
+				pop.show(QQMain.this, 110, 65);
+			}
+
+			// 最小化按钮
+			if (e.getSource() == xiao) {
+				// 让面板最小化
+				QQMain.this.setExtendedState(QQMain.this.ICONIFIED);
+			} else if (e.getSource() == close) {// 关闭
+				// 更改用户状态
+				Qquser q = new Qquser();
+				q.setQqnum(quser.getQqnum());
+				q.setState(Contents.STATE_DOWNLINE);
+				qservice.updUserState(q);
+
+				// 发送下线通知
+				notice(Contents.CMD_OFFLINE);
+				System.exit(0);
+			}
+
+			if (e.getSource() == flist) {
+				if (flist.getSelectedIndex() >= 0) {// 获取JLIst是否有被选中某一项
+					frienduser = fvecot.get(flist.getSelectedIndex());
+					// 双击了鼠标左键
+					if (e.getButton() == 1 && e.getClickCount() == 2) {
+						System.out.println("双击了鼠标左键!");
+						// new QQChat(quser,frienduser);
+						openChat(frienduser.getQqnum(), null);
+					}
+					if (e.getButton() == 3) {
+						// 点击了鼠标右键
+						popup.show(flist, e.getX(), e.getY());
+					}
+				}
+
+			} else if (e.getSource() == blackslist) {
+				if (blackslist.getSelectedIndex() >= 0) {// 获取JLIst是否有被选中某一项
+					frienduser = blackvecot.get(blackslist.getSelectedIndex());
+					// 双击了鼠标左键
+					if (e.getButton() == 1 && e.getClickCount() == 2) {
+						System.out.println("双击了鼠标左键!");
+						openChat(frienduser.getQqnum(), null);
+					}
+					if (e.getButton() == 3) {
+						// 点击了鼠标右键
+						popup.show(blackslist, e.getX(), e.getY());
+					}
+				}
+
+			} else if (e.getSource() == famlist) {
+				if (famlist.getSelectedIndex() >= 0) {// 获取JLIst是否有被选中某一项
+					frienduser = famvecot.get(famlist.getSelectedIndex());
+					// 双击了鼠标左键
+					if (e.getButton() == 1 && e.getClickCount() == 2) {
+						System.out.println("双击了鼠标左键!");
+						openChat(frienduser.getQqnum(), null);
+					}
+					if (e.getButton() == 3) {
+						// 点击了鼠标右键
+						popup.show(famlist, e.getX(), e.getY());
+					}
+				}
+
+			} else if (e.getSource() == classmlist) {
+				if (classmlist.getSelectedIndex() >= 0) {// 获取JLIst是否有被选中某一项
+					frienduser = classvecot.get(classmlist.getSelectedIndex());
+					// 双击了鼠标左键
+					if (e.getButton() == 1 && e.getClickCount() == 2) {
+						System.out.println("双击了鼠标左键!");
+						openChat(frienduser.getQqnum(), null);
+					}
+					if (e.getButton() == 3) {
+						// 点击了鼠标右键
+						popup.show(classmlist, e.getX(), e.getY());
+					}
+				}
+
+			}
+
+		}
+	}
+
+	// 打开聊天窗口 (好友的QQ号码 消息类)
+	public QQChat openChat(String qqnum, QQMsg msg) {
+		// 去集合中查找是否有该好友的聊天面板
+		QQChat chat = chats.get(qqnum);
+		if (chat == null) {
+			if (msg != null) {// 表示线程打开窗口
+				Qquser myuser = msg.getMyuser();// 我
+				Qquser fruser = msg.getFruser();// 好友
+				chat = new QQChat(fruser, myuser);// 初始化面板
+			} else {// 双击打开的窗口
+				chat = new QQChat(quser, frienduser);// 初始化面板
+			}
+
+			// 把对象放到集合中
+			chats.put(qqnum, chat);
+		}
+		if (!chat.isVisible()) {// 如果窗口隐藏 (隐藏聊天窗口后 重新打开窗口)
+			chat.t1.setText("");
+			chat.setVisible(true);// 把窗口状态改为显示
+		}
+
+		return chat;
+	}
+
+	// 通知 (命令字)
+	public void notice(int cmd) {
+		// 通知所有用户 除了黑名单、除了自己，除了离线用户 (给这些用户发消息)
+		for (int i = 0; i < fvecot.size(); i++) {
+			Qquser user = fvecot.get(i);
+			if (user.getState() != Contents.STATE_DOWNLINE) {
+				QQMsg msg = new QQMsg();
+				msg.setCmd(cmd);// 消息字
+				msg.setMyuser(quser);// 我 就是主面板上的用户
+				msg.setFruser(user);
+				new SendMsg().send(msg);
+			}
+
+		}
+		for (int i = 0; i < famvecot.size(); i++) {
+			Qquser user = famvecot.get(i);
+			if (user.getState() != Contents.STATE_DOWNLINE) {
+				QQMsg msg = new QQMsg();
+				msg.setCmd(cmd);// 消息字
+				msg.setMyuser(quser);// 我 就是主面板上的用户
+				msg.setFruser(user);
+				new SendMsg().send(msg);
+			}
+		}
+		for (int i = 0; i < classvecot.size(); i++) {
+			Qquser user = classvecot.get(i);
+			if (user.getState() != Contents.STATE_DOWNLINE) {
+				QQMsg msg = new QQMsg();
+				msg.setCmd(cmd);// 消息字
+				msg.setMyuser(quser);// 我 就是主面板上的用户
+				msg.setFruser(user);
+				new SendMsg().send(msg);
+			}
+		}
+	}
+
+	// 接收的线程
+	class MyThread extends Thread {
+		public MyThread() {
+			// 初始化集合
+			chats = new HashMap<String, QQChat>();
+		}
+
+		public void run() {
+			// 自己的端口
+			int port = quser.getPort();
+			try {
+				// 搭载接收服务器 接收自己端口的消息
+				DatagramSocket ds = new DatagramSocket(port);
+				while (true) {// 循环接收 但不用循环建立服务器
+					byte[] b = new byte[1024 * 50];// 每次接收50K
+					DatagramPacket dp = new DatagramPacket(b, b.length);
+					ds.receive(dp);
+					ByteArrayInputStream bis = new ByteArrayInputStream(b, 0,
+							dp.getLength());
+					// 转换成对象输入流
+					ObjectInputStream ois = new ObjectInputStream(bis);
+					// 得到了消息对象
+					QQMsg msg = (QQMsg) ois.readObject();
+					int cmd = msg.getCmd();// 消息字
+					if (cmd == Contents.CMD_INLINE) { // 上线通知
+						// 播放声音
+						new Sound(Contents.S_QIAOMEN);
+						// 刷新主面板
+						flushMain();
+						// 弹出提示 (取'我' 我就是好友)
+						new TipUi(msg.getMyuser());
+
+					} else if (cmd == Contents.CMD_OFFLINE) {// 下线
+						// 刷新主面板
+						flushMain();
+					} else if (cmd == Contents.CMD_BUSY) {// 忙碌
+						// 刷新主面板
+						flushMain();
+					} else if (cmd == Contents.CMD_LEAVE) {// 离开
+						// 刷新主面板
+						flushMain();
+					} else if (cmd == Contents.CMD_HIDE) {// 隐身
+						// 刷新主面板
+						flushMain();
+					} else if (cmd == Contents.CMD_CHAT) {// 聊天
+						// (好友的QQ 消息内容)
+						QQChat chat = openChat(msg.getMyuser().getQqnum(), msg);
+						// 将消息内容显示在面板中
+						chat.appendView(msg.getMyuser().getUname(), msg
+								.getDoc());
+					} else if (cmd == Contents.CMD_SHKAE) {
+						// (好友的QQ 消息内容)
+						QQChat chat = openChat(msg.getMyuser().getQqnum(), msg);
+						// 将消息内容显示在面板中
+						chat.appendView(msg.getMyuser().getUname(), msg
+								.getDoc());
+						chat.shake();
+
+					} else if (cmd == Contents.CMD_ADDFRIEND) {// 添加好友
+						// 添加声音提示
+						new Sound(Contents.S_KESHOU);
+						String message = msg.getMyuser().getUname() + "("
+								+ msg.getMyuser().getQqnum() + ")请求添加好友，是否添加？";
+						int i = JOptionPane.showConfirmDialog(null, message,
+								"添加好友", JOptionPane.OK_CANCEL_OPTION);
+						// 是0 取消2
+						QQMsg huifu = new QQMsg();
+
+						huifu.setMyuser(msg.getFruser());
+						huifu.setFruser(msg.getMyuser());
+
+						if (i == 0) {// 同意了请求
+							// 好友表添加数据 (默认放在好友分组)
+							qservice.addFriend(msg.getMyuser(),
+									msg.getFruser(), Contents.GROUP_FRIEND);
+							// 刷新面板
+							flushMain();
+							// 告诉对方
+							huifu.setCmd(Contents.CMD_AGREE);
+						} else if (i == 2) {// 拒绝添加
+							huifu.setCmd(Contents.CMD_NOADD);
+						}
+						new SendMsg().send(huifu);
+					} else if (cmd == Contents.CMD_DELFRIEND) {// 删除好友
+						// /刷新面板
+						flushMain();
+					} else if (cmd == Contents.CMD_SENDFILE) {// 文件接收
+						String message = msg.getMyuser().getUname() + "向你发送文件["
+								+ msg.getFileName() + "]，是否接收？";
+						int i = JOptionPane.showConfirmDialog(null, message,
+								"文件传输", JOptionPane.OK_CANCEL_OPTION);
+
+						// 接收消息的回复
+						QQMsg m = new QQMsg();
+						m.setMyuser(msg.getFruser());
+						m.setFruser(msg.getMyuser());
+						if (i == 0) {// 同意
+							FileDialog fd = new FileDialog(QQMain.this, "文件保存",
+									FileDialog.SAVE);
+							fd.setFile(msg.getFileName());// 设置保存文件的名字
+							fd.show();
+							
+							// 获取用户选择的保存位置
+							String filename = fd.getDirectory() + "\\"
+									+ fd.getFile();
+
+							// /判断文件是否存在
+							File f = new File(filename);
+							if (!f.exists()) {
+								f.createNewFile();
+							}
+							// 文件输出流
+							FileOutputStream fos = new FileOutputStream(f);
+							fos.write(msg.getB());
+							fos.close();
+							System.out.println("同意");
+							m.setCmd(Contents.CMD_FILEAGREE);
+						} else if (i == 2) {// 拒绝
+							System.out.println("拒绝");
+							m.setCmd(Contents.CMD_FILENO);
+						}
+
+						new SendMsg().send(m);
+
+					} else if (cmd == Contents.CMD_AGREE) {// 同意添加
+						String message = msg.getMyuser().getUname()
+								+ "同意了您的添加请求";
+						JOptionPane.showMessageDialog(null, message);
+						// 刷新面板
+						flushMain();
+					} else if (cmd == Contents.CMD_NOADD) {// 拒绝
+						String message = msg.getMyuser().getUname()
+								+ "拒绝了您的添加请求，原因是长的太丑了!";
+						JOptionPane.showMessageDialog(null, message);
+					} else if (cmd == Contents.CMD_FILEAGREE) {// 接收了文件
+						String message = msg.getMyuser().getUname()
+								+ "接收了您的文件!";
+						JOptionPane.showMessageDialog(null, message);
+					} else if (cmd == Contents.CMD_FILENO) {// 拒绝接收文件
+						String message = msg.getMyuser().getUname()
+						+ "拒绝接收您的文件!";
+				JOptionPane.showMessageDialog(null, message);
+			}
+
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+	
+	}
+}

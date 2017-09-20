@@ -1,0 +1,11 @@
+create database mysqlstudy;--新建数据库
+create table peasonmanager(--建表
+	billid int primary key AUTO_INCREMENT,
+	gongzi int not null,
+	licai int not null,
+	richang int not null,
+	guding int not null,
+	touzi int not null
+
+
+)

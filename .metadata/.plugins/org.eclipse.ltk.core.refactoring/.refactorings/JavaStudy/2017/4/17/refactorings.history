@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 1 package(s) to &apos;AJAXObject/src&apos;&#x0D;&#x0A;- Original project: &apos;JavaStudy&apos;&#x0D;&#x0A;- Destination element: &apos;AJAXObject/src&apos;&#x0D;&#x0A;- Original element: &apos;JavaStudy/src/OracleConn&apos;" description="Copy package" destination="/src" element1="/src&lt;OracleConn" flags="589830" fragments="1" id="org.eclipse.jdt.ui.copy" log="/src&lt;OracleConn&#x09;true&#x09;false" policy="org.eclipse.jdt.ui.copyPackages" stamp="1493259499969" version="1.0"/>
+</session>

@@ -1,0 +1,41 @@
+package T4.T41;
+
+import java.awt.Container;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+public class Lianxi extends JFrame{
+
+	JLabel 	QQname,QQmima;
+	JTextField qqname;
+	JPasswordField 	qQpass;
+	JButton denglu,zhuche;
+	public Lianxi() {
+		
+		super("作业练习");
+		Container c = new Container();
+		QQname = new JLabel("QQ昵称");
+		
+		qqname = new JTextField();
+		QQmima = new JLabel("QQ密码");
+		qQpass = new JPasswordField();
+		denglu = new JButton("登录");
+		zhuche = new JButton("注册");
+		setSize(300, 300);
+		//设置显示窗口
+		setVisible(true);
+		//设置居中
+		setLocationRelativeTo(null);
+		//设置关闭按钮
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		
+	}
+	public static void main(String[] args) {
+		new Lianxi();
+	}
+}

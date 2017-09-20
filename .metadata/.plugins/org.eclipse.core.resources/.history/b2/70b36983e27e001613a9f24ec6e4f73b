@@ -1,0 +1,21 @@
+package T8;
+
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+
+public class QQ extends JFrame{
+	JTextField textField;
+	public QQ(){
+		setTitle("QQ");
+		setSize(500,500);
+		textField = new JTextField();
+		add(textField);
+		setVisible(true);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	public static void main(String[] args) {
+		new QQ();
+	}
+	
+}

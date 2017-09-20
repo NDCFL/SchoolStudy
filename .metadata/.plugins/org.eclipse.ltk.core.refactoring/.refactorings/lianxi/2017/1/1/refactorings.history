@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 1 element(s) from project &apos;lianxi&apos;&#x0D;&#x0A;- Original project: &apos;lianxi&apos;&#x0D;&#x0A;- Original element: &apos;T1.GucasQRCodeEncoder.java&apos;" description="Delete element" element1="/src&lt;T1{GucasQRCodeEncoder.java" elements="1" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1483405439164" subPackages="false" version="1.0"/>
+</session>

@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" 
+	xmlns="http://java.sun.com/xml/ns/j2ee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>HelloWorld_1</servlet-name>
+    <servlet-class>T1.HelloWorld_1</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SecondServlet</servlet-name>
+    <servlet-class>T2.servlet.SecondServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>HiServlet</servlet-name>
+  	<servlet-class>T2.servlet.HiServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>HiServlet</servlet-name>
+  	<url-pattern>/hi</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+  	<welcome-file>shuzu.jsp</welcome-file>
+  
+  </welcome-file-list>
+  
+  <servlet>
+    <description>第一个servlet程序</description>
+  	<servlet-name>FirsrServlet</servlet-name>			
+  	<servlet-class>T2.servlet.FirsrServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>FirsrServlet</servlet-name>	
+  	<url-pattern>/firsrServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>合法性验证</description>
+  	<servlet-name>Login</servlet-name>			
+  	<servlet-class>T2.servlet.Login</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Login</servlet-name>	
+  	<url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>cal</servlet-name>
+  	<jsp-file>/cal.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>cal</servlet-name>
+  	<url-pattern>/jsq</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<description>我的第二的测试servlet类</description>
+  	<servlet-name>SecondServer</servlet-name>
+  	<servlet-class>T2.servlet.SecondServer</servlet-class>
+  	<init-param>
+  		<param-name>username</param-name>
+  		<param-value>絮落锦乡</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>age</param-name>
+  		<param-value>21</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>sex</param-name>
+  		<param-value>男</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>hobit</param-name>
+  		<param-value>观景</param-value>
+  	</init-param>
+  </servlet>
+  
+  <servlet>
+  	<servlet-name>subject</servlet-name>
+  	<servlet-class>T2.servlet.subject</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>subject</servlet-name>
+  	<url-pattern>/subject</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet-mapping>
+  	<servlet-name>SecondServer</servlet-name>
+  	<url-pattern>/SecondServer</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>Lianxi</servlet-name>
+  	<servlet-class>T2.servlet.Lianxi</servlet-class>
+  	<init-param>
+  		<param-name>name</param-name>
+  		<param-value>絮落锦乡</param-value>
+  	</init-param>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>T2.servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>TestServlet</servlet-name>
+    <servlet-class>TestServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>cityservlet</servlet-name>
+    <servlet-class>SQLservlet.cityservlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>privaceservlet</servlet-name>
+    <servlet-class>SQLservlet.privaceservlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>privace</servlet-name>
+    <servlet-class>Lianxi.privace</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Pservlet</servlet-name>
+    <servlet-class>Lianxi.Pservlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>city</servlet-name>
+    <servlet-class>Lianxi.city</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>T1servlet</servlet-name>
+    <servlet-class>T1.T1servlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>T1servletcity</servlet-name>
+    <servlet-class>T1.T1servletcity</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Poolservlet</servlet-name>
+    <servlet-class>Pool.Poolservlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Studentservlet</servlet-name>
+    <servlet-class>T7.Studentservlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Provinceservlet</servlet-name>
+    <servlet-class>ShowDemo.Provinceservlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Severlet1</servlet-name>
+    <servlet-class>T3.servlet.Severlet1</servlet-class>
+  </servlet>
+  <filter>
+  	<filter-name>FilterEncoding</filter-name>
+  	<filter-class>Filter.FilterEncoding</filter-class>
+  	<init-param>
+  		<param-name>config</param-name>
+  		
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>FilterEncoding</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+
+
+
+
+
+
+
+
+
+
+
+  <servlet-mapping>
+    <servlet-name>Lianxi</servlet-name>
+    <url-pattern>/lianxi</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet-mapping>
+    <servlet-name>HelloWorld_1</servlet-name>
+    <url-pattern>/servlet/HelloWorld_1</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SecondServlet</servlet-name>
+    <url-pattern>/servlet/SecondServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/loginservlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TestServlet</servlet-name>
+    <url-pattern>/servlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>cityservlet</servlet-name>
+    <url-pattern>/cityservlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>privaceservlet</servlet-name>
+    <url-pattern>/privaceservlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>privace</servlet-name>
+    <url-pattern>/privace</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Pservlet</servlet-name>
+    <url-pattern>/pservlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>city</servlet-name>
+    <url-pattern>/city</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>T1servlet</servlet-name>
+    <url-pattern>/t1servlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>T1servletcity</servlet-name>
+    <url-pattern>/t1servletcity</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Poolservlet</servlet-name>
+    <url-pattern>/poolservlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Studentservlet</servlet-name>
+    <url-pattern>/studentservlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Provinceservlet</servlet-name>
+    <url-pattern>/provinceservlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Severlet1</servlet-name>
+    <url-pattern>/severlet1</url-pattern>
+  </servlet-mapping>
+  
+  <resource-ref>
+	  <res-ref-name>conpool</res-ref-name>
+	  <res-type>javax.sql.DataSource</res-type>
+	  <res-auth>Container</res-auth>
+  </resource-ref>
+  
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

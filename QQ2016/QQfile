@@ -1,0 +1,35 @@
+create table IDtable(
+	QQid int primary key not null,--QQ号码
+	QQname varchar(30) not null,--QQ昵称
+	QQpassword varchar(20) not null,--QQ密码
+	QQhead varchar(30) not null,
+	age int check(age>0 and age<=100) not null,--年龄
+	sex char(4) default '女神' check (sex='男神' or sex='女神') not null,--性别
+	start varchar(12) not null,--星座
+	blood varchar(2) not null,--血型
+	nation varchar(10) not null,--民族
+	hobit varchar(20) not null,--爱好
+	ipdizhi varchar(20) not null,--IP地址
+	port int unique not null, --端口
+	zhuangtai varchar(10) not null,--QQ状态
+	remark text not null--签名
+)
+drop table friendtable;
+create table friendtable(
+	friendid int identity (1,1) not null,
+	fQQid int not null,
+	mQQid int  not null,
+	groupname varchar(20) not null
+
+)
+drop table news;
+create table news(
+	newsid int identity (1,1) not null,
+	mQQid int not null,
+	fQQid int not null,
+	minlin int not null,--命令制
+	newsxinxi text not null
+)
+select * from IDtable;
+select * from friendtable;
+select * from news;

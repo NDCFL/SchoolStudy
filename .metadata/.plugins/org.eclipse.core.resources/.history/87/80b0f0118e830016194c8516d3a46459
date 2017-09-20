@@ -1,0 +1,18 @@
+package T11;
+
+import java.util.Calendar;
+
+import javax.swing.JOptionPane;
+
+public class Test {
+	
+	public static void main(String[] args){
+	    
+        if(Calendar.getInstance().get(Calendar.AM_PM)==Calendar.AM){
+        
+             JOptionPane.showMessageDialog(null, "早上好");
+        }else{
+        	 JOptionPane.showMessageDialog(null, "下午好");
+        }
+  }
+}

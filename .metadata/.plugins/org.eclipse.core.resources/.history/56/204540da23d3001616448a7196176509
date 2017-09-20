@@ -1,0 +1,153 @@
+package TagDemo;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.tagext.BodyTagSupport;
+
+import SQLBase.Citysqlsentenceimp;
+import SQLBean.Citybean;
+
+public class PagingTagDemo extends BodyTagSupport implements Serializable{
+	Citysqlsentenceimp im = new Citysqlsentenceimp();
+	//分页自定义标签
+	// 总页数
+	// 每页的记录条数
+	private int pagebarsize=10;
+	private int sumpage=(int) Math.ceil((float) im.pagebarsum() / (float) pagebarsize);
+	// 当前页
+	private int currentpage=1;
+	// 总记录条数
+	private int pagebarsum = im.pagebarsum();
+	// 相关的操作
+	private String handle;
+	// 起始操作位置
+	private int starlocal;
+
+	public int getStarlocal() {
+		return starlocal;
+	}
+
+	public void setStarlocal(int starlocal) {
+		this.starlocal = starlocal;
+	}
+
+	public int getSumpage() {
+		return sumpage;
+	}
+
+	public void setSumpage(int sumpage) {
+		this.sumpage = sumpage;
+	}
+
+	public int getPagebarsize() {
+		return pagebarsize;
+	}
+
+	public void setPagebarsize(int pagebarsize) {
+		this.pagebarsize = pagebarsize;
+	}
+
+	public int getCurrentpage() {
+		return currentpage;
+	}
+
+	public void setCurrentpage(int currentpage) {
+		this.currentpage = currentpage;
+	}
+
+	public int getPagebarsum() {
+		return pagebarsum;
+	}
+
+	public void setPagebarsum(int pagebarsum) {
+		// 计算页的总数
+		this.pagebarsum = pagebarsum;
+	}
+
+	public String getHandle() {
+		return handle;
+	}
+
+	public void setHandle(String handle) {
+		// 代表选择的是第一页
+		if (handle.equals("firstpage")) {
+			currentpage = 1;
+		} else if (handle.equals("uppage")) {
+			// 代表上一页
+			if (currentpage > 1) {
+				currentpage--;
+			} else {
+				currentpage = 1;
+			}
+		} else if (handle.equals("downpage")) {
+			// 代表下一页
+			if (currentpage < sumpage) {
+				currentpage++;
+			} else {
+				currentpage = sumpage;
+			}
+		} else if (handle.equals("lastpage")) {
+			currentpage = sumpage;
+		} else {
+			currentpage = 1;
+		}
+		this.handle = handle;
+	}
+	@Override
+	public int doEndTag() throws JspException {
+		JspWriter out = pageContext.getOut();
+		try {
+			out.write("<table align='center'><tr><td><a href='T10doc/cityadd.jsp'> 新 增</a></td></tr></table>");
+			out.write("<table border='1' align='center' width='740'><tr height='40'><th align='center'>城市编号</th><th align='center'>省份名称</th><th align='center'>城市名称</th><th align='center'>操作</th></tr>");
+			List<Citybean> list = im.citylist(pagebarsize, starlocal);
+			Citybean citybean = null;
+			for(int i=0;i<list.size();i++){
+				citybean=list.get(i);
+				out.write("<tr height='40'><td align='center'>"+citybean.getCityid()+"</td><td align='center'>"+citybean.getPrivacename()+"</td><td align='center'>"+citybean.getCityname()+"</td>");
+				out.write("<td align='center'>");
+				out.write("<a href=''> 修 改 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+				out.write("<a href='' onclick='javascript:if(confirm('删除确认')){return true;}else{return false;}> 删 除 </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>");
+			}
+			out.write("</table>");
+			out.write("<br/><br/>");
+			out.write("<div align='center' style='font-size:18px'>");
+			out.write("<b>总记录数&nbsp;&nbsp;"+pagebarsum+"</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+			out.write("<b>总 页 数&nbsp;&nbsp;"+sumpage+"页</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+			out.write("<b>当前页数&nbsp;&nbsp;"+currentpage+"页</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+			out.println("<a href='T10doc/PageDemo.jsp?caozuo=0&pager=1'>首    页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+			out.write("<a href='T10doc/PageDemo.jsp?caozuo-=10&pager=2'>上 一 页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp");
+			out.write("<a href='T10doc/PageDemo.jsp?caozuo+=10&pager=3'>下 一 页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp");
+			out.write("<a href='T10doc/PageDemo.jsp?caozuo=40&pager=5'>末    页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp");
+			out.write("</div>");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		 
+		  
+		return EVAL_BODY_INCLUDE;
+	}
+	@Override
+	public int doStartTag() throws JspException {
+		JspWriter out = pageContext.getOut();
+		
+		try {
+		
+		} catch (Exception e) {
+			System.out.println("结束分页出错！");
+		}
+		return EVAL_PAGE;
+	}
+	@Override
+	public int doAfterBody() throws JspException {
+		if(currentpage>0 || currentpage<=sumpage){
+			System.out.println("============");
+			return EVAL_BODY_AGAIN;
+		}else {
+			
+			return EVAL_PAGE;
+		}
+	}
+}

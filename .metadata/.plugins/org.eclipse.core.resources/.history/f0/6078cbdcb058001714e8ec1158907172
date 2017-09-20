@@ -1,0 +1,78 @@
+package StudentManger;
+
+import java.awt.Font;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.List;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.JTableHeader;
+
+import sun.awt.WindowClosingListener;
+public class Studentdata extends JFrame implements WindowClosingListener{
+
+	
+	JButton add,close,delete,update,btfind,ponegrade,psumgrade,pavegrade,pstudid,maxgrade,mingrade,youxiu,notjige;
+	JTable table,guanbi;
+	JPanel panel;
+	JLabel lb1;
+	JTextField find;
+	JTableHeader head;
+	String title[]={"学号","姓名","班级","语文成绩","数学成绩","英语成绩"};
+	String data[][]=new String[90][6];
+	JScrollPane js;
+	BaseDAOimp sql = new BaseDAOimp();
+	String dataString=null;
+	public Studentdata(List<StudentVo> list,String order) {
+		setTitle(order);
+		for (int i = 0; i < list.size(); i++) {
+			StudentVo studentVo = list.get(i);
+			data[i][0]=studentVo.getSno()+"";
+			data[i][1]=studentVo.getStudentname();
+			data[i][2]=studentVo.getSsex();
+			data[i][3]=studentVo.getSage()+"";
+			data[i][4]=studentVo.getShobit();
+			data[i][5]=studentVo.getSzhuanye();
+		}
+		setUndecorated(true);
+		panel = new JPanel(null);
+		table = new JTable(data,title);
+		table.setBounds(0, 50, 500, 300);
+		table.setRowHeight(30);
+		table.setFont(new Font("楷体",Font.BOLD,16));
+		//滚动面板
+		js = new JScrollPane(table);
+		js.setBounds(0,50,780, 292);
+		panel.add(js);
+		lb1 = new JLabel(order);
+		lb1.setBounds(320, 10, 200, 30);
+		lb1.setFont(new Font("楷体",Font.BOLD,24));
+		panel.add(lb1);
+		add(panel);
+		this.addWindowListener(new WindowAdapter() {
+	          @Override
+	          public void windowClosing(WindowEvent e)
+	          {
+	             dispose();
+	          }
+	      });
+		setSize(800, 500);
+		setVisible(true);
+		setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	public RuntimeException windowClosingDelivered(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public RuntimeException windowClosingNotify(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

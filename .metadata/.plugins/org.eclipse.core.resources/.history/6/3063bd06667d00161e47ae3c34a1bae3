@@ -1,0 +1,95 @@
+package T7;
+
+import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.CardLayout;
+import java.awt.FlowLayout;
+import java.awt.Frame;
+import java.awt.Panel;
+import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.net.NetPermission;
+
+import javax.naming.InitialContext;
+
+import org.w3c.dom.events.MouseEvent;
+import java.awt.*;
+
+public class CardLayoutDemo extends Frame implements MouseListener{
+
+	public CardLayoutDemo(String string) {
+		super(string);
+		init();
+	}
+	public static void main(String[] args) {
+		new CardLayoutDemo("CardLayout1");
+	}
+	public void init() {
+		setLayout(new BorderLayout());
+		setSize(400,300);
+		Panel p = new Panel();
+		p.setLayout(new FlowLayout());
+		first.addMouseListener(this);
+		second.addMouseListener(this);
+		third.addMouseListener(this);
+		p.add(first);
+		p.add(second);
+		p.add(third);
+		add("North",p);
+		cards.setLayout(cl);
+		cards.add("First card",new Button("第一页的内容"));
+		cards.add("second card",new Button("第二页的内容"));
+		cards.add("third card",new Button("第三页的内容"));
+		add("Center",cards);
+		addWindowListener(new WindowAdapter(){
+			public void windowClosing(WindowEvent evt){
+//				f.setVisible(true);
+//				f.dispose();
+				System.exit(0);
+			}
+		});
+		setVisible(true);
+	}
+//	public void mouseClicked(MouseEvent evt){
+//		if(evt.getSource()==first){
+//			cl.first(cards);
+//		}else if(evt.getSource()==second){
+//			cl.first(cards);
+//			cl.next(cards);
+//		}else if(evt.getShiftKey()){
+//			cl.last(cards);
+//		}
+//	}
+	public void mouseEntered(MouseEvent arf0){}
+	public void mouseExited(MouseEvent arf0){}
+	public void mousePressed(MouseEvent arf0){}
+	public void mouseReleased(MouseEvent arf0){}
+	private Button first = new Button("第一页");
+	private Button second = new Button("第二页");
+	private Button third = new Button("第三页");
+	private Panel cards = new Panel();
+	private CardLayout cl = new CardLayout();
+	public void mouseClicked(java.awt.event.MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void mouseEntered(java.awt.event.MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void mouseExited(java.awt.event.MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void mousePressed(java.awt.event.MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void mouseReleased(java.awt.event.MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+}

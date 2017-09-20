@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move 1 elements(s) to &apos;T1&apos;&#x0D;&#x0A;- Original project: &apos;Internet&apos;&#x0D;&#x0A;- Destination element: &apos;T1&apos;&#x0D;&#x0A;- Original element: &apos;SQLcon.jsp&apos;" description="Move file" element1="WebRoot/SQLcon.jsp" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1483840838896" target="/Internet/WebRoot/T1" units="0" version="1.0"/>
+</session>

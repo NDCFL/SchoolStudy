@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;T1.F.java&apos; to &apos;GucasQRCodeEncoder.java&apos;&#x0D;&#x0A;- Original project: &apos;lianxi&apos;&#x0D;&#x0A;- Original element: &apos;T1.F.java&apos;&#x0D;&#x0A;- Renamed element: &apos;T1.GucasQRCodeEncoder.java&apos;" description="Rename compilation unit &apos;F.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;T1{F.java" name="GucasQRCodeEncoder.java" references="false" stamp="1481438844803" version="1.0"/>
+</session>

@@ -1,0 +1,25 @@
+package Loopyuju;
+
+
+public class TT {
+
+	/**
+	 * @param args
+	 */
+	
+	public static void main(String[] args) {
+		int sum=0;
+		int  t=0,num=0;
+//		一个整数，它加上100后是一个完全平方数，再加上168又是一个完全平方数，请问该数是多少？
+		for(int n=1;n<=10000;n++){
+			for (int j = 1; j <=1000; j++) {
+				
+				if (Math.sqrt((n+100))==j && Math.sqrt((n+100)+168)==j) {
+					System.out.println(n);
+				}
+			}
+		}
+		
+	}
+
+}

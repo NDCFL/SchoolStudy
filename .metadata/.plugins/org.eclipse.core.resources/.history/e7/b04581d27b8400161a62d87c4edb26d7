@@ -1,0 +1,21 @@
+package T11;
+
+import java.util.Stack;
+
+public class Stack_1 {
+
+	public static void main(String[] args) {
+		
+		Stack<Integer> sk = new Stack<Integer>();
+		sk.push(1);
+		sk.push(1);
+		sk.push(1);
+		sk.push(1);
+		sk.push(1);
+		sk.push(1);
+		while (!sk.isEmpty()) {
+			System.out.println(sk);
+		}
+	}
+	
+}

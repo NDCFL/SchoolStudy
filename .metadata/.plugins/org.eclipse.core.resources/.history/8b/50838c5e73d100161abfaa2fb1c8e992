@@ -1,0 +1,77 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<html>
+  <head>
+  </head>
+  <body>
+   <h1 align="center">结算了！！欢迎下次抢购！！</h1>
+    <hr color="blue" size="3px"/>
+	<%
+		
+		int java=0,jsp=0,js=0; 
+		//a代表的是库存量，p代表的是价格
+		//购买java的数量
+		if(request.getParameter("txt").equals("")){
+			java=0;
+		}else if(request.getParameter("txt1").equals("")){
+			jsp=0;
+		}else if(request.getParameter("txt2").equals("")){
+			js=0;
+		} 
+		java= Integer.parseInt(request.getParameter("txt"));
+		//购买jsp的数量
+		jsp  = Integer.parseInt(request.getParameter("txt1"));
+		//购买js的数量	
+		js = Integer.parseInt(request.getParameter("txt2"));
+		//java的剩余数量
+		int vjava = (Integer)application.getAttribute("a1")-java;
+		if(vjava<=0){
+			vjava=300;
+		}
+		//重新设置
+		application.setAttribute("a1",vjava);
+		//jsp的剩余数量
+		int vjsp = (Integer)application.getAttribute("a2")-java;
+		if(vjsp<=0){
+			vjsp=400;
+		}
+		//重新设置
+		application.setAttribute("a2",vjsp);
+		//js的剩余数量
+		int vjs = (Integer)application.getAttribute("a3")-java;
+		if(vjs<=0){
+			vjs=500;
+		}
+		//重新设置
+		application.setAttribute("a3",vjs);
+		//获取java的价格
+		double java$ =(Double)application.getAttribute("p1");
+		//获取jsp的价格
+		double jsp$ =(Double)application.getAttribute("p2");
+		//获取java的价格
+		double js$ =(Double)application.getAttribute("p3");
+		
+	%>
+    <table border = "1" align="center">
+			<tr align="center"><th colspan="4"><p>您好!<%=session.getAttribute("username")%>你的消费记录如下表</p><br> 
+			<tr align="center"><th>商品名称</th><th>购买数量(本)</th><th>剩余库存量(本)</th><th>花费总额(元)</th></tr>
+			<tr align="center"><td>java</td><td><%=java%></td><td><%=vjava%></td><td><%=(java$*java) %></td></tr>
+			<tr align="center"><td>jsp</td><td><%=jsp%></td><td><%=vjsp%></td><td><%=(jsp$*jsp) %></td></tr>
+			<tr align="center"><td>js</td><td><%=js%></td><td><%=vjs%></td><td><%=(js$*js) %></td></tr>
+			<tr align="center"><td>总计</td><td><%=(js+java+jsp)%></td><td><%=(vjs+vjava+vjsp)%></td><td><%=(js$*js+jsp$*jsp+java$*java) %></td></tr>
+			<tr><td colspan="4"><marquee>上龙龙商店买傲娇的品牌，却只卖呆萌的价格！！！</marquee></td></tr>
+		</table>
+	<%
+	%>
+	<h1 align="center">谢谢贵宾<b><font face="华文行楷"><%=session.getAttribute("username")%></font></b>来到龙龙商城！结账的了哦！</h1>
+    <hr color="blue" size="3px"/>
+    <table width="1200" height="380">
+    	<tr><td colspan="4"><h1 align="center"><font color="blue" face="华文行楷">结账了！请选择付款方式！！</font></h1></td></tr>
+    	<tr>
+    		<td><a href="secce.jsp"><img src="img/wx.jpg"></a></td>
+    		<td><a href="secce.jsp"><img src="img/zfb.jpg"></a></td>
+    		<td><a href="secce.jsp"><img src="img/yh.jpg"></a></td>
+    		<td><a href="secce.jsp"><img src="img/sk.jpg"></a></td>
+    	</tr>
+    </table>
+  </body>
+</html>

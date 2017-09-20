@@ -1,0 +1,441 @@
+package QQfase;
+
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.File;
+import java.util.Vector;
+
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.Sequence;
+import javax.sound.midi.Sequencer;
+import javax.swing.AbstractListModel;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
+import javax.swing.JTabbedPane;
+import javax.swing.UIManager;
+
+
+import QQSQL.QQminlin;
+import QQbean.QQidtable;
+import SQLBase.QQbase;
+
+public class haoyoufase extends JFrame implements MouseListener,ActionListener{
+
+	JLabel bg,close,min;
+	JLabel head;
+	JLabel name, qianming, huanfu, look;
+	JTabbedPane jp;
+	JList list1,list2,list3,list4,list5; 
+	JMenuItem  chat,jvfriend,jvsunyou,jvmare,jvhmd,jvsidang,lookfriendinfo;
+	JPopupMenu pop;
+	Point loc = null;
+	Point tmp = null;
+	boolean isDragged = false;
+	QQidtable idtable,friendtable;
+	Vector<QQidtable> allimfmation,vfriend,vmare,vsunyou,vhmd,vsidang;
+	QQbase qqbase = new QQbase();
+	private void setDragable() {
+		this.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mouseReleased(java.awt.event.MouseEvent e) {
+				isDragged = false;
+				haoyoufase.this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			}
+
+			public void mousePressed(java.awt.event.MouseEvent e) {
+				tmp = new Point(e.getX(), e.getY());
+
+				isDragged = true;
+				haoyoufase.this.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			}
+		});
+		this.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+			public void mouseDragged(java.awt.event.MouseEvent e) {
+				if (isDragged) {
+					loc = new Point(haoyoufase.this.getLocation().x + e.getX() - tmp.x,
+							haoyoufase.this.getLocation().y + e.getY() - tmp.y);
+					haoyoufase.this.setLocation(loc);
+				}
+			}
+		});
+	}
+	public haoyoufase(){};
+	public haoyoufase(QQidtable idtable){
+		super("好友界面");
+		this.idtable=idtable;
+		setIconImage(new ImageIcon(idtable.getQQhead()).getImage());
+		setDragable();
+		setUndecorated(true);
+		bg=new JLabel(new ImageIcon("head/qqmain1.png"));
+		bg.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		add(bg);
+		
+		close = new JLabel("  ");
+		close.setBounds(250, 5, 20, 20);
+		bg.add(close);
+		
+		
+		
+		min = new JLabel();
+		min.setBounds(230, 5, 20, 20);
+		bg.add(min);
+		
+		head = new JLabel(new ImageIcon(idtable.getQQhead()));
+		head.setBounds(10, 43, 60, 62);
+		bg.add(head);
+		
+		name = new JLabel(idtable.getQQname());
+		name.setBounds(80, 35, 60, 30);
+		bg.add(name);
+		
+		huanfu = new JLabel("  ");
+		huanfu.setBounds(232, 90, 15, 15);
+		bg.add(huanfu);
+		
+		qianming =  new JLabel(idtable.getHobit());
+		qianming.setBounds(80, 58, 100, 30);
+		bg.add(qianming);
+		
+		look = new JLabel("   ");
+		look.setBounds(180, 643, 30, 30);
+		bg.add(look);
+		
+		chat = new JMenuItem("聊天");
+		jvsunyou = new JMenuItem("移动到损友分组");
+		jvmare = new JMenuItem("移动到同学分组");
+		jvsidang = new JMenuItem("移动到死党分组");
+		jvfriend = new JMenuItem("移动到朋友分组");
+		jvhmd = new JMenuItem("移入黑名单");
+		lookfriendinfo = new JMenuItem("查看好友资料");
+		
+		pop = new JPopupMenu();
+		
+		pop.add(chat);
+		pop.add(jvsunyou);
+		pop.add(jvmare);
+		pop.add(jvsidang);
+		pop.add(jvfriend);
+		pop.add(jvhmd);
+		pop.add(lookfriendinfo);
+		
+		chat.addActionListener(this);
+		jvsunyou.addActionListener(this);
+		jvmare.addActionListener(this);
+		jvsidang.addActionListener(this);
+		jvfriend.addActionListener(this);
+		jvhmd.addActionListener(this);
+		lookfriendinfo.addActionListener(this);
+		
+		
+		//实例化向量，分组向量
+		allimfmation = new Vector<QQidtable>();
+		vsunyou = new Vector<QQidtable>();//损友
+		vmare = new Vector<QQidtable>();//同学
+		vsidang  = new Vector<QQidtable>();//死党 
+		vfriend = new Vector<QQidtable>();//朋友
+		vhmd  = new Vector<QQidtable>();//黑名单
+		//更新界面
+		reflush();
+		//设置透明的背景
+		UIManager.put("TabbedPane.contentOpaque", false);
+//		"损友","同学","死党","朋友","黑名单"
+		jp = new JTabbedPane();
+		jp.addTab("损友",list1);
+		jp.addTab("同学",list2);
+		jp.addTab("死党",list3);
+		jp.addTab("朋友",list4);
+		jp.addTab("黑名单",list5);
+		jp.setBounds(0, 140, 281, 474);
+		jp.setOpaque(false);
+		bg.add(jp);
+		
+		
+		close.addMouseListener(this);
+		min.addMouseListener(this);
+		huanfu.addMouseListener(this);
+		look.addMouseListener(this);
+		head.addMouseListener(this);
+		list1.addMouseListener(this);
+		list2.addMouseListener(this);
+		list3.addMouseListener(this);
+		list4.addMouseListener(this);
+		list5.addMouseListener(this);
+		
+		
+		
+		setSize(281, 671);
+		setVisible(true);
+		setLocation(1000, 20);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+	}
+	public static void main(String[] args) {
+		
+		new haoyoufase(new QQidtable());
+	}
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource()==close) {
+			System.exit(0);
+		}else if (e.getSource()==min) {
+			setState(JFrame.HIDE_ON_CLOSE);
+		}else if (e.getSource()==huanfu) {
+			//换肤函数，运用文件选择框
+			JFileChooser dlg = new JFileChooser();
+			//打开文件对话框
+			dlg.setDialogType(JFileChooser.OPEN_DIALOG);
+			dlg.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            //设置对话框标题
+			dlg.setDialogTitle("更换皮肤");
+			if (dlg.showOpenDialog(this) == dlg.APPROVE_OPTION) {
+            	File file = dlg.getSelectedFile();
+            	String path = file.getPath();
+            	bg.setIcon(new ImageIcon(path));
+            }
+		}else if (e.getSource()==look) {
+			JOptionPane.showMessageDialog(this, "你点击了查询按钮");
+		}else if (e.getSource()==head) {
+			if (e.getClickCount()==2) {
+				new Updatefriendfase(idtable,this);
+			}
+		}else if (e.getSource()==list1) {
+			if (e.getButton()==3) {
+					if(list1.getSelectedIndex()>=0){
+						pop.show(list1, e.getX(), e.getY());
+					}
+			}
+			//左键
+			if (e.getButton()==1) {
+				friendtable = vsunyou.get(list1.getSelectedIndex());
+				new Lookfriendfase(friendtable);
+			}
+		}else if (e.getSource()==list2) {
+			if (e.getButton()==3) {
+				if(list2.getSelectedIndex()>=0){
+					pop.show(list2, e.getX(), e.getY());
+				}
+			}
+		}else if (e.getSource()==list3) {
+			if (e.getButton()==3) {
+				if(list3.getSelectedIndex()>=0){
+					pop.show(list3, e.getX(), e.getY());
+				}
+			}
+		}else if (e.getSource()==list4) {
+			if (e.getButton()==3) {
+				if(list4.getSelectedIndex()>=0){
+					pop.show(list4, e.getX(), e.getY());
+				}
+			}
+		}else if (e.getSource()==list5) {
+			if (e.getButton()==3) {
+				if(list5.getSelectedIndex()>=0){
+					pop.show(list5, e.getX(), e.getY());
+				}
+			}
+		}
+		
+	}
+	public void mouseEntered(MouseEvent e) {
+		friendtable = vsunyou.get(list1.getSelectedIndex());
+		new Lookfriendfase(friendtable);
+		
+	}
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void mouseReleased(MouseEvent e) {
+		
+		
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource()==lookfriendinfo) {
+			friendtable = vsunyou.get(list1.getSelectedIndex());
+			new Lookfriendfase(friendtable);
+		}
+		
+	}
+	public void reflush(){
+		//获取所有好友的信息
+		allimfmation = qqbase.getmyfriend(idtable.getQQid());
+		//清空个个分组的数据，重新赋值
+		vsunyou.clear();
+		vmare.clear();
+		vsidang.clear();
+		vfriend.clear();
+		vhmd.clear();
+		//循环保存数据
+		for (QQidtable table : allimfmation) {
+//			"损友","同学","死党","朋友","黑名单"
+			String groupname = table.getGroupname();
+			//区别各个好友的类型，区分各个分组
+			if(groupname.equals(QQminlin.GROUPNAME[0])){
+				vsunyou.add(table);
+			}else if(groupname.equals(QQminlin.GROUPNAME[1])){
+				vmare.add(table);
+			}else if(groupname.equals(QQminlin.GROUPNAME[2])){
+				vsidang.add(table);
+			}else if(groupname.equals(QQminlin.GROUPNAME[3])){
+				vfriend.add(table);
+			}else if(groupname.equals(QQminlin.GROUPNAME[4])){
+				vhmd.add(table);
+			}
+			
+			list1 = new JList(new DataModel(vsunyou));
+			list2 = new JList(new DataModel(vmare));
+			list3 = new JList(new DataModel(vfriend));
+			list4 = new JList(new DataModel(vsidang));
+			list5 = new JList(new DataModel(vhmd));	
+			
+			list1.setCellRenderer(new MyfriendHead(vsunyou));
+			list2.setCellRenderer(new MyfriendHead(vmare));
+			list3.setCellRenderer(new MyfriendHead(vfriend));
+			list4.setCellRenderer(new MyfriendHead(vsidang));
+			list5.setCellRenderer(new MyfriendHead(vhmd));
+		}
+	}
+	//显示文本信息
+	class DataModel extends AbstractListModel {
+		Vector<QQidtable> data;
+		public DataModel() {
+				
+		}
+		public DataModel(Vector<QQidtable> data) {
+			this.data = data;
+		}
+	    //系统自动运行，下标从0开始计算
+	    public Object getElementAt(int index) {
+	    	QQidtable info = data.get(index);
+	    	//返回当前的信息，QQ号码，签名，QQ昵称
+	    	return info.getQQname()+"("+info.getQQid()+")<"+info.getRemark()+">";
+	    }
+
+	    public int getSize() {
+//	    	System.out.println("data.size()="+data.size());
+	        return data.size();
+	    }
+	    
+	}
+	// 获取好友头像
+	class MyfriendHead extends DefaultListCellRenderer {
+		Vector<QQidtable> datas;
+		public MyfriendHead(Vector<QQidtable> datas) {
+			
+			this.datas = datas;
+		}
+		@Override
+		public Component getListCellRendererComponent(JList list, Object value,
+				int index, boolean isSelected, boolean cellHasFocus) {
+			Component c = super.getListCellRendererComponent(list, value,
+					index, isSelected, cellHasFocus);
+			if (index >= 0 && index < datas.size()) {
+				QQidtable user =  datas.get(index);
+				String status = user.getZhuangtai();
+				String headImg = user.getQQhead();
+				String filename = "";
+				if(status.equals(QQminlin.STATUS[0])){
+					int pos = headImg.indexOf('.');
+					String pre = headImg.substring(0,pos);
+					String fix = headImg.substring(pos,headImg.length());
+					filename = pre + "b"+fix;
+				}else if(status.equals(QQminlin.STATUS[1])){
+					int pos = headImg.indexOf('.');
+					String pre = headImg.substring(0,pos);
+					String fix = headImg.substring(pos,headImg.length());
+					filename = pre + "l"+fix;
+				}
+				
+				setIcon(new ImageIcon(filename));
+				System.out.println(filename);
+				setText(user.getQQname()+"("+user.getQQid()+")<"+user.getRemark()+">");
+			}
+			// 设置字体颜色
+			if (isSelected) {
+				setBackground(list.getSelectionBackground());
+				setForeground(list.getSelectionForeground());
+			} else {
+				setBackground(list.getBackground());
+				setForeground(list.getForeground());
+			}
+			//设置有效
+			setEnabled(list.isEnabled());
+			//设置默认字体
+			setFont(list.getFont());
+//			setFont(new Font("宋体",Font.BOLD,14));
+			//设置透明背景
+			setOpaque(true);
+			return this;
+		}
+	}
+	
+	
+}
+//播放背景音乐
+class Sound4 {
+	String path = new String("musics\\");
+	// 默认背景音乐
+	String file = new String("694.mid");
+	Sequence seq;
+	Sequencer midi;
+	// 判断是否在播放音乐
+	boolean sign;
+
+	public Sound4() {
+		loadSound();
+	}
+
+//播放背景音乐的函数
+void loadSound() {
+	try {
+		// 读取音频文件
+		seq = MidiSystem.getSequence(new File(path + file));
+		// 获取一个音频设备
+		midi = MidiSystem.getSequencer();
+		// 打开音频设备
+		midi.open();
+		// 把音频文件设置到播放设备中
+		midi.setSequence(seq);
+		// 开始播放音乐
+		midi.start();
+		// 循环播放
+		midi.setLoopCount(Sequencer.LOOP_CONTINUOUSLY);
+	} catch (Exception ex) {
+		ex.printStackTrace();
+	}
+	// 代表正在播放背景音乐
+	sign = true;
+}
+
+// 停止播放背景音乐
+void mystop() {
+	midi.stop();
+	midi.close();
+	sign = false;
+}
+
+// 判断是否在播放背景音乐
+boolean isplay() {
+	return sign;
+}
+
+// 设置在下拉框中选择的背景音乐文件名称
+void setMusic(String e) {
+	file = e;
+}
+}
+

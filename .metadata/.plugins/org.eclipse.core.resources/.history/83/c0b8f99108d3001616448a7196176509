@@ -1,0 +1,33 @@
+package TagDemo;
+
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.tagext.TagSupport;
+
+public class LoginTagDemo extends TagSupport{
+
+	
+	@Override
+	public int doEndTag() throws JspException {
+		JspWriter out = pageContext.getOut();
+		try {
+			out.write("<form name='form1' action='T10doc/checklogin.jsp' method='post'>");
+			out.write("昵称:<div style='width:'150px';height='40px''><input type='text' name='username'></div>");
+			out.write("密码:<div style='width:'150px';height='40px''><input type='text' name='userpassword'></div>");
+			out.write("</form>");
+		} catch (Exception e) {
+			System.out.println("登录Tag出错！");
+		}
+		return EVAL_BODY_INCLUDE;
+	}
+	@Override
+	public int doStartTag() throws JspException {
+		JspWriter out = pageContext.getOut();
+		try {
+			out.write("</form>");
+		} catch (Exception e) {
+			System.out.println("登录Tag出错！");
+		}
+		return EVAL_BODY_INCLUDE;
+	}
+}

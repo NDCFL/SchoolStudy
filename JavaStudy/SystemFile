@@ -1,0 +1,6 @@
+text=T16_1.QQChatEach
+tt=T13.Jishiqi
+driver = com.microsoft.sqlserver.jdbc.SQLServerDriver
+url = jdbc:sqlserver://localhost\\SQL2005:1433;databasename=access
+username=sa
+password=123456
